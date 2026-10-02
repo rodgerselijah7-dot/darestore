@@ -1,0 +1,77 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api/page?r=home"
+    },
+    {
+      "source": "/shop",
+      "destination": "/api/page?r=home"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/api/robots"
+    },
+    {
+      "source": "/p/:id",
+      "destination": "/api/page?r=p&id=:id"
+    },
+    {
+      "source": "/shop/:cat",
+      "destination": "/api/page?r=shop&id=:cat"
+    },
+    {
+      "source": "/info/:page",
+      "destination": "/api/page?r=info&id=:page"
+    },
+    {
+      "source": "/about",
+      "destination": "/api/page?r=about"
+    },
+    {
+      "source": "/order",
+      "destination": "/api/page?r=order"
+    },
+    {
+      "source": "/success",
+      "destination": "/api/page?r=success"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    }
+  ],
+  "functions": {
+    "api/page.js": {
+      "includeFiles": "app.html"
+    }
+  },
+  "headers": [
+    {
+      "source": "/admin.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/app.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ]
+}

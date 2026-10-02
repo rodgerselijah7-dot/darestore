@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Admin | DARE</title>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--ink:#000;--grey:#6B6B6B;--hair:#E6E6E4;--plinth:#F3F3F1;--dot:#D8261B;--pad:clamp(16px,4vw,48px);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:#fff;color:var(--ink);font-family:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad);border-bottom:1px solid var(--hair);position:sticky;top:0;background:#fff;z-index:5}
+header b{font-weight:500;letter-spacing:.06em;font-size:16px}
+nav{display:flex;gap:20px}
+nav button{background:none;border:0;padding:0;cursor:pointer;color:var(--grey)}
+nav button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:5px}
+main{padding:32px var(--pad) 96px;max-width:1200px}
+h1{font-weight:500;font-size:22px;margin:0 0 6px}
+.sub{color:var(--grey);margin:0 0 28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 18px;border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;white-space:nowrap}
+.btn:hover{background:#fff;color:var(--ink)}
+.btn.quiet{background:#fff;color:var(--ink)}
+.btn[disabled]{opacity:.4;cursor:wait}
+.field{border:1px solid var(--hair);padding:9px 10px;min-height:40px;background:#fff}
+.field:focus{outline:none;border-color:var(--ink)}
+.login{max-width:360px;margin:12vh auto 0;padding:0 var(--pad);display:grid;gap:12px}
+.err{color:var(--dot);min-height:1.2em}
+.stats{display:flex;gap:40px;flex-wrap:wrap;margin:0 0 32px}
+.stats div{font-size:13px;color:var(--grey)}
+.stats b{display:block;font-weight:500;font-size:22px;color:var(--ink)}
+.filters{display:flex;gap:16px;margin-bottom:16px}
+.filters button{background:none;border:0;padding:0;cursor:pointer;color:var(--grey)}
+.filters button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:5px}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{text-align:left;padding:12px 16px 12px 0;border-bottom:1px solid var(--hair);vertical-align:top;font-weight:400}
+th{color:var(--grey);font-size:12px}
+tr.o{cursor:pointer}tr.o:hover td{background:#FAFAF9}
+.pill{display:inline-block;font-size:12px;padding:2px 8px;border:1px solid var(--hair)}
+.pill.paid{border-color:var(--ink)}
+.pill.shipped,.pill.delivered{background:var(--plinth);border-color:var(--plinth);color:var(--grey)}
+.detail td{background:#FAFAF9;padding:20px}
+.detail .cols{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:24px}
+@media (max-width:760px){.detail .cols{grid-template-columns:1fr}}
+.detail h4{font-weight:500;font-size:12px;color:var(--grey);margin:0 0 6px}
+.detail p{margin:0 0 4px}
+.ship{display:grid;gap:8px}
+.ship .row{display:grid;grid-template-columns:110px 1fr;gap:8px}
+.num{width:72px;text-align:right}
+.low{color:var(--dot)}
+.note{font-size:12px;color:var(--grey);margin-top:6px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const money = n => "$" + Number(n || 0).toFixed(2);
+let PW = sessionStorage.getItem("dare_admin") || "", DATA = null, TAB = "orders", FILTER = "open", OPEN = null;
+
+function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("on"), 2600); }
+async function api(method, body) {
+  const r = await fetch("/api/admin", { method, headers: { Authorization: "Bearer " + PW, "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error(d.error || "Something went wrong."); e.status = r.status; throw e; }
+  return d;
+}
+function login(msg = "") {
+  $("#app").innerHTML = `<form class="login" id="lf"><h1>DARE admin</h1><p class="sub" style="margin:0">Orders and stock.</p>
+    <label><span style="position:absolute;left:-999px">Password</span><input class="field" type="password" name="pw" placeholder="Admin password" autocomplete="current-password" autofocus></label>
+    <button class="btn" type="submit">Sign in</button><div class="err">${esc(msg)}</div></form>`;
+  $("#lf").onsubmit = e => { e.preventDefault(); PW = e.target.pw.value; load(); };
+}
+async function load() {
+  try { DATA = await api("GET"); sessionStorage.setItem("dare_admin", PW); draw(); }
+  catch (e) { if (e.status === 401) { sessionStorage.removeItem("dare_admin"); login("Wrong password."); } else login(e.message); }
+}
+function draw() {
+  const o = DATA.orders, open = o.filter(x => x.status === "paid" || x.status === "packing");
+  const revenue = o.filter(x => !["refunded", "cancelled"].includes(x.status)).reduce((a, x) => a + x.total, 0);
+  $("#app").innerHTML = `<header><b>DARE admin</b><nav><button data-tab="orders" aria-pressed="${TAB === "orders"}">Orders</button><button data-tab="stock" aria-pressed="${TAB === "stock"}">Stock</button><button id="refresh">Refresh</button><button id="out">Sign out</button></nav></header>
+  <main>${TAB === "orders" ? `
+    <div class="stats"><div><b>${open.length}</b>To ship</div><div><b>${o.length}</b>Orders</div><div><b>${money(revenue)}</b>Revenue</div></div>
+    <div class="filters">${[["open", "To ship"], ["shipped", "Shipped"], ["all", "All"]].map(([k, v]) => `<button data-f="${k}" aria-pressed="${FILTER === k}">${v}</button>`).join("")}</div>
+    ${orders()}` : stock()}</main>`;
+  document.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => { TAB = b.dataset.tab; draw(); });
+  document.querySelectorAll("[data-f]").forEach(b => b.onclick = () => { FILTER = b.dataset.f; draw(); });
+  $("#refresh").onclick = load;
+  $("#out").onclick = () => { sessionStorage.removeItem("dare_admin"); PW = ""; login(); };
+  bind();
+}
+function orders() {
+  const list = DATA.orders.filter(x => FILTER === "all" ? true : FILTER === "open" ? ["paid", "packing"].includes(x.status) : ["shipped", "delivered"].includes(x.status));
+  if (!list.length) return `<p class="sub">${FILTER === "open" ? "Nothing to ship right now." : "No orders here yet."}</p>`;
+  return `<div class="wrap"><table><thead><tr><th>Order</th><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th></tr></thead><tbody>
+    ${list.map(x => `<tr class="o" data-ref="${esc(x.ref)}" tabindex="0" aria-expanded="${OPEN === x.ref}"><td>${esc(x.ref)}</td><td>${new Date(x.created).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</td><td>${esc(x.name)}</td><td>${x.items.reduce((a, i) => a + i.qty, 0)}</td><td>${money(x.total)}</td><td><span class="pill ${esc(x.status)}">${esc(x.status)}</span></td></tr>
+      ${OPEN === x.ref ? detail(x) : ""}`).join("")}</tbody></table></div>`;
+}
+function detail(x) {
+  const a = x.address || {};
+  return `<tr class="detail"><td colspan="6"><div class="cols">
+    <div><h4>Ship to</h4><p>${esc(x.name)}</p><p>${esc(a.line1)}</p>${a.line2 ? `<p>${esc(a.line2)}</p>` : ""}<p>${esc([a.city, a.state, a.postal_code].filter(Boolean).join(" "))}</p>
+      <h4 style="margin-top:14px">Contact</h4><p>${esc(x.email)}</p><p>${esc(x.phone)}</p></div>
+    <div><h4>Items</h4>${x.items.map(i => `<p>${i.qty} &times; ${esc(i.name)}</p>`).join("")}<p style="margin-top:10px;color:var(--grey)">Shipping ${x.shipping ? money(x.shipping) : "free"}, total ${money(x.total)}</p></div>
+    <div class="ship">${x.tracking ? `<h4>Tracking</h4><p>${x.tracking.url ? `<a href="${esc(x.tracking.url)}" target="_blank" rel="noopener">${esc(x.tracking.carrier.toUpperCase())} ${esc(x.tracking.number)}</a>` : esc(x.tracking.number)}</p>` : ""}
+      <h4>${x.status === "shipped" ? "Update tracking" : "Mark as shipped"}</h4>
+      <div class="row"><select class="field" id="carrier"><option value="usps">USPS</option><option value="ups">UPS</option><option value="fedex">FedEx</option><option value="dhl">DHL</option><option value="other">Other</option></select><input class="field" id="trk" placeholder="Tracking number" value="${esc(x.tracking ? x.tracking.number : "")}"></div>
+      <button class="btn" id="shipBtn" data-ref="${esc(x.ref)}">${x.status === "shipped" ? "Update and email customer" : "Mark shipped and email customer"}</button>
+      <div class="row" style="margin-top:8px"><span style="align-self:center;color:var(--grey)">Status</span><select class="field" id="status" data-ref="${esc(x.ref)}">${["paid", "packing", "shipped", "delivered", "refunded", "cancelled"].map(s => `<option ${s === x.status ? "selected" : ""}>${s}</option>`).join("")}</select></div>
+      <p class="note">Refunds are made in Stripe. Set the status here to match.</p></div>
+  </div></td></tr>`;
+}
+function stock() {
+  const t = DATA.stock;
+  const rows = DATA.products.filter(p => p.tracked);
+  return `<h1>Stock</h1><p class="sub">Available is what customers can still buy. Checkouts in progress hold stock for 30 minutes.</p>
+    <div class="wrap"><table><thead><tr><th>Piece</th><th>Size</th><th>Sold or held</th><th>Available</th><th></th></tr></thead><tbody>
+    ${rows.flatMap(p => p.sizes.map((s, i) => { const v = (t[p.id] || {})[s] || { committed: 0, available: 0 };
+      return `<tr><td>${i ? "" : esc(p.name)}</td><td>${esc(s)}</td><td>${v.committed}</td><td><input class="field num ${v.available <= 5 ? "low" : ""}" type="number" min="0" value="${v.available}" data-id="${esc(p.id)}" data-size="${esc(s)}" aria-label="${esc(p.name)} ${esc(s)} available"></td><td><button class="btn quiet" data-save="${esc(p.id)}|${esc(s)}">Save</button></td></tr>`; })).join("")}
+    </tbody></table></div>`;
+}
+function bind() {
+  document.querySelectorAll("tr.o").forEach(r => { const f = () => { OPEN = OPEN === r.dataset.ref ? null : r.dataset.ref; draw(); }; r.onclick = f; r.onkeydown = e => { if (e.key === "Enter") f(); }; });
+  const sb = $("#shipBtn");
+  if (sb) {
+    const o = DATA.orders.find(x => x.ref === sb.dataset.ref);
+    if (o.tracking) $("#carrier").value = o.tracking.carrier;
+    sb.onclick = async () => {
+      sb.disabled = true;
+      try { const d = await api("POST", { action: "ship", ref: sb.dataset.ref, carrier: $("#carrier").value, number: $("#trk").value });
+        Object.assign(o, d.order); toast(d.emailed ? "Marked shipped. Customer emailed." : "Marked shipped. Email isn't set up, so the customer wasn't emailed."); draw(); }
+      catch (e) { toast(e.message); sb.disabled = false; }
+    };
+    $("#status").onchange = async e => { try { const d = await api("POST", { action: "status", ref: e.target.dataset.ref, status: e.target.value }); Object.assign(o, d.order); toast("Status saved."); draw(); } catch (err) { toast(err.message); } };
+  }
+  document.querySelectorAll("[data-save]").forEach(b => b.onclick = async () => {
+    const [id, size] = b.dataset.save.split("|"); const input = document.querySelector(`input[data-id="${id}"][data-size="${size}"]`);
+    b.disabled = true;
+    try { const d = await api("POST", { action: "stock", id, size, available: input.value }); DATA.stock = d.stock; toast("Stock saved."); draw(); }
+    catch (e) { toast(e.message); b.disabled = false; }
+  });
+}
+PW ? load() : login();
+</script>
+</body>
+</html>
