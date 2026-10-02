@@ -1,5 +1,5 @@
 # DARE store — setup
-
+.
 Everything here deploys to Vercel as-is: drag this folder into a Vercel project. No build step.
 
 ## What's in the folder
