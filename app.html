@@ -629,9 +629,9 @@ function e164(raw) {
   return null;
 }
 async function subscribe({ email, phone, sms }, source) {
-  const attrs = { subscriptions: {} };
-  if (email) { attrs.email = email; attrs.subscriptions.email = { marketing: { consent: "SUBSCRIBED" } }; }
-  if (phone && sms) { attrs.phone_number = phone; attrs.subscriptions.sms = { marketing: { consent: "SUBSCRIBED" } }; }
+  const attrs = {};
+  if (email) { attrs.email = email; }
+  if (phone && sms) { attrs.phone_number = phone; }
   if (!klaviyoOn || PREVIEW) { store.set("dare_signup_preview", { email, phone, sms, source, at: Date.now() }); return true; }
   const r = await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${encodeURIComponent(CONFIG.klaviyoPublicKey)}`, {
     method: "POST",
