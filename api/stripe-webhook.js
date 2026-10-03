@@ -1,13 +1,23 @@
 // Stripe webhook: logs paid orders and releases stock held by abandoned checkouts.
 // Stripe Dashboard > Developers > Webhooks > Add endpoint: https://YOUR-SITE/api/stripe-webhook
 // Events: checkout.session.completed, checkout.session.expired. Env: STRIPE_WEBHOOK_SECRET.
-const { verifyStripe, readRaw, hasRedis, redis, release, unpackRes, stripe, sendEmail, refOf, SITE } = require("./_lib");
+const { verifyStripe, readRaw, readJson, hasRedis, redis, release, unpackRes, stripe, sendEmail, refOf, SITE } = require("./_lib");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") return res.status(405).end();
   const raw = await readRaw(req);
-  if (!verifyStripe(raw, req.headers["stripe-signature"], process.env.STRIPE_WEBHOOK_SECRET)) return res.status(400).send("Bad signature");
-  const event = JSON.parse(raw);
+      let event;
+    if (verifyStripe(raw, req.headers["stripe-signature"], process.env.STRIPE_WEBHOOK_SECRET)) {
+      event = JSON.parse(raw);
+    } else {
+      // Vercel pre-parses JSON bodies, which breaks the signature check.
+      // Fall back to fetching the event straight from Stripe (authoritative).
+      const body = await readJson(req);
+      const id = body && body.id;
+      if (!id || !String(id).startsWith("evt_")) return res.status(400).end();
+      try { event = await stripe("GET", `events/${id}`); }
+      catch { return res.status(400).end(); }
+    }
   const s = event.data && event.data.object;
   try {
     if (event.type === "checkout.session.expired" && hasRedis()) {
