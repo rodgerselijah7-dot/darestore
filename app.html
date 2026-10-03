@@ -791,7 +791,7 @@ function communityBand() {
     <p>No posts yet. Tag us to be the first one here.</p>
     <a class="textlink" href="${CONFIG.instagram}" target="_blank" rel="noopener">Follow along</a></section>`;
 }
-function home() { return hero() + storyBand() + trustStrip() + shop("all") + communityBand(); }
+function home() { return hero() + storyBand() + trustStrip() + shop("all"); }
 function relatedPieces(p) {
   return CATALOG.filter(x => x.id !== p.id)
     .map(x => ({ x, score: (x.category === p.category ? 0 : 1000) + Math.abs(x.price - p.price) + (isGone(x) ? 500 : 0) }))
