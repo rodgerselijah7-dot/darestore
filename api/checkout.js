@@ -4,8 +4,8 @@ const { find, stockTable, reserve, release, packRes, stripe, readJson, hasRedis,
 
 const FREE_SHIPPING_OVER = 100; // dollars; keep in sync with CONFIG.freeShippingOver in index.html
 const RATES = {
-  standard: { name: "Standard shipping", cents: 800, min: 5, max: 7 },
-  express: { name: "Express shipping", cents: 1800, min: 2, max: 3 }
+  standard: { name: "Standard shipping", cents: 600, min: 5, max: 7 },
+  express: { name: "Express shipping", cents: 1400, min: 2, max: 3 }
 };
 const rate = (r, cents, name) => ({ shipping_rate_data: {
   type: "fixed_amount", display_name: name || r.name, fixed_amount: { amount: cents, currency: "usd" },
