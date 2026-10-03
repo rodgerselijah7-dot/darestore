@@ -3,7 +3,7 @@
     "id": "signature-shorts-blue",
     "name": "Signature Swim Shorts",
     "category": "bottoms",
-    "price": 58,
+    "price": 45,
     "colorName": "Blue",
     "sizes": [
       "S",
@@ -30,7 +30,7 @@
     "id": "signature-shorts-pink",
     "name": "Signature Swim Shorts",
     "category": "bottoms",
-    "price": 58,
+    "price": 45,
     "colorName": "Pink",
     "sizes": [
       "S",
@@ -57,7 +57,7 @@
     "id": "crown-cargo-shorts-camo",
     "name": "Crown Cargo Shorts",
     "category": "bottoms",
-    "price": 90,
+    "price": 62,
     "colorName": "Camo",
     "sizes": [
       "30",
@@ -86,7 +86,7 @@
     "id": "tee-777",
     "name": "777 Tee",
     "category": "tops",
-    "price": 64,
+    "price": 48,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -115,7 +115,7 @@
     "id": "tee-take-that-risk",
     "name": "Take That Risk Tee",
     "category": "tops",
-    "price": 84,
+    "price": 55,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -144,7 +144,7 @@
     "id": "tee-medusa",
     "name": "Medusa Tee",
     "category": "tops",
-    "price": 60,
+    "price": 45,
     "colorName": "Slate Blue",
     "sizes": [
       "S",
@@ -173,7 +173,7 @@
     "id": "tee-life-is-a-gamble",
     "name": "Life Is A Gamble Tee",
     "category": "tops",
-    "price": 58,
+    "price": 44,
     "colorName": "Tan",
     "sizes": [
       "S",
@@ -201,7 +201,7 @@
     "id": "tee-uprising",
     "name": "Uprising Tee",
     "category": "tops",
-    "price": 66,
+    "price": 48,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -230,7 +230,7 @@
     "id": "tee-smile-now-cry-later",
     "name": "Smile Now Cry Later Tee",
     "category": "tops",
-    "price": 60,
+    "price": 45,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -259,7 +259,7 @@
     "id": "tee-dare-wordmark",
     "name": "D.A.R.E Tee",
     "category": "tops",
-    "price": 46,
+    "price": 38,
     "colorName": "Red",
     "sizes": [
       "S",
@@ -287,7 +287,7 @@
     "id": "tee-melting-smiley-white",
     "name": "Melting Smiley Tee",
     "category": "tops",
-    "price": 54,
+    "price": 42,
     "colorName": "White",
     "sizes": [
       "S",
@@ -315,7 +315,7 @@
     "id": "tee-melting-smiley-blue",
     "name": "Melting Smiley Tee",
     "category": "tops",
-    "price": 62,
+    "price": 42,
     "colorName": "Slate Blue",
     "sizes": [
       "S",
@@ -343,7 +343,7 @@
     "id": "crewneck-desired-ambitions",
     "name": "Desired Ambitions Crewneck",
     "category": "hoodies",
-    "price": 88,
+    "price": 72,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -371,7 +371,7 @@
     "id": "tee-dollar-masks",
     "name": "Dollar Masks Tee",
     "category": "tops",
-    "price": 62,
+    "price": 45,
     "colorName": "White",
     "sizes": [
       "S",
@@ -400,7 +400,7 @@
     "id": "shorts-biker-olive",
     "name": "Signature Biker Shorts",
     "category": "bottoms",
-    "price": 62,
+    "price": 30,
     "colorName": "Olive",
     "sizes": [
       "S",
@@ -427,7 +427,7 @@
     "id": "shorts-redemption-red",
     "name": "Redemption Shorts",
     "category": "bottoms",
-    "price": 66,
+    "price": 48,
     "colorName": "Red",
     "sizes": [
       "S",
@@ -454,7 +454,7 @@
     "id": "tank-rare-edition-white",
     "name": "Rare Edition Tank",
     "category": "tops",
-    "price": 42,
+    "price": 30,
     "colorName": "White",
     "sizes": [
       "XS",
@@ -482,7 +482,7 @@
     "id": "hoodie-1454-bleached",
     "name": "1454 Hoodie",
     "category": "hoodies",
-    "price": 120,
+    "price": 98,
     "colorName": "Bleached Black",
     "sizes": [
       "S",
@@ -511,7 +511,7 @@
     "id": "beanie-sparkle-mauve",
     "name": "Sparkle Beanie",
     "category": "accessories",
-    "price": 38,
+    "price": 32,
     "colorName": "Mauve",
     "sizes": [
       "OS"
@@ -531,7 +531,7 @@
     "id": "shorts-denim-black",
     "name": "Signature Denim Shorts",
     "category": "bottoms",
-    "price": 74,
+    "price": 55,
     "colorName": "Black",
     "sizes": [
       "30",
@@ -559,7 +559,7 @@
     "id": "ski-mask-dare-black",
     "name": "D.A.R.E Ski Mask",
     "category": "accessories",
-    "price": 40,
+    "price": 20,
     "colorName": "Black",
     "sizes": [
       "OS"
@@ -579,7 +579,7 @@
     "id": "tee-dare-wordmark-black",
     "name": "D.A.R.E Tee",
     "category": "tops",
-    "price": 48,
+    "price": 38,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -607,7 +607,7 @@
     "id": "hoodie-777",
     "name": "777 Hoodie",
     "category": "hoodies",
-    "price": 96,
+    "price": 85,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -636,7 +636,7 @@
     "id": "shorts-reconstructed-denim",
     "name": "Reconstructed Denim Shorts",
     "category": "bottoms",
-    "price": 88,
+    "price": 60,
     "colorName": "Washed Grey",
     "sizes": [
       "30",
@@ -664,7 +664,7 @@
     "id": "shorts-biker-pink",
     "name": "Signature Biker Shorts",
     "category": "bottoms",
-    "price": 62,
+    "price": 30,
     "colorName": "Pink",
     "sizes": [
       "S",
@@ -691,7 +691,7 @@
     "id": "shorts-biker-camo",
     "name": "Signature Biker Shorts",
     "category": "bottoms",
-    "price": 62,
+    "price": 30,
     "colorName": "Camo",
     "sizes": [
       "S",
