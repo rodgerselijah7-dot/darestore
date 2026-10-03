@@ -12,7 +12,7 @@ module.exports = (req, res) => {
   TEMPLATE = TEMPLATE || fs.readFileSync(path.join(process.cwd(), "app.html"), "utf8");
   const origin = (process.env.SITE_URL || `https://${req.headers.host}`).replace(/\/$/, "");
   const { r, id } = req.query || {};
-  let title = "DARE", desc = "DARE — Desired Ambitions Required Execution. Clothing for people who act on what they want.";
+  let title = "DARE", desc = "DARE — Desired Ambitions Requires Execution. Clothing for people who act on what they want.";
   let image = `${origin}/images/og.png`, url = origin + "/", status = 200, ld = null, type = "website";
 
   if (r === "p") {
