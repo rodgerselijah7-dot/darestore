@@ -2,7 +2,7 @@
 // Env: STRIPE_SECRET_KEY (required). Stock holds need Upstash Redis (KV_REST_API_URL / KV_REST_API_TOKEN).
 const { find, stockTable, reserve, release, packRes, stripe, readJson, hasRedis, redis, clientIp, rateLimit } = require("./_lib");
 
-const FREE_SHIPPING_OVER = 150; // dollars; keep in sync with CONFIG.freeShippingOver in index.html
+const FREE_SHIPPING_OVER = 100; // dollars; keep in sync with CONFIG.freeShippingOver in index.html
 const RATES = {
   standard: { name: "Standard shipping", cents: 800, min: 5, max: 7 },
   express: { name: "Express shipping", cents: 1800, min: 2, max: 3 }
