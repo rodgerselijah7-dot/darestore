@@ -499,7 +499,7 @@ const CONFIG = {
   analytics: {
     ga4: "",            // Google Analytics 4 measurement ID, e.g. "G-XXXXXXX"
     metaPixel: "",      // Meta (Facebook/Instagram) Pixel ID, e.g. "123456789012345"
-    vercel: false       // true after turning on Web Analytics in your Vercel project
+    vercel: true       // true after turning on Web Analytics in your Vercel project
   }
 };
 /* ==================================================================== */
@@ -887,7 +887,7 @@ const INFO = {
     <h2>How we use it</h2><p>To fulfil orders, send order updates, and, if you opted in, send marketing emails and texts through Klaviyo. We don't sell your information.</p>
     <h2>Who helps us</h2><p>Stripe processes payments, Vercel hosts the site, and Klaviyo sends emails and texts. Each only gets what it needs to do that job. If analytics are turned on, we see anonymous traffic data like pages visited and how people found the site.</p>
     <h2>Text messages</h2><p>Mobile numbers and SMS consent are never shared with third parties or affiliates for their marketing purposes.</p>
-    <h2>Your choices</h2><p>Unsubscribe from email with the link in any email. Reply STOP to end texts. Email <a href="mailto:${CONFIG.contactEmail}">${CONFIG.contactEmail}</a> to see or delete your data.</p>`],
+    <h2>Security</h2><p>Payments are processed by Stripe, a PCI-certified payment provider; card numbers never reach our servers. The site runs over encrypted HTTPS, and order details are only accessible to DARE staff for fulfilment and support.</p><h2>Your choices</h2><p>Unsubscribe from email with the link in any email. Reply STOP to end texts. Email <a href="mailto:${CONFIG.contactEmail}">${CONFIG.contactEmail}</a> to see or delete your data.</p>`],
   terms: ["Terms", `
     <p>By using this site or placing an order you agree to these terms.</p>
     <h2>Orders</h2><p>All sales are in US dollars. Quantities are limited and orders may be cancelled and refunded if an item is oversold or a pricing error occurs.</p>
