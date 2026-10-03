@@ -873,7 +873,7 @@ const INFO = {
     <h2>Will sold-out items restock?</h2><p>Sometimes. When a piece comes back, people on the list hear first.</p>
     <h2>Can I change or cancel my order?</h2><p>Email us within 2 hours of ordering. After that it may already be packed.</p>
     <h2>Do you take Apple Pay?</h2><p>Yes. Checkout accepts all major cards, Apple Pay, Google Pay and Link.</p>
-    <h2>Do you charge sales tax?</h2><p>Tax is calculated at checkout based on your shipping address.</p>
+    <h2>Do you charge sales tax?</h2><p>Prices don't include sales tax. Any tax that applies to your order is shown at checkout before you pay.</p>
     <h2>How do I stop texts?</h2><p>Reply STOP to any message. Reply HELP for help.</p>`],
   contact: ["Contact", `
     <p>Order questions, wholesale and collaborations: <a href="mailto:${CONFIG.contactEmail}">${CONFIG.contactEmail}</a>. We reply within 2 business days.</p>
@@ -882,16 +882,21 @@ const INFO = {
     <label><span class="sr">Message</span><textarea class="field" name="msg" placeholder="Message" required></textarea></label>
     <button class="btn" type="submit">Send email</button></form>`],
   privacy: ["Privacy", `
-    <p>This policy explains what ${CONFIG.brand} collects and why. Have it reviewed for your business before launch.</p>
+    <p>This policy explains what ${CONFIG.brand} collects and why.</p>
     <h2>What we collect</h2><p>When you order: name, email, phone, shipping and billing address. Payment details are handled by Stripe and never touch our servers. When you sign up for alerts: email and, if you choose, mobile number.</p>
     <h2>How we use it</h2><p>To fulfil orders, send order updates, and, if you opted in, send marketing emails and texts through Klaviyo. We don't sell your information.</p>
+    <h2>Who helps us</h2><p>Stripe processes payments, Vercel hosts the site, and Klaviyo sends emails and texts. Each only gets what it needs to do that job. If analytics are turned on, we see anonymous traffic data like pages visited and how people found the site.</p>
     <h2>Text messages</h2><p>Mobile numbers and SMS consent are never shared with third parties or affiliates for their marketing purposes.</p>
     <h2>Your choices</h2><p>Unsubscribe from email with the link in any email. Reply STOP to end texts. Email <a href="mailto:${CONFIG.contactEmail}">${CONFIG.contactEmail}</a> to see or delete your data.</p>`],
   terms: ["Terms", `
-    <p>By using this site or placing an order you agree to these terms. Have them reviewed for your business before launch.</p>
+    <p>By using this site or placing an order you agree to these terms.</p>
     <h2>Orders</h2><p>All sales are in US dollars. Quantities are limited and orders may be cancelled and refunded if an item is oversold or a pricing error occurs.</p>
     <h2>SMS program</h2><p>By opting in you agree to receive recurring automated marketing texts from ${CONFIG.brand}, including new-arrival alerts and cart reminders. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply HELP for help or STOP to cancel. Carriers are not liable for delayed or undelivered messages.</p>
-    <h2>Intellectual property</h2><p>All designs, graphics and the ${CONFIG.brand} name are the property of ${CONFIG.brand} and may not be reproduced without permission.</p>`]
+    <h2>Intellectual property</h2><p>All designs, graphics and the ${CONFIG.brand} name are the property of ${CONFIG.brand} and may not be reproduced without permission.</p>
+    <h2>Returns</h2><p>Returns and exchanges follow our <a href="#/info/returns">returns policy</a>.</p>
+    <h2>Liability</h2><p>To the extent the law allows, ${CONFIG.brand}'s liability for any order is limited to the amount you paid for it.</p>
+    <h2>Governing law</h2><p>These terms are governed by the laws of the State of Texas.</p>
+    <h2>Contact</h2><p>Questions about these terms: <a href="mailto:${CONFIG.contactEmail}">${CONFIG.contactEmail}</a>.</p>`]
 };
 
 function info(key) {
