@@ -120,4 +120,4 @@ async function rateLimit(key, limit, windowSeconds) {
   return { ok: n <= limit, remaining: Math.max(0, limit - n) };
 }
 
-module.exports = { catalog, find, SITE, hasRedis, redis, stockTable, reserve, release, packRes, unpackRes, stripe, verifyStripe, sendEmail, readRaw, readJson, refOf, clientIp, rateLimit };
+module.exports = { catalog, find, SITE, hasRedis, readJson, redis, stockTable, reserve, release, packRes, unpackRes, stripe, verifyStripe, sendEmail, readRaw, readJson, refOf, clientIp, rateLimit };
