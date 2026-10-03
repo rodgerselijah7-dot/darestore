@@ -659,7 +659,7 @@ $$("[data-signup-form]").forEach(form => form.addEventListener("submit", async e
     track("sign_up", { value: 0 });
     if (email && !PREVIEW) fetch("/api/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) }).catch(() => {});
     const codeLine = email ? ` Use <b>${esc(CONFIG.welcomeCode)}</b> for 10% off your first order.` : "";
-    form.innerHTML = `<div class="ok"><strong>You're on the list.</strong>${phone ? "Look for a text to confirm. Reply Y and you're set." : "Watch your inbox for what's next."}${codeLine}</div>`;
+    form.innerHTML = `<div class="ok"><strong>You're on the list.</strong>${phone ? "You're all set." : "Watch your inbox for what's next."}${codeLine}</div>`;
     if (form.dataset.signupForm === "popup") setTimeout(closeSignup, 4200);
   } catch (err) {
     msg.textContent = err.message; btn.disabled = false; btn.textContent = "Sign up";
