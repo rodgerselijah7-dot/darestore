@@ -1,7 +1,7 @@
 [
   {
     "id": "signature-shorts-blue",
-    "name": "Signature Swim Shorts",
+    "name": "Signature Shorts",
     "category": "bottoms",
     "price": 45,
     "colorName": "Blue",
@@ -18,7 +18,7 @@
       "XL": 20
     },
     "image": "/images/products/signature-shorts-blue.jpg",
-    "description": "Quick-dry swim shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
+    "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
     "details": [
       "Lightweight nylon shell",
       "Elastic drawstring waist",
@@ -28,7 +28,7 @@
   },
   {
     "id": "signature-shorts-pink",
-    "name": "Signature Swim Shorts",
+    "name": "Signature Shorts",
     "category": "bottoms",
     "price": 45,
     "colorName": "Pink",
@@ -45,7 +45,7 @@
       "XL": 20
     },
     "image": "/images/products/signature-shorts-pink.jpg",
-    "description": "Quick-dry swim shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
+    "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
     "details": [
       "Lightweight nylon shell",
       "Elastic drawstring waist",
@@ -442,7 +442,7 @@
       "XL": 20
     },
     "image": "/images/products/shorts-redemption-red.jpg",
-    "description": "Red swim shorts built around a cherub resting on a crowned, thorn-wrapped heart \u2014 kindness, salvation, redemption, lettered in a circle.",
+    "description": "Quick-dry shorts built around a cherub resting on a crowned, thorn-wrapped heart \u2014 kindness, salvation, redemption, lettered in a circle.",
     "details": [
       "Lightweight nylon shell",
       "Elastic drawstring waist",
