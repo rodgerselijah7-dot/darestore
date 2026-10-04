@@ -1252,9 +1252,9 @@ function initFall() {
     const vh = innerHeight, ih = img.offsetHeight || vh * 0.54;
     const span = vh + ih;
     const y = ((scrollY * 0.5) % span + span) % span - ih; // -ih (just above) to vh (just below), loops with scroll
-    img.style.transform = `translate(-50%, ${y}px)`;
+    rot += (target - rot) * 0.18; if (Math.abs(target - rot) < 0.5) rot = target; img.style.transform = `translate(-50%, ${y}px) rotate(${rot}deg)`; if (rot !== target) raf = requestAnimationFrame(update);
   };
-  addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+  let lastY = scrollY, rot = 0, target = 0, down = true, acc = 0; addEventListener("scroll", () => { const d = scrollY - lastY; lastY = scrollY; if (Math.abs(d) < 400) { acc = (d > 0) === (acc > 0) ? acc + d : d; if (down && acc < -12) { down = false; target += 180; } else if (!down && acc > 12) { down = true; target += 180; } } if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
   addEventListener("resize", () => { if (!raf) raf = requestAnimationFrame(update); });
   update();
 }
