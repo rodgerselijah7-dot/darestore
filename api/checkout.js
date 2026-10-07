@@ -1,6 +1,6 @@
 // Creates a Stripe Checkout session and holds the stock for 30 minutes while the customer pays.
 // Env: STRIPE_SECRET_KEY (required). Stock holds need Upstash Redis (KV_REST_API_URL / KV_REST_API_TOKEN).
-const { find, stockTable, reserve, release, packRes, stripe, readJson, hasRedis, redis, clientIp, rateLimit } = require("./_lib");
+const { getCatalog, stockTable, reserve, release, packRes, stripe, readJson, hasRedis, redis, clientIp, rateLimit } = require("./_lib");
 
 const FREE_SHIPPING_OVER = 100; // dollars; keep in sync with CONFIG.freeShippingOver in index.html
 const RATES = {
@@ -18,6 +18,8 @@ module.exports = async (req, res) => {
   const limited = await rateLimit(`checkout:${clientIp(req)}`, 20, 600); // 20 checkout attempts per 10 minutes per IP
   if (!limited.ok) return res.status(429).json({ error: "Too many checkout attempts. Wait a few minutes and try again." });
 
+  const catalog = await getCatalog(); // hidden products are left out, so they can't be bought
+  const find = id => catalog.find(p => p.id === id);
   const body = await readJson(req);
   const raw = Array.isArray(body.items) ? body.items.slice(0, 25) : [];
   if (!raw.length) return res.status(400).json({ error: "Your bag is empty." });
@@ -36,7 +38,7 @@ module.exports = async (req, res) => {
   const lines = [...merged.values()];
 
   // hold stock atomically so two people can't buy the last one
-  const table = await stockTable().catch(() => ({}));
+  const table = await stockTable(catalog).catch(() => ({}));
   const tracked = lines.filter(l => l.p.stock).map(l => ({ id: l.p.id, size: l.size, qty: l.qty, stock: table[l.p.id]?.[l.size]?.total ?? l.p.stock[l.size] ?? 0 }));
   if (!hasRedis()) {
     const out = tracked.find(t => t.qty > (t.stock || 0));

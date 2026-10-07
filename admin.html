@@ -10,7 +10,7 @@
 :root{color-scheme:light;--ink:#000;--grey:#6B6B6B;--hair:#E6E6E4;--plinth:#F3F3F1;--dot:#D8261B;--pad:clamp(16px,4vw,48px);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:#fff;color:var(--ink);font-family:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
-button,input,select{font:inherit;color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:1px solid var(--ink);outline-offset:3px}
 header{display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad);border-bottom:1px solid var(--hair);position:sticky;top:0;background:#fff;z-index:5}
 header b{font-weight:500;letter-spacing:.06em;font-size:16px}
@@ -52,6 +52,55 @@ tr.o{cursor:pointer}tr.o:hover td{background:#FAFAF9}
 .num{width:72px;text-align:right}
 .low{color:var(--dot)}
 .note{font-size:12px;color:var(--grey);margin-top:6px}
+@media (max-width:640px){header{flex-wrap:wrap;gap:10px;padding-top:14px;padding-bottom:14px}nav{gap:16px;flex-wrap:wrap}}
+nav button{white-space:nowrap}
+/* products */
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 24px}
+.plist{display:grid;gap:0;border-top:1px solid var(--hair)}
+.prow{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--hair)}
+.prow.off .pmeta,.prow.off img{opacity:.45}
+.thumb{width:56px;height:56px;object-fit:cover;background:var(--plinth);display:block}
+.pmeta b{font-weight:500;display:block}
+.pmeta span{color:var(--grey);font-size:13px}
+.pacts{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.icon{min-width:36px;min-height:36px;border:1px solid var(--hair);background:#fff;cursor:pointer;padding:0 10px}
+.icon:hover{border-color:var(--ink)}
+.icon[disabled]{opacity:.3;cursor:default}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border:1px solid var(--hair);margin-left:6px;vertical-align:1px;color:var(--grey)}
+@media (max-width:640px){.prow{grid-template-columns:56px 1fr}.pacts{grid-column:1/-1;justify-content:flex-start}}
+.ed{max-width:760px}
+.back{background:none;border:0;padding:0;color:var(--grey);cursor:pointer;margin:0 0 18px}
+.back:hover{color:var(--ink)}
+.sec{border-top:1px solid var(--hair);padding:22px 0;display:grid;gap:14px}
+.sec h2{font-size:13px;font-weight:500;margin:0;color:var(--grey);letter-spacing:.02em}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.g2{grid-template-columns:1fr}}
+label.f{display:grid;gap:6px}
+label.f>span{font-size:13px}
+label.f small{color:var(--grey);font-size:12px}
+textarea.field{min-height:96px;resize:vertical;line-height:1.5}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ph{display:grid;gap:8px}
+.ph .box{aspect-ratio:1/1;background:var(--plinth);display:flex;align-items:center;justify-content:center;color:var(--grey);font-size:13px;overflow:hidden;position:relative}
+.ph .box img{width:100%;height:100%;object-fit:cover}
+.ph .box.busy::after{content:"Uploading…";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.8);color:var(--ink)}
+.ph .acts{display:flex;gap:8px;flex-wrap:wrap}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);padding:4px 6px 4px 10px}
+.chip button{background:none;border:0;cursor:pointer;padding:0 4px;font-size:16px;line-height:1}
+.presets{display:flex;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--grey);align-items:center}
+.presets button{background:none;border:1px solid var(--hair);padding:4px 10px;cursor:pointer}
+.presets button:hover{border-color:var(--ink)}
+.sizes-stock{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.sizes-stock label{display:grid;gap:4px;font-size:13px}
+.sizes-stock .have{font-size:12px;color:var(--grey);padding-top:9px}
+.check{display:flex;gap:10px;align-items:flex-start}
+.check input{margin-top:3px}
+.save{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--hair);padding:14px 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.save .err{flex-basis:100%;min-height:0}
+.danger{background:none;border:0;color:var(--dot);cursor:pointer;margin-left:auto;padding:0}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.on{opacity:1}
 </style>
@@ -63,7 +112,7 @@ tr.o{cursor:pointer}tr.o:hover td{background:#FAFAF9}
 const $ = (s, el = document) => el.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 const money = n => "$" + Number(n || 0).toFixed(2);
-let PW = sessionStorage.getItem("dare_admin") || "", DATA = null, TAB = "orders", FILTER = "open", OPEN = null;
+let PW = sessionStorage.getItem("dare_admin") || "", DATA = null, TAB = "orders", FILTER = "open", OPEN = null, ED = null;
 
 function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("on"), 2600); }
 async function api(method, body) {
@@ -73,7 +122,7 @@ async function api(method, body) {
   return d;
 }
 function login(msg = "") {
-  $("#app").innerHTML = `<form class="login" id="lf"><h1>DARE admin</h1><p class="sub" style="margin:0">Orders and stock.</p>
+  $("#app").innerHTML = `<form class="login" id="lf"><h1>DARE admin</h1><p class="sub" style="margin:0">Orders, products and stock.</p>
     <label><span style="position:absolute;left:-999px">Password</span><input class="field" type="password" name="pw" placeholder="Admin password" autocomplete="current-password" autofocus></label>
     <button class="btn" type="submit">Sign in</button><div class="err">${esc(msg)}</div></form>`;
   $("#lf").onsubmit = e => { e.preventDefault(); PW = e.target.pw.value; load(); };
@@ -85,16 +134,17 @@ async function load() {
 function draw() {
   const o = DATA.orders, open = o.filter(x => x.status === "paid" || x.status === "packing");
   const revenue = o.filter(x => !["refunded", "cancelled"].includes(x.status)).reduce((a, x) => a + x.total, 0);
-  $("#app").innerHTML = `<header><b>DARE admin</b><nav><button data-tab="orders" aria-pressed="${TAB === "orders"}">Orders</button><button data-tab="stock" aria-pressed="${TAB === "stock"}">Stock</button><button id="refresh">Refresh</button><button id="out">Sign out</button></nav></header>
+  $("#app").innerHTML = `<header><b>DARE admin</b><nav><button data-tab="orders" aria-pressed="${TAB === "orders"}">Orders</button><button data-tab="products" aria-pressed="${TAB === "products"}">Products</button><button data-tab="stock" aria-pressed="${TAB === "stock"}">Stock</button><button id="refresh">Refresh</button><button id="out">Sign out</button></nav></header>
   <main>${TAB === "orders" ? `
     <div class="stats"><div><b>${open.length}</b>To ship</div><div><b>${o.length}</b>Orders</div><div><b>${money(revenue)}</b>Revenue</div></div>
     <div class="filters">${[["open", "To ship"], ["shipped", "Shipped"], ["all", "All"]].map(([k, v]) => `<button data-f="${k}" aria-pressed="${FILTER === k}">${v}</button>`).join("")}</div>
-    ${orders()}` : stock()}</main>`;
-  document.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => { TAB = b.dataset.tab; draw(); });
+    ${orders()}` : TAB === "products" ? (ED ? editor() : products()) : stock()}</main>`;
+  document.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => { if (ED && ED.dirty && !confirm("Leave without saving your changes?")) return; ED = null; TAB = b.dataset.tab; draw(); });
   document.querySelectorAll("[data-f]").forEach(b => b.onclick = () => { FILTER = b.dataset.f; draw(); });
-  $("#refresh").onclick = load;
+  $("#refresh").onclick = () => { if (ED && ED.dirty && !confirm("Refresh and lose your unsaved changes?")) return; ED = null; load(); };
   $("#out").onclick = () => { sessionStorage.removeItem("dare_admin"); PW = ""; login(); };
   bind();
+  if (TAB === "products") ED ? bindEditor() : bindProducts();
 }
 function orders() {
   const list = DATA.orders.filter(x => FILTER === "all" ? true : FILTER === "open" ? ["paid", "packing"].includes(x.status) : ["shipped", "delivered"].includes(x.status));
@@ -123,7 +173,7 @@ function stock() {
   return `<h1>Stock</h1><p class="sub">Available is what customers can still buy. Checkouts in progress hold stock for 30 minutes.</p>
     <div class="wrap"><table><thead><tr><th>Piece</th><th>Size</th><th>Sold or held</th><th>Available</th><th></th></tr></thead><tbody>
     ${rows.flatMap(p => p.sizes.map((s, i) => { const v = (t[p.id] || {})[s] || { committed: 0, available: 0 };
-      return `<tr><td>${i ? "" : esc(p.name)}</td><td>${esc(s)}</td><td>${v.committed}</td><td><input class="field num ${v.available <= 5 ? "low" : ""}" type="number" min="0" value="${v.available}" data-id="${esc(p.id)}" data-size="${esc(s)}" aria-label="${esc(p.name)} ${esc(s)} available"></td><td><button class="btn quiet" data-save="${esc(p.id)}|${esc(s)}">Save</button></td></tr>`; })).join("")}
+      return `<tr><td>${i ? "" : esc(p.name) + ` <span style="color:var(--grey)">${esc(p.colorName || "")}</span>` + (p.hidden ? '<span class="tag">Hidden</span>' : "")}</td><td>${esc(s)}</td><td>${v.committed}</td><td><input class="field num ${v.available <= 5 ? "low" : ""}" type="number" min="0" value="${v.available}" data-id="${esc(p.id)}" data-size="${esc(s)}" aria-label="${esc(p.name)} ${esc(s)} available"></td><td><button class="btn quiet" data-save="${esc(p.id)}|${esc(s)}">Save</button></td></tr>`; })).join("")}
     </tbody></table></div>`;
 }
 function bind() {
@@ -147,6 +197,150 @@ function bind() {
     catch (e) { toast(e.message); b.disabled = false; }
   });
 }
+/* ---------- products ---------- */
+const CAT_LABEL = { tops: "Tops", hoodies: "Hoodies", bottoms: "Bottoms", accessories: "Accessories" };
+const PRESETS = [["S–XL", ["S", "M", "L", "XL"]], ["XS–XL", ["XS", "S", "M", "L", "XL"]], ["S–2XL", ["S", "M", "L", "XL", "2XL"]], ["Waist 28–38", ["28", "30", "32", "34", "36", "38"]], ["One Size", ["One Size"]]];
+const availOf = p => p.sizes.reduce((a, s) => a + (((DATA.stock[p.id] || {})[s] || {}).available || 0), 0);
+
+function products() {
+  const list = DATA.products;
+  return `<h1>Products</h1><p class="sub">Add, edit or hide pieces. Changes show on the site within about a minute. Quantities live in the Stock tab.</p>
+    <div class="bar"><button class="btn" id="addP">Add product</button>
+      ${DATA.canUndo ? `<button class="btn quiet" id="undoP">Undo last change</button>` : ""}
+      <button class="btn quiet" id="backupP">Download backup</button></div>
+    ${list.length ? `<div class="plist">${list.map((p, i) => `<div class="prow ${p.hidden ? "off" : ""}">
+      <img class="thumb" src="${esc(p.image)}" alt="" loading="lazy">
+      <div class="pmeta"><b>${esc(p.name)}${p.hidden ? '<span class="tag">Hidden</span>' : ""}${p.badge ? `<span class="tag">${esc(p.badge)}</span>` : ""}</b>
+        <span>${esc(p.colorName)} · ${esc(CAT_LABEL[p.category] || p.category)} · ${money(p.price).replace(".00", "")} · ${availOf(p)} available</span></div>
+      <div class="pacts">
+        <button class="icon" data-mv="${esc(p.id)}|top" ${i ? "" : "disabled"} aria-label="Move ${esc(p.name)} to the top">Top</button>
+        <button class="icon" data-mv="${esc(p.id)}|up" ${i ? "" : "disabled"} aria-label="Move ${esc(p.name)} up">↑</button>
+        <button class="icon" data-mv="${esc(p.id)}|down" ${i < list.length - 1 ? "" : "disabled"} aria-label="Move ${esc(p.name)} down">↓</button>
+        <button class="icon" data-hide="${esc(p.id)}">${p.hidden ? "Show" : "Hide"}</button>
+        <button class="btn quiet" data-edit="${esc(p.id)}">Edit</button></div></div>`).join("")}</div>`
+      : `<p class="sub">No products yet. Add your first one.</p>`}`;
+}
+async function productAction(body, msg) {
+  try { await api("POST", body); toast(msg); await load(); } catch (e) { toast(e.message); }
+}
+function bindProducts() {
+  $("#addP").onclick = () => openEditor(null);
+  document.querySelectorAll("[data-edit]").forEach(b => b.onclick = () => openEditor(b.dataset.edit));
+  document.querySelectorAll("[data-mv]").forEach(b => b.onclick = () => { const [id, dir] = b.dataset.mv.split("|"); b.disabled = true; productAction(dir === "top" ? { action: "moveProduct", id, to: "top" } : { action: "moveProduct", id, dir }, dir === "top" ? "Moved to the top. It's now the first piece in the shop." : "Order saved."); });
+  document.querySelectorAll("[data-hide]").forEach(b => b.onclick = () => {
+    const p = DATA.products.find(x => x.id === b.dataset.hide); b.disabled = true;
+    productAction({ action: "hideProduct", id: p.id, hidden: !p.hidden }, p.hidden ? `${p.name} is back in the shop.` : `${p.name} is hidden from the shop.`);
+  });
+  const u = $("#undoP"); if (u) u.onclick = () => { if (confirm("Undo the last product change?")) { u.disabled = true; productAction({ action: "undoProducts" }, "Last change undone."); } };
+  $("#backupP").onclick = () => {
+    const data = DATA.products.map(({ tracked, ...p }) => p);
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }));
+    a.download = `products-backup-${new Date().toISOString().slice(0, 10)}.json`; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
+}
+
+function openEditor(id) {
+  const p = id ? DATA.products.find(x => x.id === id) : null;
+  ED = { id, dirty: false, startStock: {}, f: p
+    ? { name: p.name, colorName: p.colorName, category: p.category, price: String(p.price), badge: p.badge || "", sizes: [...p.sizes], image: p.image, imageBack: p.imageBack || "", description: p.description, details: (p.details || []).join("\n"), hidden: !!p.hidden }
+    : { name: "", colorName: "", category: "tops", price: "", badge: "", sizes: ["S", "M", "L", "XL"], image: "", imageBack: "", description: "", details: "", hidden: false } };
+  draw(); scrollTo(0, 0);
+}
+function editor() {
+  const f = ED.f, old = ED.id ? DATA.products.find(x => x.id === ED.id) : null;
+  const had = s => old && old.sizes.includes(s);
+  const photoBox = (key, label, required) => `<div class="ph"><span style="font-size:13px">${label}${required ? "" : ' <small style="color:var(--grey)">(optional)</small>'}</span>
+    <div class="box" id="box-${key}">${f[key] ? `<img src="${esc(f[key])}" alt="">` : "No photo yet"}</div>
+    <div class="acts"><span class="btn quiet filebtn">${f[key] ? "Replace" : "Upload"}<input type="file" accept="image/jpeg,image/png,image/webp,image/*" data-up="${key}" aria-label="Upload ${label.toLowerCase()}"></span>
+      ${f[key] && !required ? `<button class="btn quiet" data-rm="${key}">Remove</button>` : ""}</div></div>`;
+  return `<div class="ed"><button class="back" id="back">← All products</button>
+    <h1>${old ? esc(old.name) : "New product"}</h1><p class="sub">${old ? `${esc(old.colorName)} · link: /p/${esc(old.id)}` : "The product goes live as soon as you save, unless you hide it."}</p>
+    <div class="sec"><h2>PHOTOS</h2><div class="photos">${photoBox("image", "Front", true)}${photoBox("imageBack", "Back", false)}</div>
+      <p class="note" style="margin:0">Square photos look best. Big photos are shrunk automatically before upload.</p></div>
+    <div class="sec"><h2>BASICS</h2>
+      <label class="f"><span>Name</span><input class="field" data-f="name" value="${esc(f.name)}" maxlength="80" placeholder="Take That Risk Tee"></label>
+      <div class="g2"><label class="f"><span>Color</span><input class="field" data-f="colorName" value="${esc(f.colorName)}" maxlength="40" placeholder="Black"></label>
+        <label class="f"><span>Category</span><select class="field" data-f="category">${DATA.categories.map(c => `<option value="${c}" ${c === f.category ? "selected" : ""}>${CAT_LABEL[c] || c}</option>`).join("")}</select></label></div>
+      <div class="g2"><label class="f"><span>Price</span><input class="field" data-f="price" value="${esc(f.price)}" inputmode="decimal" placeholder="45"></label>
+        <label class="f"><span>Label <small>optional, like New or Limited</small></span><input class="field" data-f="badge" value="${esc(f.badge)}" maxlength="24"></label></div></div>
+    <div class="sec"><h2>SIZES</h2>
+      <div class="chips">${f.sizes.map(s => `<span class="chip">${esc(s)}<button data-rs="${esc(s)}" aria-label="Remove size ${esc(s)}">×</button></span>`).join("") || '<span style="color:var(--grey)">No sizes yet</span>'}</div>
+      <div class="presets">Quick set: ${PRESETS.map(([l], i) => `<button data-pre="${i}">${l}</button>`).join("")}</div>
+      <div style="display:flex;gap:8px"><input class="field" id="newSize" placeholder="Add a size, like 2XL" maxlength="12" style="flex:1;max-width:220px"><button class="btn quiet" id="addSize">Add</button></div>
+      ${f.sizes.length ? `<div class="sizes-stock">${f.sizes.map(s => had(s)
+        ? `<label>${esc(s)}<span class="have">${(((DATA.stock[old.id] || {})[s]) || {}).available ?? 0} available · edit in Stock</span></label>`
+        : `<label>${esc(s)} starting stock<input class="field num" type="number" min="0" data-ss="${esc(s)}" value="${esc(ED.startStock[s] ?? "")}" placeholder="0" style="width:100%;text-align:left"></label>`).join("")}</div>` : ""}</div>
+    <div class="sec"><h2>DESCRIPTION</h2>
+      <label class="f"><span>Description</span><textarea class="field" data-f="description" maxlength="600" placeholder="What it is and what makes it yours.">${esc(f.description)}</textarea></label>
+      <label class="f"><span>Details <small>one per line, up to 8. The first line shows as Material.</small></span><textarea class="field" data-f="details" placeholder="Heavyweight cotton&#10;Oversized fit&#10;Screen-printed graphic">${esc(f.details)}</textarea></label></div>
+    <div class="sec"><label class="check"><input type="checkbox" data-f="hidden" ${f.hidden ? "checked" : ""}><span>Hide from the shop<br><small style="color:var(--grey)">Hidden pieces can't be seen or bought. Use this for drafts and retired pieces.</small></span></label></div>
+    <div class="save"><button class="btn" id="saveP">${old ? "Save changes" : "Add product"}</button><button class="btn quiet" id="cancelP">Cancel</button>
+      ${old ? `<button class="danger" id="delP">Delete product</button>` : ""}<div class="err" id="perr"></div></div></div>`;
+}
+function bindEditor() {
+  const f = ED.f, dirty = () => { ED.dirty = true; };
+  const leave = () => { if (ED.dirty && !confirm("Leave without saving your changes?")) return; ED = null; draw(); scrollTo(0, 0); };
+  $("#back").onclick = leave; $("#cancelP").onclick = leave;
+  document.querySelectorAll("[data-f]").forEach(el => el.oninput = el.onchange = () => { f[el.dataset.f] = el.type === "checkbox" ? el.checked : el.value; dirty(); });
+  document.querySelectorAll("[data-ss]").forEach(el => el.oninput = () => { ED.startStock[el.dataset.ss] = el.value; dirty(); });
+  const setSizes = list => { f.sizes = [...new Set(list)]; dirty(); draw(); };
+  document.querySelectorAll("[data-rs]").forEach(b => b.onclick = () => setSizes(f.sizes.filter(s => s !== b.dataset.rs)));
+  document.querySelectorAll("[data-pre]").forEach(b => b.onclick = () => setSizes(PRESETS[+b.dataset.pre][1]));
+  const add = () => { const v = $("#newSize").value.trim(); if (!v) return; if (f.sizes.length >= 12) return toast("12 sizes is the most a product can have."); setSizes([...f.sizes, v]); setTimeout(() => $("#newSize") && $("#newSize").focus(), 0); };
+  $("#addSize").onclick = add; $("#newSize").onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); add(); } };
+  document.querySelectorAll("[data-rm]").forEach(b => b.onclick = () => { f[b.dataset.rm] = ""; dirty(); draw(); });
+  document.querySelectorAll("[data-up]").forEach(inp => inp.onchange = async () => {
+    const file = inp.files && inp.files[0]; if (!file) return;
+    const key = inp.dataset.up, box = $("#box-" + key);
+    box.classList.add("busy");
+    try {
+      const { data, type } = await shrink(file);
+      const d = await api("POST", { action: "upload", data, type });
+      f[key] = d.url; dirty(); draw(); toast("Photo uploaded. Save to keep it.");
+    } catch (e) { box.classList.remove("busy"); toast(e.message || "That photo couldn't be uploaded."); }
+  });
+  $("#saveP").onclick = async () => {
+    const btn = $("#saveP"), err = $("#perr"); err.textContent = ""; btn.disabled = true;
+    try {
+      const body = { ...f, details: f.details.split("\n"), startStock: ED.startStock };
+      const d = await api("POST", { action: "saveProduct", id: ED.id, product: body });
+      const wasNew = !ED.id; ED = null;
+      toast(wasNew ? `${d.product.name} added.${d.product.hidden ? " It's hidden until you show it." : ""}` : "Changes saved."); await load(); scrollTo(0, 0);
+    } catch (e) { err.textContent = e.message; btn.disabled = false; }
+  };
+  const del = $("#delP");
+  if (del) del.onclick = async () => {
+    const p = DATA.products.find(x => x.id === ED.id);
+    if (!confirm(`Delete ${p.name} (${p.colorName})? Past orders stay as they are. If you might sell it again, hide it instead.`)) return;
+    del.disabled = true;
+    try { await api("POST", { action: "deleteProduct", id: p.id }); ED = null; toast(`${p.name} deleted. Use Undo if that was a mistake.`); await load(); }
+    catch (e) { toast(e.message); del.disabled = false; }
+  };
+}
+// Shrinks a photo to at most 1600px on the long edge and re-encodes it as JPEG (keeps PNG/WebP if small enough).
+async function shrink(file) {
+  if (!/^image\//.test(file.type) && !/\.(jpe?g|png|webp|heic|heif)$/i.test(file.name)) throw new Error("Choose a photo (JPG, PNG or WebP).");
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("This browser can't open that photo. Save it as a JPG and try again.")); i.src = url; });
+    const max = 1600, k = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+    const w = Math.round(img.naturalWidth * k), h = Math.round(img.naturalHeight * k);
+    const keep = ["image/png", "image/webp"].includes(file.type) && k === 1 && file.size < 1.5 * 1024 * 1024;
+    let blob = file, type = file.type;
+    if (!keep) {
+      const c = document.createElement("canvas"); c.width = w; c.height = h;
+      const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, w, h); x.drawImage(img, 0, 0, w, h);
+      blob = await new Promise(ok => c.toBlob(ok, "image/jpeg", 0.85)); type = "image/jpeg";
+    }
+    if (!blob) throw new Error("That photo couldn't be processed. Try another.");
+    const buf = new Uint8Array(await blob.arrayBuffer());
+    let bin = ""; for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
+    return { data: btoa(bin), type };
+  } finally { URL.revokeObjectURL(url); }
+}
+
 PW ? load() : login();
 </script>
 </body>

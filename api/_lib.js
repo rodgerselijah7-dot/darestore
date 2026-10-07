@@ -1,9 +1,8 @@
 // Shared helpers for the API functions. Files starting with "_" are not exposed as routes.
 const crypto = require("crypto");
-const catalog = require("../products.json");
+const BASE_CATALOG = require("../products.json");
 
 const SITE = () => (process.env.SITE_URL || "").replace(/\/$/, "");
-const find = id => catalog.find(p => p.id === id);
 
 /* ---------- Upstash Redis over REST (Vercel Marketplace > Upstash / KV) ---------- */
 const R_URL = () => process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
@@ -16,12 +15,33 @@ async function redis(...cmd) {
   return d.result;
 }
 
+/* ---------- catalog ----------
+   Products live in Redis under "catalog" once they've been edited from the admin page.
+   Until then (or if Redis is down) the store uses products.json. Hidden products stay in the
+   catalog (so old orders and stock still line up) but aren't shown or sold. */
+const CAT_KEY = "catalog";
+async function getCatalog({ all = false } = {}) {
+  let list = BASE_CATALOG;
+  if (hasRedis()) {
+    try { const raw = await redis("GET", CAT_KEY); if (raw) list = JSON.parse(raw); }
+    catch (e) { console.error("catalog read failed, using products.json", e); }
+  }
+  return all ? list : list.filter(p => !p.hidden);
+}
+async function saveCatalog(list) {
+  const prev = await redis("GET", CAT_KEY);
+  if (prev) { await redis("LPUSH", "catalog:history", prev); await redis("LTRIM", "catalog:history", 0, 19); }
+  await redis("SET", CAT_KEY, JSON.stringify(list));
+}
+async function find(id, opts) { return (await getCatalog(opts)).find(p => p.id === id); }
+
 /* ---------- stock ----------
    c:<id>:<size>  units committed (paid orders + checkouts in progress)
    st:<id>:<size> stock override set from the admin page (falls back to products.json) */
 const ck = (id, size) => `c:${id}:${size}`;
 const sk = (id, size) => `st:${id}:${size}`;
-async function stockTable() {
+async function stockTable(list) {
+  const catalog = list || await getCatalog({ all: true });
   const rows = [];
   for (const p of catalog) if (p.stock) for (const s of p.sizes) rows.push([p, s]);
   let committed = [], overrides = [];
@@ -95,6 +115,31 @@ async function sendEmail(to, subject, text) {
   return r.ok;
 }
 
+/* ---------- product photos ----------
+   With a Vercel Blob store connected (BLOB_READ_WRITE_TOKEN), photos go there.
+   Without one, they're kept in Redis and served by /api/img, cached at the edge for a year.
+   Either way the key is a hash of the file, so the same photo is never stored twice. */
+const IMG_TYPES = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
+async function storeImage(buf, type) {
+  const ext = IMG_TYPES[type];
+  if (!ext) throw new Error("Use a JPG, PNG or WebP photo.");
+  const key = crypto.createHash("sha256").update(buf).digest("hex").slice(0, 24) + "." + ext;
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (token) {
+    const r = await fetch("https://vercel.com/api/blob/?" + new URLSearchParams({ pathname: "products/" + key }), {
+      method: "PUT", body: buf,
+      headers: { authorization: `Bearer ${token}`, "x-api-version": "12", "x-vercel-blob-store-id": token.split("_")[3] || "",
+        "x-vercel-blob-access": "public", "x-content-type": type, "x-add-random-suffix": "0", "x-allow-overwrite": "1" }
+    });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok || !d.url) throw new Error("Photo upload failed" + (d.error && d.error.message ? `: ${d.error.message}` : "."));
+    return d.url;
+  }
+  if (!hasRedis()) throw new Error("Connect Upstash Redis (or a Vercel Blob store) to upload photos.");
+  await redis("SET", "img:" + key, buf.toString("base64"));
+  return "/api/img?k=" + key;
+}
+
 /* ---------- misc ---------- */
 async function readRaw(req) {
   if (typeof req.body === "string") return req.body;
@@ -120,4 +165,4 @@ async function rateLimit(key, limit, windowSeconds) {
   return { ok: n <= limit, remaining: Math.max(0, limit - n) };
 }
 
-module.exports = { catalog, find, SITE, hasRedis, readJson, redis, stockTable, reserve, release, packRes, unpackRes, stripe, verifyStripe, sendEmail, readRaw, readJson, refOf, clientIp, rateLimit };
+module.exports = { storeImage, IMG_TYPES, BASE_CATALOG, getCatalog, saveCatalog, find, SITE, hasRedis, readJson, redis, stockTable, reserve, release, packRes, unpackRes, stripe, verifyStripe, sendEmail, readRaw, readJson, refOf, clientIp, rateLimit };

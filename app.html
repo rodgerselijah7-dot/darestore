@@ -1267,7 +1267,7 @@ function initFall() {
   fixLinks(document);
   loadAnalytics();
   try {
-    CATALOG = window.__CATALOG__ || await (await fetch("/products.json", { cache: "no-cache" })).json();
+    CATALOG = window.__CATALOG__ || await fetch("/api/products").then(r => { if (!r.ok) throw 0; return r.json(); }).catch(() => fetch("/products.json", { cache: "no-cache" }).then(r => r.json()));
   } catch { CATALOG = []; $("#main").innerHTML = `<div class="nf"><h1>The shop couldn't load</h1><p>Refresh the page to try again.</p></div>`; return; }
   if (!PREVIEW) {
     const live = fetch("/api/stock").then(r => r.ok ? r.json() : null).then(d => { if (d && d.products && Object.keys(d.products).length) STOCK = d.products; }).catch(() => {});

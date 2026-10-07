@@ -1,5 +1,6 @@
-const { catalog } = require("./_lib");
-module.exports = (req, res) => {
+const { getCatalog } = require("./_lib");
+module.exports = async (req, res) => {
+  const catalog = await getCatalog();
   const o = (process.env.SITE_URL || `https://${req.headers.host}`).replace(/\/$/, "");
   const urls = ["/", "/about", "/shop/tops", "/shop/hoodies", "/shop/bottoms", "/shop/accessories", "/info/shipping", "/info/returns", "/info/size", "/info/faq", "/info/contact", ...catalog.map(p => `/p/${p.id}`)];
   res.setHeader("Content-Type", "application/xml");

@@ -47,7 +47,17 @@ The Resend welcome email (above) covers the gap until your Klaviyo welcome flow 
 In `app.html` CONFIG > `analytics`: add a GA4 ID and/or Meta Pixel ID, and set `vercel: true` after turning on Web Analytics in Vercel.
 Page views, product views, add to bag, checkout starts, sign-ups and purchases are all sent automatically.
 
-## 7. Products (`products.json`)
+## 7. Products — edit them in the admin page
+Go to `/admin` → **Products** to add, edit, hide, reorder or delete pieces and upload photos. Changes show on the site within about a minute.
+- The first time you save from the Products tab, the catalog moves into Redis. From then on **the admin page is the source of truth and `products.json` is ignored** (it stays as the fallback if Redis is ever unreachable). Use **Download backup** to export the current catalog in the same format as `products.json`.
+- **Undo last change** steps back through the last 20 product changes. Undoing past the first change goes back to `products.json`.
+- **Hide** keeps a piece in the catalog (old orders and stock still line up) but takes it off the shop, its page and checkout. Use it for drafts and retired pieces; delete only true mistakes.
+- A product's link (`/p/<id>`) is set from its name and color when it's created and never changes, so renaming is safe.
+- Stock: new sizes get their starting count in the product form; after that, quantities are managed in the **Stock** tab.
+- Photos are shrunk to 1600px in the browser before upload. They're stored in a Vercel Blob store if one is connected (`BLOB_READ_WRITE_TOKEN`), otherwise in Redis and served from `/api/img`, cached for a year.
+- Categories are fixed: tops, hoodies, bottoms, accessories (they match the shop's navigation).
+
+### The file format (for backups and the fallback)
 - `price` in dollars. Prices are always read on the server, so they can't be changed in the browser.
 - `stock`: starting count per size, e.g. `{"S": 20, "M": 40}`. Sizes at 0 show as sold out. Every piece at 0 gets the red "Sold" dot.
 - `image` / `imageBack`: e.g. `"/images/rare-tee-front.jpg"`. Until set, the site draws the garment.

@@ -2,13 +2,15 @@
 // so products show up properly in Google and in link previews (iMessage, Instagram, X).
 const fs = require("fs");
 const path = require("path");
-const { catalog, find } = require("./_lib");
+const { getCatalog } = require("./_lib");
 let TEMPLATE;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const INFO = { shipping: "Shipping", returns: "Returns & exchanges", size: "Size guide", faq: "FAQ", contact: "Contact", privacy: "Privacy", terms: "Terms" };
 const CATS = { tops: "Tops", hoodies: "Hoodies", bottoms: "Bottoms", accessories: "Accessories" };
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
+  const catalog = await getCatalog();
+  const find = id => catalog.find(p => p.id === id);
   TEMPLATE = TEMPLATE || fs.readFileSync(path.join(process.cwd(), "app.html"), "utf8");
   const origin = (process.env.SITE_URL || `https://${req.headers.host}`).replace(/\/$/, "");
   const { r, id } = req.query || {};
@@ -43,7 +45,9 @@ module.exports = (req, res) => {
 <meta property="og:url" content="${esc(url)}">
 <meta property="og:image" content="${esc(image)}">
 <meta name="twitter:card" content="summary_large_image">${r === "success" || r === "order" ? '\n<meta name="robots" content="noindex">' : ""}${ld ? `\n<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>` : ""}`;
-  const html = TEMPLATE.replace(/<!--META-->[\s\S]*?<!--\/META-->/, `<!--META-->${meta}<!--/META-->`);
+  // the live product list, so the storefront doesn't need a second request (and shows admin edits)
+  const data = `\n<script>window.__CATALOG__=${JSON.stringify(catalog).replace(/</g, "\\u003c").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029")}</script>`;
+  const html = TEMPLATE.replace(/<!--META-->[\s\S]*?<!--\/META-->/, `<!--META-->${meta}${data}<!--/META-->`);
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=600");
   res.status(status).send(html);
