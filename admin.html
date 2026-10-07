@@ -140,7 +140,7 @@ function draw() {
     <div class="filters">${[["open", "To ship"], ["shipped", "Shipped"], ["all", "All"]].map(([k, v]) => `<button data-f="${k}" aria-pressed="${FILTER === k}">${v}</button>`).join("")}</div>
     ${orders()}` : TAB === "products" ? (ED ? editor() : products()) : stock()}</main>`;
   document.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => { if (ED && ED.dirty && !confirm("Leave without saving your changes?")) return; ED = null; TAB = b.dataset.tab; draw(); });
-  document.querySelectorAll("[data-f]").forEach(b => b.onclick = () => { FILTER = b.dataset.f; draw(); });
+  document.querySelectorAll(".filters [data-f]").forEach(b => b.onclick = () => { FILTER = b.dataset.f; draw(); });
   $("#refresh").onclick = () => { if (ED && ED.dirty && !confirm("Refresh and lose your unsaved changes?")) return; ED = null; load(); };
   $("#out").onclick = () => { sessionStorage.removeItem("dare_admin"); PW = ""; login(); };
   bind();
@@ -260,11 +260,11 @@ function editor() {
     <div class="sec"><h2>PHOTOS</h2><div class="photos">${photoBox("image", "Front", true)}${photoBox("imageBack", "Back", false)}</div>
       <p class="note" style="margin:0">Square photos look best. Big photos are shrunk automatically before upload.</p></div>
     <div class="sec"><h2>BASICS</h2>
-      <label class="f"><span>Name</span><input class="field" data-f="name" value="${esc(f.name)}" maxlength="80" placeholder="Take That Risk Tee"></label>
-      <div class="g2"><label class="f"><span>Color</span><input class="field" data-f="colorName" value="${esc(f.colorName)}" maxlength="40" placeholder="Black"></label>
-        <label class="f"><span>Category</span><select class="field" data-f="category">${DATA.categories.map(c => `<option value="${c}" ${c === f.category ? "selected" : ""}>${CAT_LABEL[c] || c}</option>`).join("")}</select></label></div>
-      <div class="g2"><label class="f"><span>Price</span><input class="field" data-f="price" value="${esc(f.price)}" inputmode="decimal" placeholder="45"></label>
-        <label class="f"><span>Label <small>optional, like New or Limited</small></span><input class="field" data-f="badge" value="${esc(f.badge)}" maxlength="24"></label></div></div>
+      <label class="f"><span>Name</span><input class="field" data-pf="name" value="${esc(f.name)}" maxlength="80" placeholder="Take That Risk Tee"></label>
+      <div class="g2"><label class="f"><span>Color</span><input class="field" data-pf="colorName" value="${esc(f.colorName)}" maxlength="40" placeholder="Black"></label>
+        <label class="f"><span>Category</span><select class="field" data-pf="category">${DATA.categories.map(c => `<option value="${c}" ${c === f.category ? "selected" : ""}>${CAT_LABEL[c] || c}</option>`).join("")}</select></label></div>
+      <div class="g2"><label class="f"><span>Price</span><input class="field" data-pf="price" value="${esc(f.price)}" inputmode="decimal" placeholder="45"></label>
+        <label class="f"><span>Label <small>optional, like New or Limited</small></span><input class="field" data-pf="badge" value="${esc(f.badge)}" maxlength="24"></label></div></div>
     <div class="sec"><h2>SIZES</h2>
       <div class="chips">${f.sizes.map(s => `<span class="chip">${esc(s)}<button data-rs="${esc(s)}" aria-label="Remove size ${esc(s)}">×</button></span>`).join("") || '<span style="color:var(--grey)">No sizes yet</span>'}</div>
       <div class="presets">Quick set: ${PRESETS.map(([l], i) => `<button data-pre="${i}">${l}</button>`).join("")}</div>
@@ -273,9 +273,9 @@ function editor() {
         ? `<label>${esc(s)}<span class="have">${(((DATA.stock[old.id] || {})[s]) || {}).available ?? 0} available · edit in Stock</span></label>`
         : `<label>${esc(s)} starting stock<input class="field num" type="number" min="0" data-ss="${esc(s)}" value="${esc(ED.startStock[s] ?? "")}" placeholder="0" style="width:100%;text-align:left"></label>`).join("")}</div>` : ""}</div>
     <div class="sec"><h2>DESCRIPTION</h2>
-      <label class="f"><span>Description</span><textarea class="field" data-f="description" maxlength="600" placeholder="What it is and what makes it yours.">${esc(f.description)}</textarea></label>
-      <label class="f"><span>Details <small>one per line, up to 8. The first line shows as Material.</small></span><textarea class="field" data-f="details" placeholder="Heavyweight cotton&#10;Oversized fit&#10;Screen-printed graphic">${esc(f.details)}</textarea></label></div>
-    <div class="sec"><label class="check"><input type="checkbox" data-f="hidden" ${f.hidden ? "checked" : ""}><span>Hide from the shop<br><small style="color:var(--grey)">Hidden pieces can't be seen or bought. Use this for drafts and retired pieces.</small></span></label></div>
+      <label class="f"><span>Description</span><textarea class="field" data-pf="description" maxlength="600" placeholder="What it is and what makes it yours.">${esc(f.description)}</textarea></label>
+      <label class="f"><span>Details <small>one per line, up to 8. The first line shows as Material.</small></span><textarea class="field" data-pf="details" placeholder="Heavyweight cotton&#10;Oversized fit&#10;Screen-printed graphic">${esc(f.details)}</textarea></label></div>
+    <div class="sec"><label class="check"><input type="checkbox" data-pf="hidden" ${f.hidden ? "checked" : ""}><span>Hide from the shop<br><small style="color:var(--grey)">Hidden pieces can't be seen or bought. Use this for drafts and retired pieces.</small></span></label></div>
     <div class="save"><button class="btn" id="saveP">${old ? "Save changes" : "Add product"}</button><button class="btn quiet" id="cancelP">Cancel</button>
       ${old ? `<button class="danger" id="delP">Delete product</button>` : ""}<div class="err" id="perr"></div></div></div>`;
 }
@@ -283,7 +283,7 @@ function bindEditor() {
   const f = ED.f, dirty = () => { ED.dirty = true; };
   const leave = () => { if (ED.dirty && !confirm("Leave without saving your changes?")) return; ED = null; draw(); scrollTo(0, 0); };
   $("#back").onclick = leave; $("#cancelP").onclick = leave;
-  document.querySelectorAll("[data-f]").forEach(el => el.oninput = el.onchange = () => { f[el.dataset.f] = el.type === "checkbox" ? el.checked : el.value; dirty(); });
+  document.querySelectorAll("[data-pf]").forEach(el => el.oninput = el.onchange = () => { f[el.dataset.pf] = el.type === "checkbox" ? el.checked : el.value; dirty(); });
   document.querySelectorAll("[data-ss]").forEach(el => el.oninput = () => { ED.startStock[el.dataset.ss] = el.value; dirty(); });
   const setSizes = list => { f.sizes = [...new Set(list)]; dirty(); draw(); };
   document.querySelectorAll("[data-rs]").forEach(b => b.onclick = () => setSizes(f.sizes.filter(s => s !== b.dataset.rs)));
