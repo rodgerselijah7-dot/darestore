@@ -19,6 +19,8 @@ module.exports = async (req, res) => {
       catch { return res.status(400).end(); }
     }
   const s = event.data && event.data.object;
+  // DARE Arcade game purchases use the same Stripe account; the arcade's own webhook handles them
+  if (s && s.metadata && s.metadata.source === "dare-arcade") return res.status(200).json({ received: true, skipped: "arcade" });
   try {
     if (event.type === "checkout.session.expired" && hasRedis()) {
       // release the hold once, even if Stripe retries
