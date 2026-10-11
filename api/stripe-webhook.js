@@ -1,7 +1,7 @@
 // Stripe webhook: logs paid orders and releases stock held by abandoned checkouts.
 // Stripe Dashboard > Developers > Webhooks > Add endpoint: https://YOUR-SITE/api/stripe-webhook
 // Events: checkout.session.completed, checkout.session.expired. Env: STRIPE_WEBHOOK_SECRET.
-const { verifyStripe, readRaw, readJson, hasRedis, redis, release, unpackRes, stripe, sendEmail, refOf, SITE, gamesInCart, grantGames, unlockEmail, GAMES } = require("./_lib");
+const { verifyStripe, readRaw, readJson, hasRedis, redis, release, unpackRes, stripe, sendEmail, refOf, SITE } = require("./_lib");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") return res.status(405).end();
@@ -28,12 +28,6 @@ module.exports = async (req, res) => {
       const full = await stripe("GET", `checkout/sessions/${s.id}?expand[]=line_items`);
       const ship = (full.collected_information && full.collected_information.shipping_details) || full.shipping_details || {};
       const cust = full.customer_details || {};
-      // arcade games: unlock them and email the customer their code (once, even if Stripe retries)
-      const games = ["paid", "no_payment_required"].includes(full.payment_status) ? gamesInCart(full.metadata && full.metadata.cart) : [];
-      const grant = games.length ? await grantGames(s.id, cust.email, games) : null;
-      if (grant && grant.code && cust.email && await redis("SET", `lic-mail:${s.id}`, "1", "NX", "EX", 2592000))
-        await sendEmail(cust.email, "Your DARE Arcade games are unlocked", unlockEmail(grant.code, games)).catch(() => {});
-      const onlyGames = ((full.metadata && full.metadata.cart) || "").split(",").filter(Boolean).every(x => GAMES.some(g => g.id === x.split("|")[0]));
       const order = {
         ref: refOf(s.id), session: s.id, created: new Date(full.created * 1000).toISOString(), status: "paid",
         email: cust.email || "", name: ship.name || cust.name || "", phone: cust.phone || "",
@@ -42,12 +36,10 @@ module.exports = async (req, res) => {
         shipping: ((full.shipping_cost && full.shipping_cost.amount_total) || 0) / 100,
         total: (full.amount_total || 0) / 100, tracking: null
       };
-      if (games.length) order.games = games;
-      if (onlyGames) order.status = "delivered"; // nothing to ship, so it stays out of "To ship" in admin
       if (hasRedis() && await redis("SET", `order:${order.ref}`, JSON.stringify(order), "NX")) {
         await redis("LPUSH", "orders", order.ref);
         await sendEmail(process.env.OWNER_EMAIL, `New order ${order.ref}: $${order.total.toFixed(2)}`,
-          `${order.name} (${order.email})\n\n${order.items.map(i => `${i.qty} x ${i.name}  $${i.amount.toFixed(2)}`).join("\n")}\n\nShipping: $${order.shipping.toFixed(2)}\nTotal: $${order.total.toFixed(2)}${onlyGames ? "\n\nDigital order: games unlocked automatically, nothing to ship." : `\n\nShip to:\n${fmtAddr(order)}`}\n\nManage: ${SITE()}/admin`);
+          `${order.name} (${order.email})\n\n${order.items.map(i => `${i.qty} x ${i.name}  $${i.amount.toFixed(2)}`).join("\n")}\n\nShipping: $${order.shipping.toFixed(2)}\nTotal: $${order.total.toFixed(2)}\n\nShip to:\n${fmtAddr(order)}\n\nManage: ${SITE()}/admin`);
       }
     }
     return res.status(200).json({ received: true });
