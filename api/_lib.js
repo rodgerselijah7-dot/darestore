@@ -1,6 +1,7 @@
 // Shared helpers for the API functions. Files starting with "_" are not exposed as routes.
 const crypto = require("crypto");
 const BASE_CATALOG = require("../products.json");
+const GAMES = require("../games.json"); // DARE Arcade games, sold as digital products
 
 const SITE = () => (process.env.SITE_URL || "").replace(/\/$/, "");
 
@@ -34,6 +35,60 @@ async function saveCatalog(list) {
   await redis("SET", CAT_KEY, JSON.stringify(list));
 }
 async function find(id, opts) { return (await getCatalog(opts)).find(p => p.id === id); }
+// What the storefront sells: the clothing catalog (admin-editable) plus the arcade games from games.json.
+// Games are kept out of getCatalog so the admin page never edits or saves them; change game prices in games.json.
+async function shopCatalog(opts) {
+  const clothes = await getCatalog(opts);
+  return [...clothes.filter(p => !GAMES.some(g => g.id === p.id)), ...GAMES];
+}
+
+/* ---------- arcade game unlocks ----------
+   lic:<CODE>          { email, games: [...], sessions: [...], created }
+   lic-email:<email>   CODE   (one code per customer; later purchases add games to it)
+   lic-sess:<session>  CODE   (makes granting idempotent across webhook retries and the success page) */
+const ARCADE = () => (process.env.ARCADE_URL || "https://dare-arcade.vercel.app").replace(/\/$/, "");
+const ARCADE_ORIGINS = () => (process.env.ARCADE_ORIGINS || "https://dare-arcade.vercel.app,https://games.darewear.store").split(",").map(s => s.trim()).filter(Boolean);
+const CODE_ABC = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O or 1/I, so codes are easy to type
+const newCode = () => [...crypto.randomBytes(12)].map(b => CODE_ABC[b % 32]).join("");
+const cleanCode = c => String(c || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+const isCode = c => c.length === 12 && [...c].every(ch => CODE_ABC.includes(ch));
+const fmtCode = c => c.replace(/(.{4})(?=.)/g, "$1-");
+// "game-ori|Digital|1,tee-black|M|2" (session metadata.cart) -> ["ori"]
+function gamesInCart(cartMeta) {
+  const ids = String(cartMeta || "").split(",").map(x => x.split("|")[0]).filter(Boolean);
+  return [...new Set(ids.flatMap(id => { const g = GAMES.find(x => x.id === id); return g ? (g.games || [g.game]) : []; }))];
+}
+async function grantGames(sessionId, email, games) {
+  if (!hasRedis() || !games.length || !sessionId) return null;
+  const done = await redis("GET", `lic-sess:${sessionId}`);
+  if (done) return { code: done, first: false };
+  const em = String(email || "").trim().toLowerCase();
+  let code = em && await redis("GET", `lic-email:${em}`);
+  if (!code) code = newCode();
+  // claim this session first so a webhook retry racing the success page can't email twice
+  const claimed = await redis("SET", `lic-sess:${sessionId}`, code, "NX");
+  if (!claimed) return { code: await redis("GET", `lic-sess:${sessionId}`), first: false };
+  const raw = await redis("GET", `lic:${code}`);
+  const lic = raw ? JSON.parse(raw) : { email: em, games: [], sessions: [], created: new Date().toISOString() };
+  lic.games = [...new Set([...lic.games, ...games])];
+  lic.sessions = [...new Set([...(lic.sessions || []), sessionId])].slice(-50);
+  await redis("SET", `lic:${code}`, JSON.stringify(lic));
+  if (em) await redis("SET", `lic-email:${em}`, code);
+  return { code, first: true, games: lic.games };
+}
+async function licenseGames(code) {
+  if (!hasRedis() || !isCode(code)) return null;
+  const raw = await redis("GET", `lic:${code}`);
+  return raw ? JSON.parse(raw).games || [] : null;
+}
+function playLink(code, games) {
+  const one = games.length === 1 ? `/${games[0]}/` : "/";
+  return `${ARCADE()}${one}?unlock=${code}`;
+}
+function unlockEmail(code, games) {
+  const names = games.map(g => (GAMES.find(x => x.game === g) || {}).name || g).join(", ");
+  return `Your DARE Arcade games are unlocked: ${names}.\n\nPlay now: ${playLink(code, games)}\n\nYour unlock code: ${fmtCode(code)}\n\nOn another phone or computer, or in the arcade app on your Home Screen, open a game and tap "Enter unlock code". Keep this email; the code works for every game you buy with this email address.\n\nDesired Ambitions Requires Execution.`;
+}
 
 /* ---------- stock ----------
    c:<id>:<size>  units committed (paid orders + checkouts in progress)
@@ -165,4 +220,4 @@ async function rateLimit(key, limit, windowSeconds) {
   return { ok: n <= limit, remaining: Math.max(0, limit - n) };
 }
 
-module.exports = { storeImage, IMG_TYPES, BASE_CATALOG, getCatalog, saveCatalog, find, SITE, hasRedis, readJson, redis, stockTable, reserve, release, packRes, unpackRes, stripe, verifyStripe, sendEmail, readRaw, readJson, refOf, clientIp, rateLimit };
+module.exports = { GAMES, shopCatalog, ARCADE, ARCADE_ORIGINS, cleanCode, isCode, fmtCode, gamesInCart, grantGames, licenseGames, playLink, unlockEmail, storeImage, IMG_TYPES, BASE_CATALOG, getCatalog, saveCatalog, find, SITE, hasRedis, readJson, redis, stockTable, reserve, release, packRes, unpackRes, stripe, verifyStripe, sendEmail, readRaw, readJson, refOf, clientIp, rateLimit };

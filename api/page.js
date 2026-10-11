@@ -2,11 +2,11 @@
 // so products show up properly in Google and in link previews (iMessage, Instagram, X).
 const fs = require("fs");
 const path = require("path");
-const { getCatalog } = require("./_lib");
+const { shopCatalog: getCatalog } = require("./_lib"); // clothing + arcade games
 let TEMPLATE;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const INFO = { shipping: "Shipping", returns: "Returns & exchanges", size: "Size guide", faq: "FAQ", contact: "Contact", privacy: "Privacy", terms: "Terms" };
-const CATS = { tops: "Tops", hoodies: "Hoodies", bottoms: "Bottoms", accessories: "Accessories" };
+const CATS = { tops: "Tops", hoodies: "Hoodies", bottoms: "Bottoms", accessories: "Accessories", games: "Games" };
 
 module.exports = async (req, res) => {
   const catalog = await getCatalog();

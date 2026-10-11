@@ -1,6 +1,6 @@
 // Creates a Stripe Checkout session and holds the stock for 30 minutes while the customer pays.
 // Env: STRIPE_SECRET_KEY (required). Stock holds need Upstash Redis (KV_REST_API_URL / KV_REST_API_TOKEN).
-const { getCatalog, stockTable, reserve, release, packRes, stripe, readJson, hasRedis, redis, clientIp, rateLimit } = require("./_lib");
+const { shopCatalog, stockTable, reserve, release, packRes, stripe, readJson, hasRedis, redis, clientIp, rateLimit } = require("./_lib");
 
 const FREE_SHIPPING_OVER = 100; // dollars; keep in sync with CONFIG.freeShippingOver in index.html
 const RATES = {
@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
   const limited = await rateLimit(`checkout:${clientIp(req)}`, 20, 600); // 20 checkout attempts per 10 minutes per IP
   if (!limited.ok) return res.status(429).json({ error: "Too many checkout attempts. Wait a few minutes and try again." });
 
-  const catalog = await getCatalog(); // hidden products are left out, so they can't be bought
+  const catalog = await shopCatalog(); // hidden products are left out, so they can't be bought (games come from games.json)
   const find = id => catalog.find(p => p.id === id);
   const body = await readJson(req);
   const raw = Array.isArray(body.items) ? body.items.slice(0, 25) : [];
@@ -32,8 +32,8 @@ module.exports = async (req, res) => {
     if (!p.sizes.includes(it.size)) return res.status(400).json({ error: `${p.name} doesn't come in size ${it.size}.` });
     if (p.soldOut) return res.status(400).json({ error: `${p.name} is sold out. Remove it and try again.` });
     const key = p.id + "|" + it.size;
-    const qty = Math.max(1, Math.min(10, parseInt(it.qty, 10) || 1));
-    merged.set(key, { p, size: it.size, qty: Math.min(10, (merged.get(key)?.qty || 0) + qty) });
+    const qty = p.digital ? 1 : Math.max(1, Math.min(10, parseInt(it.qty, 10) || 1)); // a game is bought once
+    merged.set(key, { p, size: it.size, qty: p.digital ? 1 : Math.min(10, (merged.get(key)?.qty || 0) + qty) });
   }
   const lines = [...merged.values()];
 
@@ -52,18 +52,20 @@ module.exports = async (req, res) => {
   }
 
   const origin = req.headers.origin || `https://${req.headers.host}`;
-  const subtotal = lines.reduce((a, l) => a + l.p.price * l.qty, 0);
+  const physical = lines.filter(l => !l.p.digital);
+  const subtotal = physical.reduce((a, l) => a + l.p.price * l.qty, 0); // games don't count toward free shipping
   const free = subtotal >= FREE_SHIPPING_OVER;
+  const ship = physical.length > 0; // a bag of only games needs no address or shipping
   try {
     const session = await stripe("POST", "checkout/sessions", {
       mode: "payment",
       line_items: lines.map(l => ({ quantity: l.qty, price_data: { currency: "usd", unit_amount: Math.round(l.p.price * 100), product_data: {
-        name: `${l.p.name} (${l.p.colorName}, ${l.size})`,
+        name: l.p.digital ? `${l.p.name} (${l.p.colorName})` : `${l.p.name} (${l.p.colorName}, ${l.size})`,
         images: l.p.image ? [new URL(l.p.image, origin).href] : undefined,
         metadata: { product_id: l.p.id, size: l.size } } } })),
-      shipping_options: [free ? rate(RATES.standard, 0, "Free standard shipping") : rate(RATES.standard, RATES.standard.cents), rate(RATES.express, RATES.express.cents)],
-      shipping_address_collection: { allowed_countries: ["US"] },
-      phone_number_collection: { enabled: true },
+      shipping_options: ship ? [free ? rate(RATES.standard, 0, "Free standard shipping") : rate(RATES.standard, RATES.standard.cents), rate(RATES.express, RATES.express.cents)] : undefined,
+      shipping_address_collection: ship ? { allowed_countries: ["US"] } : undefined,
+      phone_number_collection: { enabled: ship },
       billing_address_collection: "auto",
       customer_creation: "always",
       allow_promotion_codes: true,

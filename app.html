@@ -376,6 +376,12 @@ footer .check a{color:rgba(255,255,255,.75)}
 .receipt{width:100%;border-collapse:collapse;margin:20px 0 32px;font-size:14px;min-width:0}
 .receipt td{padding:12px 0;border-bottom:1px solid var(--hair)}.receipt td:last-child{text-align:right}
 .receipt tr.t td{border-bottom:0}
+.unlock-box{border:1px solid var(--ink);padding:24px;margin:8px 0 28px}
+.unlock-box .eyebrow{display:block;margin-bottom:10px}
+.unlock-box .code{font-family:var(--display);font-weight:800;font-size:clamp(26px,6vw,36px);letter-spacing:.06em;margin:6px 0 4px;user-select:all;-webkit-user-select:all}
+.unlock-box p{margin:0 0 14px;color:var(--grey);font-size:14px}
+.unlock-box .btn{margin-top:6px}
+.game-note{font-size:14px;color:var(--grey);margin:14px 0 0}
 .nf h1{font-family:var(--display);font-weight:800;font-size:36px;letter-spacing:-.01em;margin:0 0 8px}
 .nf p{color:var(--grey);margin:0 0 28px}
 </style>
@@ -389,6 +395,7 @@ footer .check a{color:rgba(255,255,255,.75)}
   <a class="name" href="#/" aria-label="DARE home">DARE</a>
   <nav class="nav" aria-label="Main">
     <a href="#/" data-nav="shop">Shop</a>
+    <a href="#/shop/games" data-nav="games">Games</a>
     <a href="#/about" data-nav="about">About</a>
     <a href="#/info/shipping" data-nav="info">Info</a>
     <button id="searchBtn" aria-haspopup="dialog" aria-controls="searchOv" aria-label="Search"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:15px;height:15px;vertical-align:-2px"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.4"/><path d="M11 11L14.5 14.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
@@ -561,8 +568,19 @@ function saveCart() {
   renderCart();
 }
 function subtotal() { return cart.reduce((a, l) => a + (find(l.id)?.price || 0) * l.qty, 0); }
+function shipSubtotal() { return cart.reduce((a, l) => { const p = find(l.id); return a + (p && !p.digital ? p.price * l.qty : 0); }, 0); }
 function addToCart(id, size, qty = 1) {
   const p = find(id); if (!p) return;
+  if (p.digital) {
+    const pass = cart.map(l => find(l.id)).find(x => x && x.games);
+    if (cart.some(l => l.id === id)) { toast(`${p.name} is already in your bag.`, "View bag", openCart); return; }
+    if (pass && p.game && pass.games.includes(p.game)) { toast(`The ${pass.name} in your bag already includes ${p.name}.`, "View bag", openCart); return; }
+    if (p.games) { const n = cart.length; cart = cart.filter(l => { const x = find(l.id); return !(x && x.game && p.games.includes(x.game)); }); if (cart.length < n) toast(`Swapped the single games in your bag for the ${p.name}.`); }
+    cart.push({ id, size: p.sizes[0], qty: 1 }); saveCart();
+    toast(`Added ${p.name}`, "View bag", openCart);
+    track("add_to_cart", { id: p.id, name: p.name, price: p.price, qty: 1, size: p.sizes[0] });
+    return;
+  }
   const max = Math.min(10, avail(p, size));
   if (max <= 0) { toast(`${p.name} in size ${size} is sold out.`); return; }
   const line = cart.find(l => l.id === id && l.size === size);
@@ -575,15 +593,16 @@ function addToCart(id, size, qty = 1) {
   track("add_to_cart", { id: p.id, name: p.name, price: p.price, qty: added, size });
 }
 function renderCart() {
-  const sub = subtotal(), left = CONFIG.freeShippingOver - sub;
-  $("#freebar").innerHTML = cart.length ? `${left > 0 ? `${money(left)} away from free shipping.` : "Free standard shipping."}<div class="bar"><i style="width:${Math.min(100, (sub / CONFIG.freeShippingOver) * 100)}%"></i></div>` : "";
-  $("#freebar").style.display = cart.length ? "" : "none";
+  const sub = subtotal(), shipSub = shipSubtotal(), left = CONFIG.freeShippingOver - shipSub;
+  const hasShip = cart.some(l => { const p = find(l.id); return p && !p.digital; });
+  $("#freebar").innerHTML = hasShip ? `${left > 0 ? `${money(left)} away from free shipping.` : "Free standard shipping."}<div class="bar"><i style="width:${Math.min(100, (shipSub / CONFIG.freeShippingOver) * 100)}%"></i></div>` : "";
+  $("#freebar").style.display = hasShip ? "" : "none";
   $("#cartFoot").style.display = cart.length ? "" : "none";
   $("#subtotal").textContent = money(sub);
   const linesEl = $("#lines");
   linesEl.innerHTML = cart.length ? cart.map((l, i) => {
     const p = find(l.id);
-    return `<div class="item"><a class="print" href="#/p/${p.id}" data-close>${art(p)}</a><div><h3>${esc(p.name)}</h3><div class="sub">${esc(p.colorName)}, size ${esc(l.size)}${l.qty > 1 ? ` &times; ${l.qty}` : ""}</div>
+    return `<div class="item"><a class="print" href="#/p/${p.id}" data-close>${art(p)}</a><div><h3>${esc(p.name)}</h3><div class="sub">${p.digital ? `${esc(p.colorName)}, instant unlock` : `${esc(p.colorName)}, size ${esc(l.size)}${l.qty > 1 ? ` &times; ${l.qty}` : ""}`}</div>
       <button class="rm" data-rm="${i}">Remove</button></div><div class="lp">${money(p.price * l.qty)}</div></div>`;
   }).join("") : `<div class="empty"><p>Your bag is empty.</p><a class="btn quiet" href="#/" data-close>Continue shopping</a></div>`;
   fixLinks(linesEl);
@@ -719,10 +738,11 @@ function toast(text, action, fn) {
 }
 
 /* ---------- views ---------- */
-const CATS = [["all", "All"], ["tops", "Tops"], ["hoodies", "Hoodies"], ["bottoms", "Bottoms"], ["accessories", "Accessories"]];
+const CATS = [["all", "All"], ["tops", "Tops"], ["hoodies", "Hoodies"], ["bottoms", "Bottoms"], ["accessories", "Accessories"], ["games", "Games"]];
+const ARCADE_URL = "https://dare-arcade.vercel.app"; // where the games are played
 const photo = (p, view) => (view === "back" && p.imageBack) ? `<img class="photo" src="${esc(p.imageBack)}" alt="${esc(p.name)}, back" loading="lazy">` : art(p);
 
-const CATCODE = { tops: "TP", hoodies: "HD", bottoms: "BT", accessories: "AC" };
+const CATCODE = { tops: "TP", hoodies: "HD", bottoms: "BT", accessories: "AC", games: "GM" };
 function refCode(p) {
   const sameCat = CATALOG.filter(x => x.category === p.category);
   const idx = Math.max(1, sameCat.indexOf(p) + 1);
@@ -739,7 +759,7 @@ function work(p, i = 0) {
 }
 let SHOP_LIST = [], FIRST = true;
 function shop(cat = "all") {
-  const list = CATALOG.filter(p => cat === "all" ? true : p.category === cat);
+  const list = CATALOG.filter(p => cat === "all" ? !p.digital : p.category === cat);
   SHOP_LIST = list;
   const gridIcon = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="1" y="1" width="6" height="6" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="1" width="6" height="6" stroke="currentColor" stroke-width="1.4"/><rect x="1" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.4"/></svg>`;
   const oneIcon = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="1" width="10" height="14" stroke="currentColor" stroke-width="1.4"/></svg>`;
@@ -757,16 +777,16 @@ function shop(cat = "all") {
 function heroPiece() {
   const pinned = CONFIG.heroProductId && find(CONFIG.heroProductId);
   if (pinned && !isGone(pinned)) return pinned;
-  const live = CATALOG.filter(p => !isGone(p));
+  const live = CATALOG.filter(p => !isGone(p) && !p.digital);
   return live[0] || CATALOG[0];
 }
 function featuredPiece() {
   const hero = heroPiece();
   const pinned = CONFIG.featuredProductId && find(CONFIG.featuredProductId);
   if (pinned && pinned.id !== hero.id && !isGone(pinned)) return pinned;
-  const badged = CATALOG.find(p => p.badge && p.id !== hero.id && !isGone(p));
+  const badged = CATALOG.find(p => p.badge && !p.digital && p.id !== hero.id && !isGone(p));
   if (badged) return badged;
-  return CATALOG.find(p => p.id !== hero.id && !isGone(p)) || hero;
+  return CATALOG.find(p => p.id !== hero.id && !p.digital && !isGone(p)) || hero;
 }
 function hero() {
   const p = heroPiece();
@@ -793,7 +813,7 @@ function communityBand() {
 }
 function home() { return hero() + storyBand() + trustStrip() + shop("all"); }
 function relatedPieces(p) {
-  return CATALOG.filter(x => x.id !== p.id)
+  return CATALOG.filter(x => x.id !== p.id && !!x.digital === !!p.digital)
     .map(x => ({ x, score: (x.category === p.category ? 0 : 1000) + Math.abs(x.price - p.price) + (isGone(x) ? 500 : 0) }))
     .sort((a, b) => a.score - b.score)
     .slice(0, 3).map(s => s.x);
@@ -808,10 +828,14 @@ function product(id) {
       <div class="placard"><a class="back" href="#" data-back>&larr; All pieces</a>
         ${p.badge ? `<p class="pchip">${esc(p.badge)}</p>` : ""}
         <h1>${esc(p.name)}</h1>
-        <dl class="facts"><dt>Colour</dt><dd>${esc(p.colorName)}</dd>${p.details[0] ? `<dt>Material</dt><dd>${esc(p.details[0])}</dd>` : ""}<dt>Ref</dt><dd>${refCode(p)}</dd></dl>
+        <dl class="facts">${p.digital ? `<dt>Format</dt><dd>${esc(p.colorName)}</dd><dt>Plays on</dt><dd>Phone, tablet or computer</dd>` : `<dt>Colour</dt><dd>${esc(p.colorName)}</dd>${p.details[0] ? `<dt>Material</dt><dd>${esc(p.details[0])}</dd>` : ""}`}<dt>Ref</dt><dd>${refCode(p)}</dd></dl>
         <p class="price">${gone ? '<span class="dot" aria-hidden="true"></span>Gone' : money(p.price)}</p>
         ${(() => { const t = totalAvail(p); return !gone && t != null && t <= 5 ? `<p class="stockline">Only ${t} left across all sizes</p>` : ""; })()}
-        ${gone ? `<button class="btn quiet wide" data-signup>Tell me if it comes back</button><p class="small"></p>` : `
+        ${p.digital ? `
+        <button class="btn wide" id="addBtn">Add to bag</button>
+        <div class="buybar" id="buybar" aria-hidden="true"><div class="p">${money(p.price)}</div><button class="btn" id="barBtn" tabindex="-1">Add to bag</button></div>
+        <p class="small">Instant unlock. After checkout you get an unlock code and a play link, on screen and by email.</p>
+        ${p.game ? `<p class="game-note"><a class="textlink" href="${ARCADE_URL}/${esc(p.game)}/" target="_blank" rel="noopener">Try it free first</a></p>` : `<p class="game-note"><a class="textlink" href="${ARCADE_URL}/" target="_blank" rel="noopener">Visit the DARE Arcade</a></p>`}` : gone ? `<button class="btn quiet wide" data-signup>Tell me if it comes back</button><p class="small"></p>` : `
         <div class="lbl"><span id="sizeLbl">${one ? "One size" : "Size"}</span>${one ? "" : '<a href="#/info/size">Size guide</a>'}</div>
         <div class="sizes" role="group" aria-labelledby="sizeLbl">${p.sizes.map(s => `<button data-size="${esc(s)}" aria-pressed="${one}" ${avail(p, s) <= 0 ? "disabled aria-label='" + esc(s) + ", sold out'" : ""}>${esc(s)}</button>`).join("")}</div>
         <button class="btn wide" id="addBtn">${one ? "Add to bag" : "Choose a size"}</button>
@@ -819,12 +843,13 @@ function product(id) {
         <p class="left" id="left" aria-live="polite">${one && avail(p, p.sizes[0]) <= 5 ? `Only ${avail(p, p.sizes[0])} left` : ""}</p>
         <p class="small">Free standard shipping over ${money(CONFIG.freeShippingOver)}. Ships in 2 to 4 business days.</p>`}
         <div class="about"><p>${esc(p.description)}</p></div>
-        ${p.details.length > 1 ? `<details><summary>Details</summary><p>${p.details.slice(1).map(esc).join("<br>")}</p></details>` : ""}
-        <details><summary>Shipping</summary><p>Standard (5 to 7 business days) or Express (2 to 3 business days) at checkout. <a href="#/info/shipping">Full shipping details</a></p></details>
-        <details><summary>Returns &amp; exchanges</summary><p>Unworn pieces with tags can be returned or exchanged within ${CONFIG.returnWindowDays} days of delivery. <a href="#/info/returns">How returns work</a></p></details>
+        ${p.digital ? `<details open><summary>What's included</summary><p>${p.details.map(esc).join("<br>")}</p></details>` : p.details.length > 1 ? `<details><summary>Details</summary><p>${p.details.slice(1).map(esc).join("<br>")}</p></details>` : ""}
+        ${p.digital ? `<details><summary>How unlocking works</summary><p>Pay at checkout and the full game unlocks right away. Open the play link on your confirmation page, or type your unlock code into any game in the DARE Arcade (tap "Enter unlock code"). The same code works on all your devices and covers every game you buy with your email.</p></details>
+        <details><summary>Refunds</summary><p>If a game won't play on your device, email <a href="mailto:${CONFIG.contactEmail}">${CONFIG.contactEmail}</a> within 14 days and we'll refund you.</p></details>` : `<details><summary>Shipping</summary><p>Standard (5 to 7 business days) or Express (2 to 3 business days) at checkout. <a href="#/info/shipping">Full shipping details</a></p></details>
+        <details><summary>Returns &amp; exchanges</summary><p>Unworn pieces with tags can be returned or exchanged within ${CONFIG.returnWindowDays} days of delivery. <a href="#/info/returns">How returns work</a></p></details>`}
       </div></div>
-    <section class="others"><h2>More pieces</h2><div class="wall">${more.map(work).join("")}</div></section>
-    <section class="reviews"><h2>Reviews</h2><div class="rv-empty"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>No reviews yet. Be one of the first to wear it.</p><a class="textlink" href="mailto:${CONFIG.contactEmail}?subject=${encodeURIComponent("Review: " + p.name)}">Share yours</a></div></section>`;
+    <section class="others"><h2>${p.digital ? "More games" : "More pieces"}</h2><div class="wall">${more.map(work).join("")}</div></section>
+    ${p.digital ? "" : `<section class="reviews"><h2>Reviews</h2><div class="rv-empty"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>No reviews yet. Be one of the first to wear it.</p><a class="textlink" href="mailto:${CONFIG.contactEmail}?subject=${encodeURIComponent("Review: " + p.name)}">Share yours</a></div></section>`}`;
 }
 function bindProduct(id) {
   const p = find(id); if (!p) return;
@@ -957,9 +982,11 @@ async function bindSuccess(params) {
     const r = await fetch("/api/order?session_id=" + encodeURIComponent(id)); if (!r.ok) return;
     const o = await r.json();
     if (o.name) $("#okTitle").textContent = `Thank you, ${o.name}.`;
-    if (o.email) $("#okLead").textContent = `A receipt is on its way to ${o.email}. You'll get another email with tracking when your order ships.`;
-    $("#okSum").innerHTML = `<p style="color:var(--grey);font-size:14px">Order ${esc(o.ref)}</p><table class="receipt">${o.items.map(i => `<tr><td>${esc(i.name)} &times; ${i.qty}</td><td>${money(i.amount)}</td></tr>`).join("")}
-      <tr><td>Shipping</td><td>${o.shipping ? money(o.shipping) : "Free"}</td></tr><tr class="t"><td>Total</td><td>${money(o.total)}</td></tr></table>`;
+    if (o.email) $("#okLead").textContent = o.shipped ? `A receipt is on its way to ${o.email}. You'll get another email with tracking when your order ships.` : `A receipt is on its way to ${o.email}.`;
+    else if (!o.shipped) $("#okLead").textContent = "A receipt is on its way to your inbox.";
+    const unlock = o.arcade ? `<div class="unlock-box"><span class="eyebrow">Your games are unlocked</span><p>${esc(o.arcade.games.join(", "))}</p><div class="code" aria-label="Unlock code">${esc(o.arcade.code)}</div><p>Your unlock code. It's also in your email. Type it into any game in the DARE Arcade on another phone or computer, or in the arcade app on your Home Screen.</p><a class="btn" href="${esc(o.arcade.play)}">Play now</a></div>` : "";
+    $("#okSum").innerHTML = unlock + `<p style="color:var(--grey);font-size:14px">Order ${esc(o.ref)}</p><table class="receipt">${o.items.map(i => `<tr><td>${esc(i.name)} &times; ${i.qty}</td><td>${money(i.amount)}</td></tr>`).join("")}
+      ${o.shipped === false ? "" : `<tr><td>Shipping</td><td>${o.shipping ? money(o.shipping) : "Free"}</td></tr>`}<tr class="t"><td>Total</td><td>${money(o.total)}</td></tr></table>`;
     fixLinks($("#okSum"));
     if (o.paid && !store.get("dare_tracked_" + o.ref, false)) {
       store.set("dare_tracked_" + o.ref, true);
@@ -1014,7 +1041,7 @@ function render() {
   const params = curParams();
   let html, navKey = "", title = "";
   if (!a) { html = home(); navKey = "shop"; }
-  else if (a === "shop") { html = shop(b || "all"); navKey = "shop"; if (b) title = (CATS.find(c => c[0] === b) || [])[1]; }
+  else if (a === "shop") { html = shop(b || "all"); navKey = b === "games" ? "games" : "shop"; if (b) title = (CATS.find(c => c[0] === b) || [])[1]; }
   else if (a === "p") { html = product(b); navKey = "shop"; title = find(b) ? find(b).name : ""; }
   else if (a === "info") { html = info(b || "shipping"); navKey = "info"; title = INFO[b] ? INFO[b][0] : ""; }
   else if (a === "about") { html = about(); title = "About"; }

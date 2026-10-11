@@ -1,0 +1,68 @@
+[
+  {
+    "id": "game-the-last-don",
+    "game": "the-last-don",
+    "name": "The Last Don",
+    "category": "games",
+    "digital": true,
+    "price": 4.99,
+    "colorName": "Digital game",
+    "sizes": ["Digital"],
+    "image": "/images/products/game-the-last-don.jpg",
+    "description": "A match-3 game set on Fort Worth's Historic South Side. Match crowns, keys and fists to take Panther City back from the New Order, one block at a time.",
+    "details": ["Plays in your browser on phone, tablet or computer", "60 levels across five districts", "Three-chapter comic backstory", "District 1 is free to try; this unlocks districts 2 to 5"]
+  },
+  {
+    "id": "game-rebel-elimination",
+    "game": "rebel-elimination",
+    "name": "Rebel Elimination",
+    "category": "games",
+    "digital": true,
+    "price": 3.99,
+    "colorName": "Digital game",
+    "sizes": ["Digital"],
+    "image": "/images/products/game-rebel-elimination.jpg",
+    "description": "Fort Worth is under siege. Run, gun and take down three bosses as Dontae Amare in this side-scrolling action game.",
+    "details": ["Plays in your browser on phone, tablet or computer", "Three stages, three bosses, three difficulty settings", "Stage checkpoints", "Stage 1 is free to try; this unlocks stages 2 and 3"]
+  },
+  {
+    "id": "game-cosmic-encounter",
+    "game": "cosmic-encounter",
+    "name": "Cosmic Encounter",
+    "category": "games",
+    "digital": true,
+    "price": 2.99,
+    "colorName": "Digital game",
+    "sizes": ["Digital"],
+    "image": "/images/products/game-cosmic-encounter.jpg",
+    "description": "A Galaga-style space shooter. Pick a ship, clear the waves, make your choices in the encounters, and take down the bosses.",
+    "details": ["Plays in your browser on phone, tablet or computer", "Endless waves with a boss every fifth wave", "Upgrades and story encounters between waves", "Waves 1 to 5 and the first boss are free to try; this unlocks every wave after"]
+  },
+  {
+    "id": "game-ori",
+    "game": "ori",
+    "name": "ORI",
+    "category": "games",
+    "digital": true,
+    "price": 2.99,
+    "colorName": "Digital game",
+    "sizes": ["Digital"],
+    "image": "/images/products/game-ori.jpg",
+    "description": "A new kind of tile game. Master 18 five-block shapes across 30 levels and six zones, from rising rows to a hidden next piece.",
+    "details": ["Plays in your browser on phone, tablet or computer", "30 levels in six zones, then endless ORBIT mode", "Zone checkpoints", "Zone 1 (levels 1 to 5) is free to try; this unlocks zones 2 to 6 and ORBIT"]
+  },
+  {
+    "id": "game-all-access",
+    "games": ["the-last-don", "rebel-elimination", "cosmic-encounter", "ori"],
+    "name": "All-Access Pass",
+    "category": "games",
+    "digital": true,
+    "price": 9.99,
+    "badge": "Best value",
+    "colorName": "Digital pass",
+    "sizes": ["Digital"],
+    "image": "/images/products/game-all-access.jpg",
+    "description": "Every paid game in the DARE Arcade, fully unlocked: The Last Don, Rebel Elimination, Cosmic Encounter and ORI. $14.96 if bought one by one.",
+    "details": ["Plays in your browser on phone, tablet or computer", "Unlocks The Last Don, Rebel Elimination, Cosmic Encounter and ORI", "One unlock code works on all your devices"]
+  }
+]
