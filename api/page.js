@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
   const origin = (process.env.SITE_URL || `https://${req.headers.host}`).replace(/\/$/, "");
   const { r, id } = req.query || {};
   let title = "DARE", desc = "DARE — Desired Ambitions Requires Execution. Clothing for people who act on what they want.";
-  let image = `${origin}/images/og.png`, url = origin + "/", status = 200, ld = null, type = "website";
+  let image = `${origin}/images/og.png?v=2`, url = origin + "/", status = 200, ld = null, type = "website";
 
   if (r === "p") {
     const p = find(id);
