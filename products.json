@@ -1,63 +1,5 @@
 [
   {
-    "id": "hoodie-1454-bleached",
-    "name": "1454 Hoodie",
-    "category": "hoodies",
-    "price": 98,
-    "colorName": "Bleached Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 10,
-      "M": 20,
-      "L": 20,
-      "XL": 15,
-      "2XL": 8
-    },
-    "image": "/images/products/hoodie-1454-bleached.jpg",
-    "description": "Hand-bleached hoodie — no two come out the same. A small glitter 1454 mark sits at the chest, Dontae Amare Rare Edition lettered small on the back.",
-    "details": [
-      "Cotton fleece",
-      "Hand-bleached, one-of-one wash",
-      "Glitter print"
-    ],
-    "imageBack": "/images/products/hoodie-1454-bleached-back.jpg"
-  },
-  {
-    "id": "hoodie-777",
-    "name": "777 Hoodie",
-    "category": "hoodies",
-    "price": 85,
-    "colorName": "Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 15,
-      "M": 25,
-      "L": 25,
-      "XL": 20,
-      "2XL": 10
-    },
-    "image": "/images/products/hoodie-777-front.jpg",
-    "imageBack": "/images/products/hoodie-777-back.jpg",
-    "description": "Hoodie version of the 777 — white on the chest, a column of 777s running color to color down the back beneath a dagger on the hood.",
-    "details": [
-      "Cotton fleece",
-      "Oversized fit",
-      "Screen-printed graphic, front and back"
-    ]
-  },
-  {
     "id": "moto-hoodie-black",
     "name": "Moto Zip Hoodie",
     "category": "hoodies",
@@ -123,6 +65,64 @@
     "set": "moto",
     "setPrice": 55,
     "setImage": "/images/products/set-moto-joggers-black.jpg"
+  },
+  {
+    "id": "hoodie-777",
+    "name": "777 Hoodie",
+    "category": "hoodies",
+    "price": 85,
+    "colorName": "Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 15,
+      "M": 25,
+      "L": 25,
+      "XL": 20,
+      "2XL": 10
+    },
+    "image": "/images/products/hoodie-777-front.jpg",
+    "imageBack": "/images/products/hoodie-777-back.jpg",
+    "description": "Hoodie version of the 777 — white on the chest, a column of 777s running color to color down the back beneath a dagger on the hood.",
+    "details": [
+      "Cotton fleece",
+      "Oversized fit",
+      "Screen-printed graphic, front and back"
+    ]
+  },
+  {
+    "id": "hoodie-1454-bleached",
+    "name": "1454 Hoodie",
+    "category": "hoodies",
+    "price": 98,
+    "colorName": "Bleached Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 10,
+      "M": 20,
+      "L": 20,
+      "XL": 15,
+      "2XL": 8
+    },
+    "image": "/images/products/hoodie-1454-bleached.jpg",
+    "description": "Hand-bleached hoodie — no two come out the same. A small glitter 1454 mark sits at the chest, Dontae Amare Rare Edition lettered small on the back.",
+    "details": [
+      "Cotton fleece",
+      "Hand-bleached, one-of-one wash",
+      "Glitter print"
+    ],
+    "imageBack": "/images/products/hoodie-1454-bleached-back.jpg"
   },
   {
     "id": "crewneck-desired-ambitions",

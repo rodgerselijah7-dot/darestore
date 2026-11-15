@@ -149,7 +149,7 @@ body[data-page="product"] .bg-fall{display:none}
 .plinth.duo{background:#fff;display:flex;align-items:center;justify-content:center;gap:4%;padding:0 5%}
 .plinth.duo .half{flex:1 1 0;min-width:0;height:100%;display:flex;align-items:center;justify-content:center}
 .plinth.duo img.photo{width:100%;height:auto;max-height:72%;object-fit:contain}
-.price s,.label .p s,.setpart s{color:var(--grey);font-weight:400;margin-right:6px}
+.price s,.label .p s,.setpart s,.hero-feat .p s{color:var(--grey);font-weight:400;margin-right:6px}
 .item .lp s{display:block;color:var(--grey);font-size:12px}
 .item .lp .sub{display:block;margin:2px 0 0;font-size:11px}
 .setpart{margin-bottom:6px}
@@ -823,7 +823,9 @@ function hero() {
   return `<section class="hero"><div class="hero-copy"><h1>Desired.<br>Required.<br>Executed.</h1>
     <p>DARE is clothing for people who act on what they want, not just talk about it.</p>
     <div class="ctas"><a class="btn" href="#/shop">Shop the collection</a><a class="btn quiet" href="#/about">Our story</a></div></div>
-    ${p ? `<a class="hero-feat" href="#/p/${p.id}"><div class="plinth">${photo(p)}</div><div class="t">${esc(p.name)}</div><div class="p">${priceText(p)}</div></a>` : ""}</section>`;
+    ${(() => { if (!p) return ""; const k = setKeyFor(p), g = k && setGroups()[k];
+      if (g && !g.every(isGone)) return `<a class="hero-feat" href="#/set/${k}"><div class="plinth duo">${g.map(x => `<div class="half">${setPhoto(x)}</div>`).join("")}</div><div class="t">${esc(setTitle(g[0].set))}</div><div class="p">${setPriceHtml(g)}</div></a>`;
+      return `<a class="hero-feat" href="#/p/${p.id}"><div class="plinth">${photo(p)}</div><div class="t">${esc(p.name)}</div><div class="p">${priceText(p)}</div></a>`; })()}</section>`;
 }
 function storyBand() {
   const letters = CONFIG.storyHeading.replace(/[^A-Za-z]/g, "").split("");
