@@ -355,7 +355,7 @@
   },
   {
     "id": "tee-d-black",
-    "name": "Signature D Tee",
+    "name": "DARE Mini",
     "category": "tops",
     "price": 38,
     "colorName": "Washed Black",
@@ -374,9 +374,9 @@
       "2XL": 15
     },
     "image": "/images/products/tee-d-black.jpg",
-    "description": "Washed black tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
+    "description": "Mineral-washed black tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
     "details": [
-      "Mineral-washed cotton",
+      "Mineral Washed",
       "Relaxed fit",
       "Printed chest logo"
     ],
@@ -384,7 +384,7 @@
   },
   {
     "id": "tee-d-grey",
-    "name": "Signature D Tee",
+    "name": "DARE Mini",
     "category": "tops",
     "price": 38,
     "colorName": "Mineral Grey",
@@ -405,7 +405,7 @@
     "image": "/images/products/tee-d-grey.jpg",
     "description": "Mineral-washed grey tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
     "details": [
-      "Mineral-washed cotton",
+      "Mineral Washed",
       "Relaxed fit",
       "Printed chest logo"
     ],
@@ -413,7 +413,7 @@
   },
   {
     "id": "tee-d-brown",
-    "name": "Signature D Tee",
+    "name": "DARE Mini",
     "category": "tops",
     "price": 38,
     "colorName": "Mineral Brown",
@@ -434,7 +434,7 @@
     "image": "/images/products/tee-d-brown.jpg",
     "description": "Mineral-washed brown tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
     "details": [
-      "Mineral-washed cotton",
+      "Mineral Washed",
       "Relaxed fit",
       "Printed chest logo"
     ],
@@ -442,7 +442,7 @@
   },
   {
     "id": "tee-d-navy",
-    "name": "Signature D Tee",
+    "name": "DARE Mini",
     "category": "tops",
     "price": 38,
     "colorName": "Mineral Navy",
@@ -463,7 +463,7 @@
     "image": "/images/products/tee-d-navy.jpg",
     "description": "Mineral-washed navy tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
     "details": [
-      "Mineral-washed cotton",
+      "Mineral Washed",
       "Relaxed fit",
       "Printed chest logo"
     ],
@@ -753,6 +753,105 @@
       "Relaxed fit",
       "Screen-printed graphic"
     ]
+  },
+  {
+    "id": "studio-bra-white",
+    "name": "Studio Sports Bra",
+    "category": "tops",
+    "price": 35,
+    "colorName": "White",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/studio-bra-white.jpg",
+    "description": "White racerback sports bra with a keyhole cutout at the back and a wide band at the hem. Pairs with the matching Studio Shorts.",
+    "details": [
+      "Smooth stretch knit",
+      "Racerback with keyhole cutout",
+      "Wide elastic underband"
+    ],
+    "badge": "Matching set",
+    "set": "studio",
+    "setPrice": 30,
+    "setImage": "/images/products/set-studio-bra-white.jpg",
+    "gallery": [
+      "/images/products/studio-set-white.jpg"
+    ]
+  },
+  {
+    "id": "studio-shorts-white",
+    "name": "Studio Shorts",
+    "category": "bottoms",
+    "price": 35,
+    "colorName": "White",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/studio-shorts-white.jpg",
+    "description": "High-rise white shorts with a V-seam waistband and side pockets, cut to wear with the Studio Sports Bra.",
+    "details": [
+      "Smooth stretch knit",
+      "High-rise V-seam waistband",
+      "Side pockets"
+    ],
+    "badge": "Matching set",
+    "set": "studio",
+    "setPrice": 30,
+    "setImage": "/images/products/set-studio-shorts-white.jpg",
+    "gallery": [
+      "/images/products/studio-set-white.jpg"
+    ]
+  },
+  {
+    "id": "romper-tie-dye",
+    "name": "Tie-Dye Romper",
+    "category": "tops",
+    "price": 48,
+    "colorName": "Midnight Tie-Dye",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/romper-tie-dye.jpg",
+    "description": "Sleeveless one-piece romper in a hand-dyed midnight blue wash, scoop neck and fitted biker-length legs. No two dye patterns come out the same.",
+    "details": [
+      "Stretch knit",
+      "Hand-dyed, one-of-one pattern",
+      "Scoop neck, fitted biker-length legs"
+    ],
+    "badge": "New"
   },
   {
     "id": "tank-rare-edition-white",
