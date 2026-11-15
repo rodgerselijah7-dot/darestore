@@ -146,6 +146,13 @@ body[data-page="product"] .bg-fall{display:none}
 .label .p{margin-top:6px;color:var(--ink);font-weight:700}
 .ref{font-size:11px;color:#B5B5B2;letter-spacing:.04em;margin-top:2px}
 .low{position:absolute;top:10px;left:10px;background:var(--wall);border:1px solid var(--dot);color:var(--dot);font-size:11px;padding:3px 8px;border-radius:999px}
+.plinth.duo{background:#fff}
+.plinth.duo .half{position:absolute;width:74%;height:74%;display:grid;place-items:center}
+.plinth.duo .half:first-child{top:1%;left:-5%}
+.plinth.duo .half:nth-child(2){bottom:1%;right:-5%}
+.plinth.duo img.photo{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.setpart{margin-bottom:6px}
+.setpart .lbl a{color:var(--ink)}
 .tag-badge{position:absolute;top:10px;right:10px;background:var(--ink);color:var(--wall);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px}
 .stockline{font-size:13px;color:var(--dot);margin:-16px 0 20px}
 
@@ -737,13 +744,39 @@ function work(p, i = 0) {
   return `<a class="work${gone ? " gone" : ""}" href="#/p/${p.id}" data-piece="${p.id}" style="--i:${i}"><div class="plinth" data-piece="${p.id}">${photo(p)}${back ? `<div class="alt" aria-hidden="true">${photo(p, "back")}</div>` : ""}${low ? `<span class="low">${left} left</span>` : ""}${p.badge ? `<span class="tag-badge">${esc(p.badge)}</span>` : ""}</div>
     <div class="label"><div class="t">${esc(p.name)}</div><div class="m">${metaText(p)}</div><div class="p">${priceText(p)}</div><div class="ref">${refCode(p)}</div></div></a>`;
 }
+/* ---------- matching sets: pieces sharing a "set" id and colour are sold together on one card ---------- */
+const SET_ORDER = { hoodies: 0, tops: 1, bottoms: 2, accessories: 3 };
+const setTitle = s => s.charAt(0).toUpperCase() + s.slice(1) + " Set";
+const setKeyFor = p => p.set ? p.set + "-" + p.colorName.toLowerCase().replace(/[^a-z0-9]+/g, "-") : null;
+function setGroups() {
+  const g = {};
+  for (const p of CATALOG) { const k = setKeyFor(p); if (k) (g[k] = g[k] || []).push(p); }
+  for (const k in g) { if (g[k].length < 2) delete g[k]; else g[k].sort((a, b) => (SET_ORDER[a.category] ?? 9) - (SET_ORDER[b.category] ?? 9)); }
+  return g;
+}
+const shortName = p => p.name.split(" ").pop();
+const setTotal = ps => ps.reduce((a, p) => a + p.price, 0);
+function setCard(k, ps, i = 0) {
+  const gone = ps.every(isGone);
+  return `<a class="work setcard${gone ? " gone" : ""}" href="#/set/${k}" data-set="${k}" style="--i:${i}"><div class="plinth duo">${ps.map(p => `<div class="half">${photo(p)}</div>`).join("")}<span class="tag-badge">Matching set</span></div>
+    <div class="label"><div class="t">${esc(setTitle(ps[0].set))}</div><div class="m">${esc(ps[0].colorName)}, ${ps.map(p => esc(shortName(p))).join(" + ")}</div><div class="p">${gone ? '<span class="dot" aria-hidden="true"></span>Gone' : money(setTotal(ps))}</div></div></a>`;
+}
+function wallTiles(list) {
+  const groups = setGroups(), done = new Set(), out = [];
+  for (const p of list) {
+    const k = setKeyFor(p);
+    if (k && groups[k]) { if (!done.has(k)) { done.add(k); out.push(setCard(k, groups[k], out.length)); } }
+    else out.push(work(p, out.length));
+  }
+  return out;
+}
 let SHOP_LIST = [], FIRST = true;
 function shop(cat = "all") {
   const list = CATALOG.filter(p => cat === "all" ? true : p.category === cat);
   SHOP_LIST = list;
   const gridIcon = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="1" y="1" width="6" height="6" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="1" width="6" height="6" stroke="currentColor" stroke-width="1.4"/><rect x="1" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.4"/></svg>`;
   const oneIcon = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="1" width="10" height="14" stroke="currentColor" stroke-width="1.4"/></svg>`;
-  const tiles = list.map(work);
+  const tiles = wallTiles(list);
   if (cat === "all" && tiles.length >= 6) tiles.splice(3, 0, `<div class="interrupt" aria-hidden="true"><p>Most people stop at <span>desired</span>.</p></div>`);
   if (cat === "all" && tiles.length >= 12) {
     const feat = featuredPiece();
@@ -809,6 +842,49 @@ function setBlock(p) {
   if (!mates.length) return "";
   const total = p.price + mates[0].price;
   return `<section class="others setrow"><h2>Complete the set</h2><p class="small">${esc(p.name)} and ${esc(mates[0].name)} together: ${money(total)}. Pick your size in each piece.</p><div class="wall">${mates.map(work).join("")}</div></section>`;
+}
+function setPage(k) {
+  const ps = setGroups()[k];
+  if (!ps) return notFound();
+  const all = ps.every(isGone);
+  return `<div class="piece">
+      <div class="views">${ps.map(p => `<div class="plinth" role="button" tabindex="0" aria-label="Zoom in on the ${esc(p.name)}">${photo(p)}</div>`).join("")}</div>
+      <div class="placard"><a class="back" href="#" data-back>&larr; All pieces</a>
+        <p class="pchip">Matching set</p>
+        <h1>${esc(setTitle(ps[0].set))}</h1>
+        <dl class="facts"><dt>Colour</dt><dd>${esc(ps[0].colorName)}</dd><dt>Pieces</dt><dd>${ps.map(p => esc(p.name)).join(" + ")}</dd></dl>
+        <p class="price">${all ? '<span class="dot" aria-hidden="true"></span>Gone' : money(setTotal(ps))}</p>
+        ${all ? `<button class="btn quiet wide" data-signup>Tell me if it comes back</button>` : `
+        ${ps.map(p => { const one = p.sizes.length === 1; return `<div class="setpart" data-part="${p.id}">
+          <div class="lbl"><span id="sz-${p.id}"><a href="#/p/${p.id}">${esc(p.name)}</a>, ${money(p.price)}</span>${one ? "" : '<a href="#/info/size">Size guide</a>'}</div>
+          ${isGone(p) ? `<p class="small">Sold out. The rest of the set is still available.</p>` : `<div class="sizes" role="group" aria-labelledby="sz-${p.id}">${p.sizes.map(s => `<button data-size="${esc(s)}" aria-pressed="${one}" ${avail(p, s) <= 0 ? "disabled aria-label='" + esc(s) + ", sold out'" : ""}>${esc(s)}</button>`).join("")}</div>`}
+        </div>`; }).join("")}
+        <button class="btn wide" id="addSet">Add the set to bag</button>
+        <p class="small">Free standard shipping over ${money(CONFIG.freeShippingOver)}. Ships in 2 to 4 business days.</p>`}
+        <div class="about">${ps.map(p => `<p>${esc(p.description)}</p>`).join("")}</div>
+        <details><summary>Returns &amp; exchanges</summary><p>Unworn pieces with tags can be returned or exchanged within ${CONFIG.returnWindowDays} days of delivery. <a href="#/info/returns">How returns work</a></p></details>
+      </div></div>
+    <section class="others"><h2>Shop each piece</h2><div class="wall">${ps.map(work).join("")}</div></section>`;
+}
+function bindSet(k) {
+  const ps = setGroups()[k]; if (!ps) return;
+  const chosen = {};
+  ps.forEach(p => { if (p.sizes.length === 1) chosen[p.id] = p.sizes[0]; });
+  $$(".setpart").forEach(part => {
+    const id = part.dataset.part;
+    $$(".sizes button", part).forEach(b => b.onclick = () => {
+      $$(".sizes button", part).forEach(x => x.setAttribute("aria-pressed", "false")); b.setAttribute("aria-pressed", "true"); chosen[id] = b.dataset.size;
+    });
+  });
+  const add = $("#addSet");
+  if (add) add.onclick = () => {
+    const live = ps.filter(p => !isGone(p));
+    const missing = live.find(p => !chosen[p.id]);
+    if (missing) { $(`.setpart[data-part="${missing.id}"]`).scrollIntoView({ behavior: "smooth", block: "center" }); toast(`Choose a size for the ${missing.name}.`); return; }
+    live.forEach(p => addToCart(p.id, chosen[p.id], 1));
+    toast(`Added the ${setTitle(ps[0].set)} to your bag`, "View bag", openCart);
+  };
+  $$(".views .plinth").forEach(pl => { const open = () => openZoom(pl); pl.onclick = open; pl.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } }; });
 }
 function product(id) {
   const p = find(id);
@@ -1030,6 +1106,7 @@ function render() {
   if (!a) { html = home(); navKey = "shop"; }
   else if (a === "shop") { html = shop(b || "all"); navKey = "shop"; if (b) title = (CATS.find(c => c[0] === b) || [])[1]; }
   else if (a === "p") { html = product(b); navKey = "shop"; title = find(b) ? find(b).name : ""; }
+  else if (a === "set") { html = setPage(b); navKey = "shop"; const g = setGroups()[b]; title = g ? `${setTitle(g[0].set)}, ${g[0].colorName}` : ""; }
   else if (a === "info") { html = info(b || "shipping"); navKey = "info"; title = INFO[b] ? INFO[b][0] : ""; }
   else if (a === "about") { html = about(); title = "About"; }
   else if (a === "order") { html = orderPage(); title = "Order status"; }
@@ -1037,7 +1114,7 @@ function render() {
   else if (a === "cart") { html = home(); setTimeout(openCart, 100); }
   else { html = notFound(); title = "Page not found"; }
   document.title = title ? `${title} | DARE` : "DARE";
-  document.body.dataset.page = !a ? "home" : a === "p" ? "product" : a === "shop" ? "shop" : a === "about" ? "about" : "other";
+  document.body.dataset.page = !a ? "home" : a === "p" || a === "set" ? "product" : a === "shop" ? "shop" : a === "about" ? "about" : "other";
   OBSERVERS.forEach(o => o.disconnect()); OBSERVERS = [];
   LAST_PATH = curPath(); CUR_PIECE = a === "p" ? b : null;
   const cur = $(".cursor"); if (cur) cur.classList.remove("on");
@@ -1050,6 +1127,7 @@ function render() {
     if (scroller) scroller.scrollLeft = Math.max(0, activeFilter.offsetLeft - (scroller.clientWidth - activeFilter.offsetWidth) / 2);
   }
   if (a === "p") bindProduct(b);
+  if (a === "set") bindSet(b);
   if (a === "order") bindOrderPage();
   if (a === "success") bindSuccess(params);
   fadeImages($("#main")); FIRST = false;

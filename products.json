@@ -1,127 +1,61 @@
 [
   {
-    "id": "track-jacket-rust",
-    "name": "Track Jacket",
+    "id": "hoodie-1454-bleached",
+    "name": "1454 Hoodie",
     "category": "hoodies",
-    "price": 65,
-    "colorName": "Rust",
+    "price": 98,
+    "colorName": "Bleached Black",
     "sizes": [
-      "XS",
       "S",
       "M",
       "L",
-      "XL"
+      "XL",
+      "2XL"
     ],
     "stock": {
-      "XS": 10,
-      "S": 20,
-      "M": 25,
+      "S": 10,
+      "M": 20,
       "L": 20,
-      "XL": 10
+      "XL": 15,
+      "2XL": 8
     },
-    "image": "/images/products/track-jacket-rust.jpg",
-    "description": "Fitted full-zip track jacket in rust, with a stand collar, white zip, zip pockets and a white stripe running down each sleeve. Pairs with the matching Track Shorts.",
+    "image": "/images/products/hoodie-1454-bleached.jpg",
+    "description": "Hand-bleached hoodie — no two come out the same. A small glitter 1454 mark sits at the chest, Dontae Amare Rare Edition lettered small on the back.",
     "details": [
-      "Smooth stretch knit",
-      "Fitted, cropped cut",
-      "Stand collar, full zip",
-      "Two zip pockets",
-      "Contrast sleeve stripes"
+      "Cotton fleece",
+      "Hand-bleached, one-of-one wash",
+      "Glitter print"
     ],
-    "badge": "Matching set",
-    "set": "track"
+    "imageBack": "/images/products/hoodie-1454-bleached-back.jpg"
   },
   {
-    "id": "track-shorts-rust",
-    "name": "Track Shorts",
-    "category": "bottoms",
-    "price": 35,
-    "colorName": "Rust",
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "XS": 10,
-      "S": 20,
-      "M": 25,
-      "L": 20,
-      "XL": 10
-    },
-    "image": "/images/products/track-shorts-rust.jpg",
-    "description": "High-rise shorts in the same rust stretch knit as the Track Jacket, cut to wear as a set.",
-    "details": [
-      "Smooth stretch knit",
-      "High-rise waistband",
-      "Fitted cut"
-    ],
-    "badge": "Matching set",
-    "set": "track"
-  },
-  {
-    "id": "track-jacket-black",
-    "name": "Track Jacket",
+    "id": "hoodie-777",
+    "name": "777 Hoodie",
     "category": "hoodies",
-    "price": 65,
+    "price": 85,
     "colorName": "Black",
     "sizes": [
-      "XS",
       "S",
       "M",
       "L",
-      "XL"
+      "XL",
+      "2XL"
     ],
     "stock": {
-      "XS": 10,
-      "S": 20,
+      "S": 15,
       "M": 25,
-      "L": 20,
-      "XL": 10
+      "L": 25,
+      "XL": 20,
+      "2XL": 10
     },
-    "image": "/images/products/track-jacket-black.jpg",
-    "description": "Fitted full-zip track jacket in black, with a stand collar, white zip, zip pockets and a white stripe running down each sleeve. Pairs with the matching Track Shorts.",
+    "image": "/images/products/hoodie-777-front.jpg",
+    "imageBack": "/images/products/hoodie-777-back.jpg",
+    "description": "Hoodie version of the 777 — white on the chest, a column of 777s running color to color down the back beneath a dagger on the hood.",
     "details": [
-      "Smooth stretch knit",
-      "Fitted, cropped cut",
-      "Stand collar, full zip",
-      "Two zip pockets",
-      "Contrast sleeve stripes"
-    ],
-    "badge": "Matching set",
-    "set": "track"
-  },
-  {
-    "id": "track-shorts-black",
-    "name": "Track Shorts",
-    "category": "bottoms",
-    "price": 35,
-    "colorName": "Black",
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "XS": 10,
-      "S": 20,
-      "M": 25,
-      "L": 20,
-      "XL": 10
-    },
-    "image": "/images/products/track-shorts-black.jpg",
-    "description": "High-rise shorts in the same black stretch knit as the Track Jacket, cut to wear as a set.",
-    "details": [
-      "Smooth stretch knit",
-      "High-rise waistband",
-      "Fitted cut"
-    ],
-    "badge": "Matching set",
-    "set": "track"
+      "Cotton fleece",
+      "Oversized fit",
+      "Screen-printed graphic, front and back"
+    ]
   },
   {
     "id": "moto-hoodie-black",
@@ -187,11 +121,232 @@
     "set": "moto"
   },
   {
-    "id": "tee-d-brown",
+    "id": "crewneck-desired-ambitions",
+    "name": "Desired Ambitions Crewneck",
+    "category": "hoodies",
+    "price": 72,
+    "colorName": "Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 15,
+      "M": 25,
+      "L": 25,
+      "XL": 20,
+      "2XL": 10
+    },
+    "image": "/images/products/crewneck-desired-ambitions.jpg",
+    "description": "Heavyweight crewneck with the whole mission spelled out on the chest: Desired Ambitions Requires Execution.",
+    "details": [
+      "Cotton fleece",
+      "Ribbed cuffs and hem",
+      "Screen-printed chest graphic"
+    ]
+  },
+  {
+    "id": "track-jacket-black",
+    "name": "Track Jacket",
+    "category": "hoodies",
+    "price": 65,
+    "colorName": "Black",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/track-jacket-black.jpg",
+    "description": "Fitted full-zip track jacket in black, with a stand collar, white zip, zip pockets and a white stripe running down each sleeve. Pairs with the matching Track Shorts.",
+    "details": [
+      "Smooth stretch knit",
+      "Fitted, cropped cut",
+      "Stand collar, full zip",
+      "Two zip pockets",
+      "Contrast sleeve stripes"
+    ],
+    "badge": "Matching set",
+    "set": "track"
+  },
+  {
+    "id": "track-shorts-black",
+    "name": "Track Shorts",
+    "category": "bottoms",
+    "price": 35,
+    "colorName": "Black",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/track-shorts-black.jpg",
+    "description": "High-rise shorts in the same black stretch knit as the Track Jacket, cut to wear as a set.",
+    "details": [
+      "Smooth stretch knit",
+      "High-rise waistband",
+      "Fitted cut"
+    ],
+    "badge": "Matching set",
+    "set": "track"
+  },
+  {
+    "id": "track-jacket-rust",
+    "name": "Track Jacket",
+    "category": "hoodies",
+    "price": 65,
+    "colorName": "Rust",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/track-jacket-rust.jpg",
+    "description": "Fitted full-zip track jacket in rust, with a stand collar, white zip, zip pockets and a white stripe running down each sleeve. Pairs with the matching Track Shorts.",
+    "details": [
+      "Smooth stretch knit",
+      "Fitted, cropped cut",
+      "Stand collar, full zip",
+      "Two zip pockets",
+      "Contrast sleeve stripes"
+    ],
+    "badge": "Matching set",
+    "set": "track"
+  },
+  {
+    "id": "track-shorts-rust",
+    "name": "Track Shorts",
+    "category": "bottoms",
+    "price": 35,
+    "colorName": "Rust",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/track-shorts-rust.jpg",
+    "description": "High-rise shorts in the same rust stretch knit as the Track Jacket, cut to wear as a set.",
+    "details": [
+      "Smooth stretch knit",
+      "High-rise waistband",
+      "Fitted cut"
+    ],
+    "badge": "Matching set",
+    "set": "track"
+  },
+  {
+    "id": "beanie-sparkle-mauve",
+    "name": "Sparkle Beanie",
+    "category": "accessories",
+    "price": 32,
+    "colorName": "Mauve",
+    "sizes": [
+      "OS"
+    ],
+    "stock": {
+      "OS": 40
+    },
+    "image": "/images/products/beanie-sparkle-mauve.jpg",
+    "description": "Knit beanie fading into rhinestones at the crown, Dare signed on the cuff.",
+    "details": [
+      "Acrylic knit",
+      "Rhinestone embellishment",
+      "Embroidered cuff"
+    ]
+  },
+  {
+    "id": "ski-mask-dare-black",
+    "name": "D.A.R.E Ski Mask",
+    "category": "accessories",
+    "price": 20,
+    "colorName": "Black",
+    "sizes": [
+      "OS"
+    ],
+    "stock": {
+      "OS": 40
+    },
+    "image": "/images/products/ski-mask-dare-black.jpg",
+    "description": "Ski mask with D.A.R.E lettered in neon at the back.",
+    "details": [
+      "Stretch knit",
+      "Full-face coverage",
+      "Printed graphic"
+    ]
+  },
+  {
+    "id": "tee-take-that-risk",
+    "name": "Take That Risk Tee",
+    "category": "tops",
+    "price": 55,
+    "colorName": "Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 15,
+      "M": 25,
+      "L": 25,
+      "XL": 20,
+      "2XL": 10
+    },
+    "image": "/images/products/tee-take-that-risk-front.jpg",
+    "imageBack": "/images/products/tee-take-that-risk-back.jpg",
+    "description": "Crushed velvet tee built around a dealer who's already decided. The question waits on the back: will you take that risk?",
+    "details": [
+      "Crushed velvet",
+      "Oversized fit",
+      "Distressed graphic print, front and back"
+    ]
+  },
+  {
+    "id": "tee-d-black",
     "name": "Signature D Tee",
     "category": "tops",
     "price": 38,
-    "colorName": "Mineral Brown",
+    "colorName": "Washed Black",
     "sizes": [
       "S",
       "M",
@@ -206,8 +361,8 @@
       "XL": 25,
       "2XL": 15
     },
-    "image": "/images/products/tee-d-brown.jpg",
-    "description": "Mineral-washed brown tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
+    "image": "/images/products/tee-d-black.jpg",
+    "description": "Washed black tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
     "details": [
       "Mineral-washed cotton",
       "Relaxed fit",
@@ -245,11 +400,11 @@
     "badge": "New"
   },
   {
-    "id": "tee-d-black",
+    "id": "tee-d-brown",
     "name": "Signature D Tee",
     "category": "tops",
     "price": 38,
-    "colorName": "Washed Black",
+    "colorName": "Mineral Brown",
     "sizes": [
       "S",
       "M",
@@ -264,8 +419,8 @@
       "XL": 25,
       "2XL": 15
     },
-    "image": "/images/products/tee-d-black.jpg",
-    "description": "Washed black tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
+    "image": "/images/products/tee-d-brown.jpg",
+    "description": "Mineral-washed brown tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
     "details": [
       "Mineral-washed cotton",
       "Relaxed fit",
@@ -303,89 +458,6 @@
     "badge": "New"
   },
   {
-    "id": "signature-shorts-blue",
-    "name": "Signature Shorts",
-    "category": "bottoms",
-    "price": 45,
-    "colorName": "Blue",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "S": 20,
-      "M": 30,
-      "L": 30,
-      "XL": 20
-    },
-    "image": "/images/products/signature-shorts-blue.jpg",
-    "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
-    "details": [
-      "Lightweight nylon shell",
-      "Elastic drawstring waist",
-      "Mesh lining",
-      "Printed DARE crest"
-    ]
-  },
-  {
-    "id": "signature-shorts-pink",
-    "name": "Signature Shorts",
-    "category": "bottoms",
-    "price": 45,
-    "colorName": "Pink",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "S": 20,
-      "M": 30,
-      "L": 30,
-      "XL": 20
-    },
-    "image": "/images/products/signature-shorts-pink.jpg",
-    "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
-    "details": [
-      "Lightweight nylon shell",
-      "Elastic drawstring waist",
-      "Mesh lining",
-      "Printed DARE crest"
-    ]
-  },
-  {
-    "id": "crown-cargo-shorts-camo",
-    "name": "Camo Shorts",
-    "category": "bottoms",
-    "price": 62,
-    "colorName": "Camo",
-    "sizes": [
-      "30",
-      "32",
-      "34",
-      "36",
-      "38"
-    ],
-    "stock": {
-      "30": 15,
-      "32": 25,
-      "34": 25,
-      "36": 20,
-      "38": 15
-    },
-    "image": "/images/products/crown-cargo-shorts-camo.jpg",
-    "imageBack": "/images/products/crown-cargo-shorts-camo-alt.jpg",
-    "description": "Camo shorts carrying the mission on the leg: Desired Ambitions Requires Execution. The DARE crest is stamped on the other.",
-    "details": [
-      "Cotton twill",
-      "Five-pocket construction",
-      "Printed graphics, both legs"
-    ]
-  },
-  {
     "id": "tee-777",
     "name": "777 Tee",
     "category": "tops",
@@ -415,10 +487,10 @@
     ]
   },
   {
-    "id": "tee-take-that-risk",
-    "name": "Take That Risk Tee",
+    "id": "tee-uprising",
+    "name": "Uprising Tee",
     "category": "tops",
-    "price": 55,
+    "price": 48,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -428,19 +500,77 @@
       "2XL"
     ],
     "stock": {
-      "S": 15,
-      "M": 25,
-      "L": 25,
-      "XL": 20,
-      "2XL": 10
+      "S": 20,
+      "M": 35,
+      "L": 35,
+      "XL": 25,
+      "2XL": 15
     },
-    "image": "/images/products/tee-take-that-risk-front.jpg",
-    "imageBack": "/images/products/tee-take-that-risk-back.jpg",
-    "description": "Crushed velvet tee built around a dealer who's already decided. The question waits on the back: will you take that risk?",
+    "image": "/images/products/tee-uprising.jpg",
+    "description": "Black tee with a chrome UPRISING wordmark over an astronaut skull in flame on the front, and a chrome RADIANCE wordmark lettered across the back.",
     "details": [
-      "Crushed velvet",
-      "Oversized fit",
-      "Distressed graphic print, front and back"
+      "Cotton jersey",
+      "Relaxed fit",
+      "Holographic print, front and back"
+    ],
+    "imageBack": "/images/products/tee-radiance-black.jpg"
+  },
+  {
+    "id": "tee-smile-now-cry-later",
+    "name": "Smile Now Cry Later Tee",
+    "category": "tops",
+    "price": 45,
+    "colorName": "Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 35,
+      "L": 35,
+      "XL": 25,
+      "2XL": 15
+    },
+    "image": "/images/products/tee-smile-now-cry-later-front.jpg",
+    "imageBack": "/images/products/tee-smile-now-cry-later-back.jpg",
+    "description": "Airbrushed comedy and tragedy masks at the chest, echoed smaller on the back.",
+    "details": [
+      "Cotton jersey",
+      "Relaxed fit",
+      "Screen-printed graphic, front and back"
+    ]
+  },
+  {
+    "id": "tee-dollar-masks",
+    "name": "Dollar Masks Tee",
+    "category": "tops",
+    "price": 45,
+    "colorName": "White",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 35,
+      "L": 35,
+      "XL": 25,
+      "2XL": 15
+    },
+    "image": "/images/products/tee-dollar-masks-front.jpg",
+    "imageBack": "/images/products/tee-dollar-masks-back.jpg",
+    "description": "White tee with two hundred-dollar masks going up in flame, and the mission on the back.",
+    "details": [
+      "Cotton jersey",
+      "Relaxed fit",
+      "Screen-printed graphic, front and back"
     ]
   },
   {
@@ -501,10 +631,10 @@
     ]
   },
   {
-    "id": "tee-uprising",
-    "name": "Uprising Tee",
+    "id": "tee-dare-wordmark-black",
+    "name": "D.A.R.E Tee",
     "category": "tops",
-    "price": 48,
+    "price": 38,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -520,42 +650,12 @@
       "XL": 25,
       "2XL": 15
     },
-    "image": "/images/products/tee-uprising.jpg",
-    "description": "Black tee with a chrome UPRISING wordmark over an astronaut skull in flame on the front, and a chrome RADIANCE wordmark lettered across the back.",
+    "image": "/images/products/tee-dare-wordmark-black.jpg",
+    "description": "The name in tone-on-tone: D.A.R.E printed black on black.",
     "details": [
       "Cotton jersey",
       "Relaxed fit",
-      "Holographic print, front and back"
-    ],
-    "imageBack": "/images/products/tee-radiance-black.jpg"
-  },
-  {
-    "id": "tee-smile-now-cry-later",
-    "name": "Smile Now Cry Later Tee",
-    "category": "tops",
-    "price": 45,
-    "colorName": "Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 20,
-      "M": 35,
-      "L": 35,
-      "XL": 25,
-      "2XL": 15
-    },
-    "image": "/images/products/tee-smile-now-cry-later-front.jpg",
-    "imageBack": "/images/products/tee-smile-now-cry-later-back.jpg",
-    "description": "Airbrushed comedy and tragedy masks at the chest, echoed smaller on the back.",
-    "details": [
-      "Cotton jersey",
-      "Relaxed fit",
-      "Screen-printed graphic, front and back"
+      "Tonal screen print"
     ]
   },
   {
@@ -643,117 +743,6 @@
     ]
   },
   {
-    "id": "crewneck-desired-ambitions",
-    "name": "Desired Ambitions Crewneck",
-    "category": "hoodies",
-    "price": 72,
-    "colorName": "Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 15,
-      "M": 25,
-      "L": 25,
-      "XL": 20,
-      "2XL": 10
-    },
-    "image": "/images/products/crewneck-desired-ambitions.jpg",
-    "description": "Heavyweight crewneck with the whole mission spelled out on the chest: Desired Ambitions Requires Execution.",
-    "details": [
-      "Cotton fleece",
-      "Ribbed cuffs and hem",
-      "Screen-printed chest graphic"
-    ]
-  },
-  {
-    "id": "tee-dollar-masks",
-    "name": "Dollar Masks Tee",
-    "category": "tops",
-    "price": 45,
-    "colorName": "White",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 20,
-      "M": 35,
-      "L": 35,
-      "XL": 25,
-      "2XL": 15
-    },
-    "image": "/images/products/tee-dollar-masks-front.jpg",
-    "imageBack": "/images/products/tee-dollar-masks-back.jpg",
-    "description": "White tee with two hundred-dollar masks going up in flame, and the mission on the back.",
-    "details": [
-      "Cotton jersey",
-      "Relaxed fit",
-      "Screen-printed graphic, front and back"
-    ]
-  },
-  {
-    "id": "shorts-biker-olive",
-    "name": "Signature Biker Shorts",
-    "category": "bottoms",
-    "price": 30,
-    "colorName": "Olive",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "S": 20,
-      "M": 30,
-      "L": 30,
-      "XL": 20
-    },
-    "image": "/images/products/shorts-biker-olive.jpg",
-    "description": "Compression biker shorts with a side pocket built in. The DARE crest sits at the waistband; the script signs off at the hem.",
-    "details": [
-      "Stretch compression fabric",
-      "Side pocket",
-      "High-rise waistband",
-      "Printed graphics"
-    ]
-  },
-  {
-    "id": "shorts-redemption-red",
-    "name": "Redemption Shorts",
-    "category": "bottoms",
-    "price": 48,
-    "colorName": "Red",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "S": 20,
-      "M": 30,
-      "L": 30,
-      "XL": 20
-    },
-    "image": "/images/products/shorts-redemption-red.jpg",
-    "description": "Red shorts built around a cherub resting on a crowned, thorn-wrapped heart — kindness, salvation, redemption, lettered in a circle.",
-    "details": [
-      "Lightweight nylon shell",
-      "Elastic drawstring waist",
-      "Mesh lining",
-      "Screen-printed graphic"
-    ]
-  },
-  {
     "id": "tank-rare-edition-white",
     "name": "Rare Edition Tank",
     "category": "tops",
@@ -779,55 +768,6 @@
       "Ribbed cotton",
       "Fitted, cropped cut",
       "Screen-printed graphic"
-    ]
-  },
-  {
-    "id": "hoodie-1454-bleached",
-    "name": "1454 Hoodie",
-    "category": "hoodies",
-    "price": 98,
-    "colorName": "Bleached Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 10,
-      "M": 20,
-      "L": 20,
-      "XL": 15,
-      "2XL": 8
-    },
-    "image": "/images/products/hoodie-1454-bleached.jpg",
-    "description": "Hand-bleached hoodie — no two come out the same. A small glitter 1454 mark sits at the chest, Dontae Amare Rare Edition lettered small on the back.",
-    "details": [
-      "Cotton fleece",
-      "Hand-bleached, one-of-one wash",
-      "Glitter print"
-    ],
-    "imageBack": "/images/products/hoodie-1454-bleached-back.jpg"
-  },
-  {
-    "id": "beanie-sparkle-mauve",
-    "name": "Sparkle Beanie",
-    "category": "accessories",
-    "price": 32,
-    "colorName": "Mauve",
-    "sizes": [
-      "OS"
-    ],
-    "stock": {
-      "OS": 40
-    },
-    "image": "/images/products/beanie-sparkle-mauve.jpg",
-    "description": "Knit beanie fading into rhinestones at the crown, Dare signed on the cuff.",
-    "details": [
-      "Acrylic knit",
-      "Rhinestone embellishment",
-      "Embroidered cuff"
     ]
   },
   {
@@ -859,83 +799,6 @@
     ]
   },
   {
-    "id": "ski-mask-dare-black",
-    "name": "D.A.R.E Ski Mask",
-    "category": "accessories",
-    "price": 20,
-    "colorName": "Black",
-    "sizes": [
-      "OS"
-    ],
-    "stock": {
-      "OS": 40
-    },
-    "image": "/images/products/ski-mask-dare-black.jpg",
-    "description": "Ski mask with D.A.R.E lettered in neon at the back.",
-    "details": [
-      "Stretch knit",
-      "Full-face coverage",
-      "Printed graphic"
-    ]
-  },
-  {
-    "id": "tee-dare-wordmark-black",
-    "name": "D.A.R.E Tee",
-    "category": "tops",
-    "price": 38,
-    "colorName": "Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 20,
-      "M": 35,
-      "L": 35,
-      "XL": 25,
-      "2XL": 15
-    },
-    "image": "/images/products/tee-dare-wordmark-black.jpg",
-    "description": "The name in tone-on-tone: D.A.R.E printed black on black.",
-    "details": [
-      "Cotton jersey",
-      "Relaxed fit",
-      "Tonal screen print"
-    ]
-  },
-  {
-    "id": "hoodie-777",
-    "name": "777 Hoodie",
-    "category": "hoodies",
-    "price": 85,
-    "colorName": "Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 15,
-      "M": 25,
-      "L": 25,
-      "XL": 20,
-      "2XL": 10
-    },
-    "image": "/images/products/hoodie-777-front.jpg",
-    "imageBack": "/images/products/hoodie-777-back.jpg",
-    "description": "Hoodie version of the 777 — white on the chest, a column of 777s running color to color down the back beneath a dagger on the hood.",
-    "details": [
-      "Cotton fleece",
-      "Oversized fit",
-      "Screen-printed graphic, front and back"
-    ]
-  },
-  {
     "id": "shorts-reconstructed-denim",
     "name": "Reconstructed Denim Shorts",
     "category": "bottoms",
@@ -961,6 +824,143 @@
       "Cotton denim",
       "Hand-distressed, one-of-one repairs",
       "Five-pocket construction"
+    ]
+  },
+  {
+    "id": "crown-cargo-shorts-camo",
+    "name": "Camo Shorts",
+    "category": "bottoms",
+    "price": 62,
+    "colorName": "Camo",
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "stock": {
+      "30": 15,
+      "32": 25,
+      "34": 25,
+      "36": 20,
+      "38": 15
+    },
+    "image": "/images/products/crown-cargo-shorts-camo.jpg",
+    "imageBack": "/images/products/crown-cargo-shorts-camo-alt.jpg",
+    "description": "Camo shorts carrying the mission on the leg: Desired Ambitions Requires Execution. The DARE crest is stamped on the other.",
+    "details": [
+      "Cotton twill",
+      "Five-pocket construction",
+      "Printed graphics, both legs"
+    ]
+  },
+  {
+    "id": "signature-shorts-blue",
+    "name": "Signature Shorts",
+    "category": "bottoms",
+    "price": 45,
+    "colorName": "Blue",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 30,
+      "L": 30,
+      "XL": 20
+    },
+    "image": "/images/products/signature-shorts-blue.jpg",
+    "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
+    "details": [
+      "Lightweight nylon shell",
+      "Elastic drawstring waist",
+      "Mesh lining",
+      "Printed DARE crest"
+    ]
+  },
+  {
+    "id": "signature-shorts-pink",
+    "name": "Signature Shorts",
+    "category": "bottoms",
+    "price": 45,
+    "colorName": "Pink",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 30,
+      "L": 30,
+      "XL": 20
+    },
+    "image": "/images/products/signature-shorts-pink.jpg",
+    "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
+    "details": [
+      "Lightweight nylon shell",
+      "Elastic drawstring waist",
+      "Mesh lining",
+      "Printed DARE crest"
+    ]
+  },
+  {
+    "id": "shorts-redemption-red",
+    "name": "Redemption Shorts",
+    "category": "bottoms",
+    "price": 48,
+    "colorName": "Red",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 30,
+      "L": 30,
+      "XL": 20
+    },
+    "image": "/images/products/shorts-redemption-red.jpg",
+    "description": "Red shorts built around a cherub resting on a crowned, thorn-wrapped heart — kindness, salvation, redemption, lettered in a circle.",
+    "details": [
+      "Lightweight nylon shell",
+      "Elastic drawstring waist",
+      "Mesh lining",
+      "Screen-printed graphic"
+    ]
+  },
+  {
+    "id": "shorts-biker-olive",
+    "name": "Signature Biker Shorts",
+    "category": "bottoms",
+    "price": 30,
+    "colorName": "Olive",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 30,
+      "L": 30,
+      "XL": 20
+    },
+    "image": "/images/products/shorts-biker-olive.jpg",
+    "description": "Compression biker shorts with a side pocket built in. The DARE crest sits at the waistband; the script signs off at the hem.",
+    "details": [
+      "Stretch compression fabric",
+      "Side pocket",
+      "High-rise waistband",
+      "Printed graphics"
     ]
   },
   {

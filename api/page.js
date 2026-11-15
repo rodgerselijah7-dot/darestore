@@ -29,6 +29,16 @@ module.exports = async (req, res) => {
       ld = { "@context": "https://schema.org", "@type": "Product", name: p.name, description: p.description, image: [image], sku: p.id, brand: { "@type": "Brand", name: "DARE" }, color: p.colorName,
         offers: { "@type": "Offer", url, priceCurrency: "USD", price: p.price.toFixed(2), availability: `https://schema.org/${out ? "SoldOut" : "InStock"}`, itemCondition: "https://schema.org/NewCondition" } };
     }
+  } else if (r === "set") {
+    const ps = catalog.filter(p => p.set && `${p.set}-${p.colorName.toLowerCase().replace(/[^a-z0-9]+/g, "-")}` === id);
+    url = `${origin}/set/${encodeURIComponent(id || "")}`;
+    if (ps.length < 2) { status = 404; title = "Page not found | DARE"; }
+    else {
+      const name = ps[0].set.charAt(0).toUpperCase() + ps[0].set.slice(1) + " Set";
+      title = `${name}, ${ps[0].colorName} | DARE`;
+      desc = `Matching set: ${ps.map(p => p.name).join(" + ")} in ${ps[0].colorName}. $${ps.reduce((a, p) => a + p.price, 0)} together.`;
+      if (ps[0].image) image = new URL(ps[0].image, origin).href;
+    }
   } else if (r === "shop") { title = `${CATS[id] || "Shop"} | DARE`; url = `${origin}/shop/${encodeURIComponent(id || "")}`; if (!CATS[id]) status = 404; }
   else if (r === "info") { title = `${INFO[id] || "Info"} | DARE`; url = `${origin}/info/${encodeURIComponent(id || "")}`; if (!INFO[id]) status = 404; }
   else if (r === "about") { title = "About | DARE"; url = `${origin}/about`; }

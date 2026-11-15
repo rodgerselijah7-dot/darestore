@@ -21,6 +21,10 @@
       "destination": "/api/page?r=p&id=:id"
     },
     {
+      "source": "/set/:id",
+      "destination": "/api/page?r=set&id=:id"
+    },
+    {
       "source": "/shop/:cat",
       "destination": "/api/page?r=shop&id=:cat"
     },
