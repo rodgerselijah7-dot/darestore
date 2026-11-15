@@ -792,17 +792,30 @@ function communityBand() {
     <a class="textlink" href="${CONFIG.instagram}" target="_blank" rel="noopener">Follow along</a></section>`;
 }
 function home() { return hero() + storyBand() + trustStrip() + shop("all"); }
-function relatedPieces(p) {
-  return CATALOG.filter(x => x.id !== p.id)
+function relatedPieces(p, skip = []) {
+  return CATALOG.filter(x => x.id !== p.id && !skip.includes(x.id))
     .map(x => ({ x, score: (x.category === p.category ? 0 : 1000) + Math.abs(x.price - p.price) + (isGone(x) ? 500 : 0) }))
     .sort((a, b) => a.score - b.score)
     .slice(0, 3).map(s => s.x);
+}
+function setMates(p) {
+  if (!p.set) return [];
+  const same = CATALOG.filter(x => x.id !== p.id && x.set === p.set && x.category !== p.category);
+  const match = same.filter(x => x.colorName === p.colorName);
+  return match.length ? match : same;
+}
+function setBlock(p) {
+  const mates = setMates(p);
+  if (!mates.length) return "";
+  const total = p.price + mates[0].price;
+  return `<section class="others setrow"><h2>Complete the set</h2><p class="small">${esc(p.name)} and ${esc(mates[0].name)} together: ${money(total)}. Pick your size in each piece.</p><div class="wall">${mates.map(work).join("")}</div></section>`;
 }
 function product(id) {
   const p = find(id);
   if (!p) return notFound();
   const gone = isGone(p), one = p.sizes.length === 1;
-  const more = relatedPieces(p);
+  const mateIds = setMates(p).map(x => x.id);
+  const more = relatedPieces(p, mateIds);
   return `<div class="piece">
       <div class="views"><div class="plinth" data-piece="${p.id}" role="button" tabindex="0" aria-label="Zoom in">${photo(p)}</div>${p.imageBack ? `<div class="plinth" role="button" tabindex="0" aria-label="Zoom in on the back">${photo(p, "back")}</div>` : ""}${(p.gallery || []).map(src => `<div class="plinth" role="button" tabindex="0" aria-label="Zoom in on detail"><img class="photo" src="${esc(src)}" alt="${esc(p.name)}, detail" loading="lazy"></div>`).join("")}</div>
       <div class="placard"><a class="back" href="#" data-back>&larr; All pieces</a>
@@ -823,6 +836,7 @@ function product(id) {
         <details><summary>Shipping</summary><p>Standard (5 to 7 business days) or Express (2 to 3 business days) at checkout. <a href="#/info/shipping">Full shipping details</a></p></details>
         <details><summary>Returns &amp; exchanges</summary><p>Unworn pieces with tags can be returned or exchanged within ${CONFIG.returnWindowDays} days of delivery. <a href="#/info/returns">How returns work</a></p></details>
       </div></div>
+    ${setBlock(p)}
     <section class="others"><h2>More pieces</h2><div class="wall">${more.map(work).join("")}</div></section>
     <section class="reviews"><h2>Reviews</h2><div class="rv-empty"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>No reviews yet. Be one of the first to wear it.</p><a class="textlink" href="mailto:${CONFIG.contactEmail}?subject=${encodeURIComponent("Review: " + p.name)}">Share yours</a></div></section>`;
 }

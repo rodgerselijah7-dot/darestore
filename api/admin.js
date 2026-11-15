@@ -81,6 +81,9 @@ module.exports = async (req, res) => {
     const added = p.sizes.filter(s => !oldSizes.includes(s));
     // a new (or re-added) size starts fresh, even if a deleted product once used the same id
     if (added.length) await redis("DEL", ...added.flatMap(s => [`st:${p.id}:${s}`, `c:${p.id}:${s}`]));
+    // keep fields the form doesn't edit (matching-set link, extra photos)
+    if (old && old.set) p.set = old.set;
+    if (old && old.gallery) p.gallery = old.gallery;
     if (isNew) catalog.push(p); else catalog[catalog.indexOf(old)] = p;
     await saveCatalog(catalog);
     return res.status(200).json({ product: p });

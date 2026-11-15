@@ -1,5 +1,308 @@
 [
   {
+    "id": "track-jacket-rust",
+    "name": "Track Jacket",
+    "category": "hoodies",
+    "price": 65,
+    "colorName": "Rust",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/track-jacket-rust.jpg",
+    "description": "Fitted full-zip track jacket in rust, with a stand collar, white zip, zip pockets and a white stripe running down each sleeve. Pairs with the matching Track Shorts.",
+    "details": [
+      "Smooth stretch knit",
+      "Fitted, cropped cut",
+      "Stand collar, full zip",
+      "Two zip pockets",
+      "Contrast sleeve stripes"
+    ],
+    "badge": "Matching set",
+    "set": "track"
+  },
+  {
+    "id": "track-shorts-rust",
+    "name": "Track Shorts",
+    "category": "bottoms",
+    "price": 35,
+    "colorName": "Rust",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/track-shorts-rust.jpg",
+    "description": "High-rise shorts in the same rust stretch knit as the Track Jacket, cut to wear as a set.",
+    "details": [
+      "Smooth stretch knit",
+      "High-rise waistband",
+      "Fitted cut"
+    ],
+    "badge": "Matching set",
+    "set": "track"
+  },
+  {
+    "id": "track-jacket-black",
+    "name": "Track Jacket",
+    "category": "hoodies",
+    "price": 65,
+    "colorName": "Black",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/track-jacket-black.jpg",
+    "description": "Fitted full-zip track jacket in black, with a stand collar, white zip, zip pockets and a white stripe running down each sleeve. Pairs with the matching Track Shorts.",
+    "details": [
+      "Smooth stretch knit",
+      "Fitted, cropped cut",
+      "Stand collar, full zip",
+      "Two zip pockets",
+      "Contrast sleeve stripes"
+    ],
+    "badge": "Matching set",
+    "set": "track"
+  },
+  {
+    "id": "track-shorts-black",
+    "name": "Track Shorts",
+    "category": "bottoms",
+    "price": 35,
+    "colorName": "Black",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/track-shorts-black.jpg",
+    "description": "High-rise shorts in the same black stretch knit as the Track Jacket, cut to wear as a set.",
+    "details": [
+      "Smooth stretch knit",
+      "High-rise waistband",
+      "Fitted cut"
+    ],
+    "badge": "Matching set",
+    "set": "track"
+  },
+  {
+    "id": "moto-hoodie-black",
+    "name": "Moto Zip Hoodie",
+    "category": "hoodies",
+    "price": 75,
+    "colorName": "Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 15,
+      "M": 25,
+      "L": 25,
+      "XL": 20,
+      "2XL": 10
+    },
+    "image": "/images/products/moto-hoodie-black.jpg",
+    "description": "Full-zip black hoodie with stitched moto ribbing across the shoulders and elbows. Pairs with the matching Moto Joggers.",
+    "details": [
+      "Cotton fleece",
+      "Full zip, drawstring hood",
+      "Stitched rib panels at shoulders and elbows",
+      "Kangaroo pocket",
+      "Ribbed cuffs"
+    ],
+    "badge": "Matching set",
+    "set": "moto"
+  },
+  {
+    "id": "moto-joggers-black",
+    "name": "Moto Joggers",
+    "category": "bottoms",
+    "price": 60,
+    "colorName": "Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 15,
+      "M": 25,
+      "L": 25,
+      "XL": 20,
+      "2XL": 10
+    },
+    "image": "/images/products/moto-joggers-black.jpg",
+    "description": "Black joggers with the same stitched moto ribbing at the knees and hips as the Moto Zip Hoodie, cut to wear as a set.",
+    "details": [
+      "Cotton fleece",
+      "Elastic drawstring waist",
+      "Stitched rib panels at knees and hips",
+      "Ribbed ankle cuffs"
+    ],
+    "badge": "Matching set",
+    "set": "moto"
+  },
+  {
+    "id": "tee-d-brown",
+    "name": "Signature D Tee",
+    "category": "tops",
+    "price": 38,
+    "colorName": "Mineral Brown",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 35,
+      "L": 35,
+      "XL": 25,
+      "2XL": 15
+    },
+    "image": "/images/products/tee-d-brown.jpg",
+    "description": "Mineral-washed brown tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
+    "details": [
+      "Mineral-washed cotton",
+      "Relaxed fit",
+      "Printed chest logo"
+    ],
+    "badge": "New"
+  },
+  {
+    "id": "tee-d-grey",
+    "name": "Signature D Tee",
+    "category": "tops",
+    "price": 38,
+    "colorName": "Mineral Grey",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 35,
+      "L": 35,
+      "XL": 25,
+      "2XL": 15
+    },
+    "image": "/images/products/tee-d-grey.jpg",
+    "description": "Mineral-washed grey tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
+    "details": [
+      "Mineral-washed cotton",
+      "Relaxed fit",
+      "Printed chest logo"
+    ],
+    "badge": "New"
+  },
+  {
+    "id": "tee-d-black",
+    "name": "Signature D Tee",
+    "category": "tops",
+    "price": 38,
+    "colorName": "Washed Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 35,
+      "L": 35,
+      "XL": 25,
+      "2XL": 15
+    },
+    "image": "/images/products/tee-d-black.jpg",
+    "description": "Washed black tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
+    "details": [
+      "Mineral-washed cotton",
+      "Relaxed fit",
+      "Printed chest logo"
+    ],
+    "badge": "New"
+  },
+  {
+    "id": "tee-d-navy",
+    "name": "Signature D Tee",
+    "category": "tops",
+    "price": 38,
+    "colorName": "Mineral Navy",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 35,
+      "L": 35,
+      "XL": 25,
+      "2XL": 15
+    },
+    "image": "/images/products/tee-d-navy.jpg",
+    "description": "Mineral-washed navy tee with the white Old English D printed small at the chest. Every wash comes out a little different.",
+    "details": [
+      "Mineral-washed cotton",
+      "Relaxed fit",
+      "Printed chest logo"
+    ],
+    "badge": "New"
+  },
+  {
     "id": "signature-shorts-blue",
     "name": "Signature Shorts",
     "category": "bottoms",
@@ -442,7 +745,7 @@
       "XL": 20
     },
     "image": "/images/products/shorts-redemption-red.jpg",
-    "description": "Red shorts built around a cherub resting on a crowned, thorn-wrapped heart \u2014 kindness, salvation, redemption, lettered in a circle.",
+    "description": "Red shorts built around a cherub resting on a crowned, thorn-wrapped heart — kindness, salvation, redemption, lettered in a circle.",
     "details": [
       "Lightweight nylon shell",
       "Elastic drawstring waist",
@@ -499,7 +802,7 @@
       "2XL": 8
     },
     "image": "/images/products/hoodie-1454-bleached.jpg",
-    "description": "Hand-bleached hoodie \u2014 no two come out the same. A small glitter 1454 mark sits at the chest, Dontae Amare Rare Edition lettered small on the back.",
+    "description": "Hand-bleached hoodie — no two come out the same. A small glitter 1454 mark sits at the chest, Dontae Amare Rare Edition lettered small on the back.",
     "details": [
       "Cotton fleece",
       "Hand-bleached, one-of-one wash",
@@ -625,7 +928,7 @@
     },
     "image": "/images/products/hoodie-777-front.jpg",
     "imageBack": "/images/products/hoodie-777-back.jpg",
-    "description": "Hoodie version of the 777 \u2014 white on the chest, a column of 777s running color to color down the back beneath a dagger on the hood.",
+    "description": "Hoodie version of the 777 — white on the chest, a column of 777s running color to color down the back beneath a dagger on the hood.",
     "details": [
       "Cotton fleece",
       "Oversized fit",
@@ -653,7 +956,7 @@
       "38": 10
     },
     "image": "/images/products/shorts-reconstructed-denim.jpg",
-    "description": "Washed denim shorts torn and patched with color at the seams \u2014 no two repairs the same. The DARE crest stamped at the hem.",
+    "description": "Washed denim shorts torn and patched with color at the seams — no two repairs the same. The DARE crest stamped at the hem.",
     "details": [
       "Cotton denim",
       "Hand-distressed, one-of-one repairs",
