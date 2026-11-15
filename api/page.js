@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
     else {
       const name = ps[0].set.charAt(0).toUpperCase() + ps[0].set.slice(1) + " Set";
       title = `${name}, ${ps[0].colorName} | DARE`;
-      desc = `Matching set: ${ps.map(p => p.name).join(" + ")} in ${ps[0].colorName}. $${ps.reduce((a, p) => a + p.price, 0)} together.`;
+      desc = `Matching set: ${ps.map(p => p.name).join(" + ")} in ${ps[0].colorName}. $${ps.reduce((a, p) => a + (p.setPrice ?? p.price), 0)} together.`;
       if (ps[0].image) image = new URL(ps[0].image, origin).href;
     }
   } else if (r === "shop") { title = `${CATS[id] || "Shop"} | DARE`; url = `${origin}/shop/${encodeURIComponent(id || "")}`; if (!CATS[id]) status = 404; }

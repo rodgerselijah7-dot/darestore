@@ -12,6 +12,17 @@ const rate = (r, cents, name) => ({ shipping_rate_data: {
   delivery_estimate: { minimum: { unit: "business_day", value: r.min }, maximum: { unit: "business_day", value: r.max } }
 }});
 
+function setAlloc(lines) {
+  const units = lines.map(() => 0), groups = {};
+  lines.forEach((l, i) => { const p = l.p; if (p.set && p.setPrice != null) { const k = p.set + "-" + p.colorName.toLowerCase().replace(/[^a-z0-9]+/g, "-"); ((groups[k] = groups[k] || {})[p.id] = groups[k][p.id] || []).push(i); } });
+  for (const k in groups) {
+    const ids = Object.keys(groups[k]); if (ids.length < 2) continue;
+    const pairs = Math.min(...ids.map(id => groups[k][id].reduce((a, i) => a + lines[i].qty, 0)));
+    for (const id of ids) { let left = pairs; for (const i of groups[k][id]) { const n = Math.min(left, lines[i].qty); units[i] = n; left -= n; } }
+  }
+  return units;
+}
+
 module.exports = async (req, res) => {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
   if (!process.env.STRIPE_SECRET_KEY) return res.status(500).json({ error: "Checkout isn't set up yet. Add STRIPE_SECRET_KEY in Vercel and redeploy." });
@@ -52,13 +63,20 @@ module.exports = async (req, res) => {
   }
 
   const origin = req.headers.origin || `https://${req.headers.host}`;
-  const subtotal = lines.reduce((a, l) => a + l.p.price * l.qty, 0);
+  // matching sets: each complete pair (same set + colour) is charged at the pieces' setPrice
+  const units = setAlloc(lines);
+  const charged = [];
+  lines.forEach((l, i) => {
+    if (units[i]) charged.push({ ...l, qty: units[i], unit: l.p.setPrice, set: true });
+    if (l.qty - units[i]) charged.push({ ...l, qty: l.qty - units[i], unit: l.p.price, set: false });
+  });
+  const subtotal = charged.reduce((a, l) => a + l.unit * l.qty, 0);
   const free = subtotal >= FREE_SHIPPING_OVER;
   try {
     const session = await stripe("POST", "checkout/sessions", {
       mode: "payment",
-      line_items: lines.map(l => ({ quantity: l.qty, price_data: { currency: "usd", unit_amount: Math.round(l.p.price * 100), product_data: {
-        name: `${l.p.name} (${l.p.colorName}, ${l.size})`,
+      line_items: charged.map(l => ({ quantity: l.qty, price_data: { currency: "usd", unit_amount: Math.round(l.unit * 100), product_data: {
+        name: `${l.p.name} (${l.p.colorName}, ${l.size})${l.set ? ", set price" : ""}`,
         images: l.p.image ? [new URL(l.p.image, origin).href] : undefined,
         metadata: { product_id: l.p.id, size: l.size } } } })),
       shipping_options: [free ? rate(RATES.standard, 0, "Free standard shipping") : rate(RATES.standard, RATES.standard.cents), rate(RATES.express, RATES.express.cents)],

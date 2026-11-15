@@ -84,6 +84,8 @@ module.exports = async (req, res) => {
     // keep fields the form doesn't edit (matching-set link, extra photos)
     if (old && old.set) p.set = old.set;
     if (old && old.gallery) p.gallery = old.gallery;
+    if (old && old.setPrice != null) p.setPrice = old.setPrice;
+    if (old && old.setImage) p.setImage = old.setImage;
     if (isNew) catalog.push(p); else catalog[catalog.indexOf(old)] = p;
     await saveCatalog(catalog);
     return res.status(200).json({ product: p });

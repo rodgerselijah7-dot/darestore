@@ -87,7 +87,9 @@
       "Ribbed cuffs"
     ],
     "badge": "Matching set",
-    "set": "moto"
+    "set": "moto",
+    "setPrice": 65,
+    "setImage": "/images/products/set-moto-hoodie-black.jpg"
   },
   {
     "id": "moto-joggers-black",
@@ -118,7 +120,9 @@
       "Ribbed ankle cuffs"
     ],
     "badge": "Matching set",
-    "set": "moto"
+    "set": "moto",
+    "setPrice": 55,
+    "setImage": "/images/products/set-moto-joggers-black.jpg"
   },
   {
     "id": "crewneck-desired-ambitions",
@@ -178,7 +182,9 @@
       "Contrast sleeve stripes"
     ],
     "badge": "Matching set",
-    "set": "track"
+    "set": "track",
+    "setPrice": 55,
+    "setImage": "/images/products/set-track-jacket-black.jpg"
   },
   {
     "id": "track-shorts-black",
@@ -208,7 +214,9 @@
       "Fitted cut"
     ],
     "badge": "Matching set",
-    "set": "track"
+    "set": "track",
+    "setPrice": 30,
+    "setImage": "/images/products/set-track-shorts-black.jpg"
   },
   {
     "id": "track-jacket-rust",
@@ -240,7 +248,9 @@
       "Contrast sleeve stripes"
     ],
     "badge": "Matching set",
-    "set": "track"
+    "set": "track",
+    "setPrice": 55,
+    "setImage": "/images/products/set-track-jacket-rust.jpg"
   },
   {
     "id": "track-shorts-rust",
@@ -270,7 +280,9 @@
       "Fitted cut"
     ],
     "badge": "Matching set",
-    "set": "track"
+    "set": "track",
+    "setPrice": 30,
+    "setImage": "/images/products/set-track-shorts-rust.jpg"
   },
   {
     "id": "beanie-sparkle-mauve",

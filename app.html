@@ -146,11 +146,12 @@ body[data-page="product"] .bg-fall{display:none}
 .label .p{margin-top:6px;color:var(--ink);font-weight:700}
 .ref{font-size:11px;color:#B5B5B2;letter-spacing:.04em;margin-top:2px}
 .low{position:absolute;top:10px;left:10px;background:var(--wall);border:1px solid var(--dot);color:var(--dot);font-size:11px;padding:3px 8px;border-radius:999px}
-.plinth.duo{background:#fff}
-.plinth.duo .half{position:absolute;width:74%;height:74%;display:grid;place-items:center}
-.plinth.duo .half:first-child{top:1%;left:-5%}
-.plinth.duo .half:nth-child(2){bottom:1%;right:-5%}
-.plinth.duo img.photo{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.plinth.duo{background:#fff;display:flex;align-items:center;justify-content:center;gap:4%;padding:0 5%}
+.plinth.duo .half{flex:1 1 0;min-width:0;height:100%;display:flex;align-items:center;justify-content:center}
+.plinth.duo img.photo{width:100%;height:auto;max-height:72%;object-fit:contain}
+.price s,.label .p s,.setpart s{color:var(--grey);font-weight:400;margin-right:6px}
+.item .lp s{display:block;color:var(--grey);font-size:12px}
+.item .lp .sub{display:block;margin:2px 0 0;font-size:11px}
 .setpart{margin-bottom:6px}
 .setpart .lbl a{color:var(--ink)}
 .tag-badge{position:absolute;top:10px;right:10px;background:var(--ink);color:var(--wall);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px}
@@ -567,7 +568,20 @@ function saveCart() {
   cc.textContent = n;
   renderCart();
 }
-function subtotal() { return cart.reduce((a, l) => a + (find(l.id)?.price || 0) * l.qty, 0); }
+/* Set pricing: for each matching set, every complete pair in the bag is charged at the set price.
+   Mirrors setAlloc() in api/checkout.js, which is what actually charges the customer. */
+function setAlloc(lines, get) {
+  const units = lines.map(() => 0), groups = {};
+  lines.forEach((l, i) => { const p = get(l.id); if (p && p.set && p.setPrice != null) { const k = p.set + "-" + p.colorName.toLowerCase().replace(/[^a-z0-9]+/g, "-"); ((groups[k] = groups[k] || {})[p.id] = groups[k][p.id] || []).push(i); } });
+  for (const k in groups) {
+    const ids = Object.keys(groups[k]); if (ids.length < 2) continue;
+    const pairs = Math.min(...ids.map(id => groups[k][id].reduce((a, i) => a + lines[i].qty, 0)));
+    for (const id of ids) { let left = pairs; for (const i of groups[k][id]) { const n = Math.min(left, lines[i].qty); units[i] = n; left -= n; } }
+  }
+  return units;
+}
+function lineTotal(l, setUnits) { const p = find(l.id); if (!p) return 0; return (p.setPrice ?? p.price) * setUnits + p.price * (l.qty - setUnits); }
+function subtotal() { const u = setAlloc(cart, find); return cart.reduce((a, l, i) => a + lineTotal(l, u[i]), 0); }
 function addToCart(id, size, qty = 1) {
   const p = find(id); if (!p) return;
   const max = Math.min(10, avail(p, size));
@@ -587,11 +601,11 @@ function renderCart() {
   $("#freebar").style.display = cart.length ? "" : "none";
   $("#cartFoot").style.display = cart.length ? "" : "none";
   $("#subtotal").textContent = money(sub);
-  const linesEl = $("#lines");
+  const linesEl = $("#lines"), su = setAlloc(cart, find);
   linesEl.innerHTML = cart.length ? cart.map((l, i) => {
-    const p = find(l.id);
+    const p = find(l.id), lt = lineTotal(l, su[i]), full = p.price * l.qty;
     return `<div class="item"><a class="print" href="#/p/${p.id}" data-close>${art(p)}</a><div><h3>${esc(p.name)}</h3><div class="sub">${esc(p.colorName)}, size ${esc(l.size)}${l.qty > 1 ? ` &times; ${l.qty}` : ""}</div>
-      <button class="rm" data-rm="${i}">Remove</button></div><div class="lp">${money(p.price * l.qty)}</div></div>`;
+      <button class="rm" data-rm="${i}">Remove</button></div><div class="lp">${lt < full ? `<s>${money(full)}</s>${money(lt)}<span class="sub">Set price</span>` : money(full)}</div></div>`;
   }).join("") : `<div class="empty"><p>Your bag is empty.</p><a class="btn quiet" href="#/" data-close>Continue shopping</a></div>`;
   fixLinks(linesEl);
 }
@@ -755,11 +769,14 @@ function setGroups() {
   return g;
 }
 const shortName = p => p.name.split(" ").pop();
-const setTotal = ps => ps.reduce((a, p) => a + p.price, 0);
+const setFull = ps => ps.reduce((a, p) => a + p.price, 0);
+const setTotal = ps => ps.reduce((a, p) => a + (p.setPrice ?? p.price), 0);
+const setPriceHtml = ps => setTotal(ps) < setFull(ps) ? `<s>${money(setFull(ps))}</s>${money(setTotal(ps))}` : money(setTotal(ps));
+const setPhoto = p => `<img class="photo" src="${esc(p.setImage || p.image)}" alt="${esc(p.name)}" loading="lazy">`;
 function setCard(k, ps, i = 0) {
   const gone = ps.every(isGone);
-  return `<a class="work setcard${gone ? " gone" : ""}" href="#/set/${k}" data-set="${k}" style="--i:${i}"><div class="plinth duo">${ps.map(p => `<div class="half">${photo(p)}</div>`).join("")}<span class="tag-badge">Matching set</span></div>
-    <div class="label"><div class="t">${esc(setTitle(ps[0].set))}</div><div class="m">${esc(ps[0].colorName)}, ${ps.map(p => esc(shortName(p))).join(" + ")}</div><div class="p">${gone ? '<span class="dot" aria-hidden="true"></span>Gone' : money(setTotal(ps))}</div></div></a>`;
+  return `<a class="work setcard${gone ? " gone" : ""}" href="#/set/${k}" data-set="${k}" style="--i:${i}"><div class="plinth duo">${ps.map(p => `<div class="half">${setPhoto(p)}</div>`).join("")}<span class="tag-badge">Matching set</span></div>
+    <div class="label"><div class="t">${esc(setTitle(ps[0].set))}</div><div class="m">${esc(ps[0].colorName)}, ${ps.map(p => esc(shortName(p))).join(" + ")}</div><div class="p">${gone ? '<span class="dot" aria-hidden="true"></span>Gone' : setPriceHtml(ps)}</div></div></a>`;
 }
 function wallTiles(list) {
   const groups = setGroups(), done = new Set(), out = [];
@@ -840,8 +857,8 @@ function setMates(p) {
 function setBlock(p) {
   const mates = setMates(p);
   if (!mates.length) return "";
-  const total = p.price + mates[0].price;
-  return `<section class="others setrow"><h2>Complete the set</h2><p class="small">${esc(p.name)} and ${esc(mates[0].name)} together: ${money(total)}. Pick your size in each piece.</p><div class="wall">${mates.map(work).join("")}</div></section>`;
+  const both = [p, mates[0]], k = setKeyFor(p), g = k && setGroups()[k];
+  return `<section class="others setrow"><h2>Complete the set</h2><p class="small">${esc(p.name)} and ${esc(mates[0].name)} together: ${setPriceHtml(both)}. The set price applies automatically in your bag.</p><div class="wall">${g ? setCard(k, g) : mates.map(work).join("")}</div></section>`;
 }
 function setPage(k) {
   const ps = setGroups()[k];
@@ -853,10 +870,10 @@ function setPage(k) {
         <p class="pchip">Matching set</p>
         <h1>${esc(setTitle(ps[0].set))}</h1>
         <dl class="facts"><dt>Colour</dt><dd>${esc(ps[0].colorName)}</dd><dt>Pieces</dt><dd>${ps.map(p => esc(p.name)).join(" + ")}</dd></dl>
-        <p class="price">${all ? '<span class="dot" aria-hidden="true"></span>Gone' : money(setTotal(ps))}</p>
+        <p class="price">${all ? '<span class="dot" aria-hidden="true"></span>Gone' : setPriceHtml(ps)}</p>${setTotal(ps) < setFull(ps) && !all ? `<p class="small">Save ${money(setFull(ps) - setTotal(ps))} when you get both pieces together. The set price applies automatically in your bag.</p>` : ""}
         ${all ? `<button class="btn quiet wide" data-signup>Tell me if it comes back</button>` : `
         ${ps.map(p => { const one = p.sizes.length === 1; return `<div class="setpart" data-part="${p.id}">
-          <div class="lbl"><span id="sz-${p.id}"><a href="#/p/${p.id}">${esc(p.name)}</a>, ${money(p.price)}</span>${one ? "" : '<a href="#/info/size">Size guide</a>'}</div>
+          <div class="lbl"><span id="sz-${p.id}"><a href="#/p/${p.id}">${esc(p.name)}</a>, ${p.setPrice != null && p.setPrice < p.price ? `<s>${money(p.price)}</s>${money(p.setPrice)}` : money(p.price)}</span>${one ? "" : '<a href="#/info/size">Size guide</a>'}</div>
           ${isGone(p) ? `<p class="small">Sold out. The rest of the set is still available.</p>` : `<div class="sizes" role="group" aria-labelledby="sz-${p.id}">${p.sizes.map(s => `<button data-size="${esc(s)}" aria-pressed="${one}" ${avail(p, s) <= 0 ? "disabled aria-label='" + esc(s) + ", sold out'" : ""}>${esc(s)}</button>`).join("")}</div>`}
         </div>`; }).join("")}
         <button class="btn wide" id="addSet">Add the set to bag</button>
