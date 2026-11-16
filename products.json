@@ -1174,13 +1174,41 @@
       "38": 15
     },
     "image": "/images/products/crown-cargo-shorts-camo.jpg",
-    "imageBack": "/images/products/crown-cargo-shorts-camo-alt.jpg",
-    "description": "Camo shorts carrying the mission on the leg: Desired Ambitions Requires Execution. The DARE crest is stamped on the other.",
+    "description": "Camo shorts carrying the mission on the leg: Desired Ambitions Requires Execution, lettered in red with a red Old English D on the other leg.",
     "details": [
       "Cotton twill",
       "Five-pocket construction",
       "Printed graphics, both legs"
     ]
+  },
+  {
+    "id": "shorts-camo-d",
+    "name": "Camo D Shorts",
+    "category": "bottoms",
+    "price": 55,
+    "colorName": "Camo",
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "stock": {
+      "30": 15,
+      "32": 25,
+      "34": 25,
+      "36": 20,
+      "38": 15
+    },
+    "image": "/images/products/crown-cargo-shorts-camo-alt.jpg",
+    "description": "Camo shorts kept clean, with one white Old English D printed at the leg.",
+    "details": [
+      "Cotton twill",
+      "Five-pocket construction",
+      "Printed graphic"
+    ],
+    "badge": "New"
   },
   {
     "id": "signature-shorts-blue",
