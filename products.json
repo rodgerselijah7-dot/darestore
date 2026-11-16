@@ -3,7 +3,7 @@
     "id": "moto-hoodie-black",
     "name": "Moto Zip Hoodie",
     "category": "hoodies",
-    "price": 75,
+    "price": 70,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -30,14 +30,14 @@
     ],
     "badge": "Matching set",
     "set": "moto",
-    "setPrice": 55,
+    "setPrice": 56,
     "setImage": "/images/products/set-moto-hoodie-black.jpg"
   },
   {
     "id": "moto-joggers-black",
     "name": "Moto Joggers",
     "category": "bottoms",
-    "price": 60,
+    "price": 55,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -63,7 +63,7 @@
     ],
     "badge": "Matching set",
     "set": "moto",
-    "setPrice": 45,
+    "setPrice": 44,
     "setImage": "/images/products/set-moto-joggers-black.jpg"
   },
   {
@@ -99,7 +99,7 @@
     "id": "hoodie-1454-bleached",
     "name": "1454 Hoodie",
     "category": "hoodies",
-    "price": 70,
+    "price": 90,
     "colorName": "Bleached Black",
     "sizes": [
       "S",
@@ -156,7 +156,7 @@
     "id": "track-jacket-black",
     "name": "Track Jacket",
     "category": "hoodies",
-    "price": 65,
+    "price": 45,
     "colorName": "Black",
     "sizes": [
       "XS",
@@ -183,14 +183,14 @@
     ],
     "badge": "Matching set",
     "set": "track",
-    "setPrice": 33,
+    "setPrice": 39,
     "setImage": "/images/products/set-track-jacket-black.jpg"
   },
   {
     "id": "track-shorts-black",
     "name": "Track Shorts",
     "category": "bottoms",
-    "price": 35,
+    "price": 30,
     "colorName": "Black",
     "sizes": [
       "XS",
@@ -215,14 +215,14 @@
     ],
     "badge": "Matching set",
     "set": "track",
-    "setPrice": 17,
+    "setPrice": 26,
     "setImage": "/images/products/set-track-shorts-black.jpg"
   },
   {
     "id": "track-jacket-rust",
     "name": "Track Jacket",
     "category": "hoodies",
-    "price": 65,
+    "price": 45,
     "colorName": "Rust",
     "sizes": [
       "XS",
@@ -249,14 +249,14 @@
     ],
     "badge": "Matching set",
     "set": "track",
-    "setPrice": 33,
+    "setPrice": 39,
     "setImage": "/images/products/set-track-jacket-rust.jpg"
   },
   {
     "id": "track-shorts-rust",
     "name": "Track Shorts",
     "category": "bottoms",
-    "price": 35,
+    "price": 30,
     "colorName": "Rust",
     "sizes": [
       "XS",
@@ -281,14 +281,14 @@
     ],
     "badge": "Matching set",
     "set": "track",
-    "setPrice": 17,
+    "setPrice": 26,
     "setImage": "/images/products/set-track-shorts-rust.jpg"
   },
   {
     "id": "beanie-sparkle-mauve",
     "name": "Sparkle Beanie",
     "category": "accessories",
-    "price": 32,
+    "price": 30,
     "colorName": "Mauve",
     "sizes": [
       "OS"
@@ -309,7 +309,7 @@
     "id": "ski-mask-dare-black",
     "name": "D.A.R.E Ski Mask",
     "category": "accessories",
-    "price": 20,
+    "price": 25,
     "colorName": "Black",
     "sizes": [
       "OS"
@@ -358,7 +358,7 @@
     "id": "tee-d-black",
     "name": "DARE Mini",
     "category": "tops",
-    "price": 38,
+    "price": 40,
     "colorName": "Washed Black",
     "sizes": [
       "S",
@@ -390,7 +390,7 @@
     "id": "tee-d-grey",
     "name": "DARE Mini",
     "category": "tops",
-    "price": 38,
+    "price": 40,
     "colorName": "Mineral Grey",
     "sizes": [
       "S",
@@ -422,7 +422,7 @@
     "id": "tee-d-brown",
     "name": "DARE Mini",
     "category": "tops",
-    "price": 38,
+    "price": 40,
     "colorName": "Mineral Brown",
     "sizes": [
       "S",
@@ -454,7 +454,7 @@
     "id": "tee-d-navy",
     "name": "DARE Mini",
     "category": "tops",
-    "price": 38,
+    "price": 40,
     "colorName": "Mineral Navy",
     "sizes": [
       "S",
@@ -631,7 +631,7 @@
     "id": "tee-life-is-a-gamble",
     "name": "Life Is A Gamble Tee",
     "category": "tops",
-    "price": 44,
+    "price": 45,
     "colorName": "Tan",
     "sizes": [
       "S",
@@ -659,7 +659,7 @@
     "id": "tee-dare-wordmark-black",
     "name": "D.A.R.E Tee",
     "category": "tops",
-    "price": 38,
+    "price": 35,
     "colorName": "Black",
     "sizes": [
       "S",
@@ -687,7 +687,7 @@
     "id": "tee-dare-wordmark",
     "name": "D.A.R.E Tee",
     "category": "tops",
-    "price": 38,
+    "price": 35,
     "colorName": "Red",
     "sizes": [
       "S",
@@ -715,7 +715,7 @@
     "id": "tee-melting-smiley-white",
     "name": "Melting Smiley Tee",
     "category": "tops",
-    "price": 42,
+    "price": 40,
     "colorName": "White",
     "sizes": [
       "S",
@@ -743,7 +743,7 @@
     "id": "tee-melting-smiley-blue",
     "name": "Melting Smiley Tee",
     "category": "tops",
-    "price": 42,
+    "price": 40,
     "colorName": "Slate Blue",
     "sizes": [
       "S",
@@ -987,7 +987,7 @@
     "id": "romper-tie-dye",
     "name": "Tie-Dye Romper",
     "category": "tops",
-    "price": 48,
+    "price": 45,
     "colorName": "Midnight Tie-Dye",
     "sizes": [
       "XS",
@@ -1016,7 +1016,7 @@
     "id": "tank-rare-edition-white",
     "name": "Rare Edition Tank",
     "category": "tops",
-    "price": 15,
+    "price": 25,
     "colorName": "White",
     "sizes": [
       "XS",
@@ -1044,7 +1044,7 @@
     "id": "skirt-plaid-red",
     "name": "Plaid Pleated Skirt",
     "category": "bottoms",
-    "price": 38,
+    "price": 40,
     "colorName": "Red Plaid",
     "sizes": [
       "XS",
@@ -1073,7 +1073,7 @@
     "id": "shorts-denim-black",
     "name": "Signature Denim Shorts",
     "category": "bottoms",
-    "price": 55,
+    "price": 50,
     "colorName": "Black",
     "sizes": [
       "30",
@@ -1101,7 +1101,7 @@
     "id": "shorts-ripped-denim-black",
     "name": "Ripped Denim Shorts",
     "category": "bottoms",
-    "price": 58,
+    "price": 60,
     "colorName": "Black",
     "sizes": [
       "30",
@@ -1130,7 +1130,7 @@
     "id": "shorts-reconstructed-denim",
     "name": "Reconstructed Denim Shorts",
     "category": "bottoms",
-    "price": 60,
+    "price": 65,
     "colorName": "Washed Grey",
     "sizes": [
       "30",
@@ -1158,7 +1158,7 @@
     "id": "signature-shorts-blue",
     "name": "Signature Shorts",
     "category": "bottoms",
-    "price": 45,
+    "price": 40,
     "colorName": "Blue",
     "sizes": [
       "S",
@@ -1185,7 +1185,7 @@
     "id": "crown-cargo-shorts-camo",
     "name": "Camo Shorts",
     "category": "bottoms",
-    "price": 62,
+    "price": 60,
     "colorName": "Camo",
     "sizes": [
       "30",
@@ -1241,7 +1241,7 @@
     "id": "signature-shorts-pink",
     "name": "Signature Shorts",
     "category": "bottoms",
-    "price": 45,
+    "price": 40,
     "colorName": "Pink",
     "sizes": [
       "S",
@@ -1268,7 +1268,7 @@
     "id": "shorts-redemption-red",
     "name": "Redemption Shorts",
     "category": "bottoms",
-    "price": 48,
+    "price": 45,
     "colorName": "Red",
     "sizes": [
       "S",
