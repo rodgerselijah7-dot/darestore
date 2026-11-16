@@ -777,13 +777,24 @@ function setCard(k, ps, i = 0) {
     <div class="label"><div class="t">${esc(setTitle(ps[0].set))}</div><div class="m">${esc(ps[0].colorName)}, ${ps.map(p => esc(shortName(p))).join(" + ")}</div><div class="p">${gone ? '<span class="dot" aria-hidden="true"></span>Gone' : setPriceHtml(ps)}</div></div></a>`;
 }
 function wallTiles(list) {
-  const groups = setGroups(), done = new Set(), out = [];
+  const groups = setGroups(), done = new Set(), sets = [], rest = [];
   for (const p of list) {
     const k = setKeyFor(p);
-    if (k && groups[k]) { if (!done.has(k)) { done.add(k); out.push(setCard(k, groups[k], out.length)); } }
-    else out.push(work(p, out.length));
+    if (k && groups[k]) { if (!done.has(k)) { done.add(k); sets.push(k); } }
+    else rest.push(p);
   }
-  return out;
+  // Sets lead the grid. Sets sold in two colours go on spots that share a row both
+  // two-across (phones) and three-across (desktop): slots 0-1, 4-5, 6-7, 10-11...
+  const byName = {}; sets.forEach(k => (byName[groups[k][0].set] = byName[groups[k][0].set] || []).push(k));
+  const pairs = [], singles = [];
+  Object.values(byName).forEach(ks => { while (ks.length >= 2) pairs.push(ks.splice(0, 2)); singles.push(...ks); });
+  const order = [];
+  while (pairs.length || singles.length) {
+    const s = order.length % 6;
+    if (pairs.length && (s === 0 || s === 4 || !singles.length)) order.push(...pairs.shift());
+    else order.push(singles.shift());
+  }
+  return [...order.map((k, i) => setCard(k, groups[k], i)), ...rest.map((p, i) => work(p, order.length + i))];
 }
 let SHOP_LIST = [], FIRST = true;
 function shop(cat = "all") {
