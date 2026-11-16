@@ -96,6 +96,47 @@
     ]
   },
   {
+    "id": "beanie-sparkle-mauve",
+    "name": "Sparkle Beanie",
+    "category": "accessories",
+    "price": 30,
+    "colorName": "Mauve",
+    "sizes": [
+      "OS"
+    ],
+    "stock": {
+      "OS": 40
+    },
+    "image": "/images/products/beanie-sparkle-mauve.jpg",
+    "description": "Knit beanie fading into rhinestones at the crown, Dare signed on the cuff.",
+    "details": [
+      "Acrylic knit",
+      "Rhinestone embellishment",
+      "Embroidered cuff"
+    ],
+    "soldOut": true
+  },
+  {
+    "id": "ski-mask-dare-black",
+    "name": "D.A.R.E Ski Mask",
+    "category": "accessories",
+    "price": 25,
+    "colorName": "Black",
+    "sizes": [
+      "OS"
+    ],
+    "stock": {
+      "OS": 40
+    },
+    "image": "/images/products/ski-mask-dare-black.jpg",
+    "description": "Ski mask with D.A.R.E lettered in neon at the back.",
+    "details": [
+      "Stretch knit",
+      "Full-face coverage",
+      "Printed graphic"
+    ]
+  },
+  {
     "id": "hoodie-1454-bleached",
     "name": "1454 Hoodie",
     "category": "hoodies",
@@ -283,47 +324,6 @@
     "set": "track",
     "setPrice": 26,
     "setImage": "/images/products/set-track-shorts-rust.jpg"
-  },
-  {
-    "id": "beanie-sparkle-mauve",
-    "name": "Sparkle Beanie",
-    "category": "accessories",
-    "price": 30,
-    "colorName": "Mauve",
-    "sizes": [
-      "OS"
-    ],
-    "stock": {
-      "OS": 40
-    },
-    "image": "/images/products/beanie-sparkle-mauve.jpg",
-    "description": "Knit beanie fading into rhinestones at the crown, Dare signed on the cuff.",
-    "details": [
-      "Acrylic knit",
-      "Rhinestone embellishment",
-      "Embroidered cuff"
-    ],
-    "soldOut": true
-  },
-  {
-    "id": "ski-mask-dare-black",
-    "name": "D.A.R.E Ski Mask",
-    "category": "accessories",
-    "price": 25,
-    "colorName": "Black",
-    "sizes": [
-      "OS"
-    ],
-    "stock": {
-      "OS": 40
-    },
-    "image": "/images/products/ski-mask-dare-black.jpg",
-    "description": "Ski mask with D.A.R.E lettered in neon at the back.",
-    "details": [
-      "Stretch knit",
-      "Full-face coverage",
-      "Printed graphic"
-    ]
   },
   {
     "id": "tee-take-that-risk",
@@ -1098,35 +1098,6 @@
     ]
   },
   {
-    "id": "shorts-ripped-denim-black",
-    "name": "Ripped Denim Shorts",
-    "category": "bottoms",
-    "price": 60,
-    "colorName": "Black",
-    "sizes": [
-      "30",
-      "32",
-      "34",
-      "36",
-      "38"
-    ],
-    "stock": {
-      "30": 15,
-      "32": 25,
-      "34": 25,
-      "36": 20,
-      "38": 15
-    },
-    "image": "/images/products/shorts-ripped-denim-black.jpg",
-    "description": "Black denim shorts with heavy ripped-and-repaired panels down both legs, cut long at the knee.",
-    "details": [
-      "Cotton stretch denim",
-      "Distressed front panels",
-      "Five-pocket construction"
-    ],
-    "badge": "New"
-  },
-  {
     "id": "signature-shorts-blue",
     "name": "Signature Shorts",
     "category": "bottoms",
@@ -1178,6 +1149,63 @@
       "Elastic drawstring waist",
       "Mesh lining",
       "Printed DARE crest"
+    ]
+  },
+  {
+    "id": "shorts-ripped-denim-black",
+    "name": "Ripped Denim Shorts",
+    "category": "bottoms",
+    "price": 60,
+    "colorName": "Black",
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "stock": {
+      "30": 15,
+      "32": 25,
+      "34": 25,
+      "36": 20,
+      "38": 15
+    },
+    "image": "/images/products/shorts-ripped-denim-black.jpg",
+    "description": "Black denim shorts with heavy ripped-and-repaired panels down both legs, cut long at the knee.",
+    "details": [
+      "Cotton stretch denim",
+      "Distressed front panels",
+      "Five-pocket construction"
+    ],
+    "badge": "New"
+  },
+  {
+    "id": "shorts-reconstructed-denim",
+    "name": "Reconstructed Denim Shorts",
+    "category": "bottoms",
+    "price": 65,
+    "colorName": "Washed Grey",
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "stock": {
+      "30": 10,
+      "32": 18,
+      "34": 18,
+      "36": 15,
+      "38": 10
+    },
+    "image": "/images/products/shorts-reconstructed-denim.jpg",
+    "description": "Washed denim shorts torn and patched with color at the seams — no two repairs the same. The DARE crest stamped at the hem.",
+    "details": [
+      "Cotton denim",
+      "Hand-distressed, one-of-one repairs",
+      "Five-pocket construction"
     ]
   },
   {
@@ -1234,34 +1262,6 @@
       "Cotton twill",
       "Five-pocket construction",
       "Printed graphic"
-    ]
-  },
-  {
-    "id": "shorts-reconstructed-denim",
-    "name": "Reconstructed Denim Shorts",
-    "category": "bottoms",
-    "price": 65,
-    "colorName": "Washed Grey",
-    "sizes": [
-      "30",
-      "32",
-      "34",
-      "36",
-      "38"
-    ],
-    "stock": {
-      "30": 10,
-      "32": 18,
-      "34": 18,
-      "36": 15,
-      "38": 10
-    },
-    "image": "/images/products/shorts-reconstructed-denim.jpg",
-    "description": "Washed denim shorts torn and patched with color at the seams — no two repairs the same. The DARE crest stamped at the hem.",
-    "details": [
-      "Cotton denim",
-      "Hand-distressed, one-of-one repairs",
-      "Five-pocket construction"
     ]
   },
   {
