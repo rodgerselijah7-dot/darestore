@@ -799,7 +799,8 @@
     "setImage": "/images/products/set-honeycomb-tee-red.jpg",
     "gallery": [
       "/images/products/honeycomb-set-red.jpg"
-    ]
+    ],
+    "setCover": "/images/products/honeycomb-set-red.jpg"
   },
   {
     "id": "honeycomb-shorts-red",
@@ -834,7 +835,8 @@
     "setImage": "/images/products/set-honeycomb-shorts-red.jpg",
     "gallery": [
       "/images/products/honeycomb-set-red.jpg"
-    ]
+    ],
+    "setCover": "/images/products/honeycomb-set-red.jpg"
   },
   {
     "id": "honeycomb-tee-black",
@@ -869,7 +871,8 @@
     "setImage": "/images/products/set-honeycomb-tee-black.jpg",
     "gallery": [
       "/images/products/honeycomb-set-black.jpg"
-    ]
+    ],
+    "setCover": "/images/products/honeycomb-set-black.jpg"
   },
   {
     "id": "honeycomb-shorts-black",
@@ -904,7 +907,8 @@
     "setImage": "/images/products/set-honeycomb-shorts-black.jpg",
     "gallery": [
       "/images/products/honeycomb-set-black.jpg"
-    ]
+    ],
+    "setCover": "/images/products/honeycomb-set-black.jpg"
   },
   {
     "id": "studio-bra-white",
@@ -939,7 +943,8 @@
     "setImage": "/images/products/set-studio-bra-white.jpg",
     "gallery": [
       "/images/products/studio-set-white.jpg"
-    ]
+    ],
+    "setCover": "/images/products/studio-set-white.jpg"
   },
   {
     "id": "studio-shorts-white",
@@ -974,7 +979,8 @@
     "setImage": "/images/products/set-studio-shorts-white.jpg",
     "gallery": [
       "/images/products/studio-set-white.jpg"
-    ]
+    ],
+    "setCover": "/images/products/studio-set-white.jpg"
   },
   {
     "id": "romper-tie-dye",

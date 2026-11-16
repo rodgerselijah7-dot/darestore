@@ -86,6 +86,7 @@ module.exports = async (req, res) => {
     if (old && old.gallery) p.gallery = old.gallery;
     if (old && old.setPrice != null) p.setPrice = old.setPrice;
     if (old && old.setImage) p.setImage = old.setImage;
+    if (old && old.setCover) p.setCover = old.setCover;
     if (isNew) catalog.push(p); else catalog[catalog.indexOf(old)] = p;
     await saveCatalog(catalog);
     return res.status(200).json({ product: p });

@@ -766,10 +766,13 @@ const shortName = p => p.name.split(" ").pop();
 const setFull = ps => ps.reduce((a, p) => a + p.price, 0);
 const setTotal = ps => ps.reduce((a, p) => a + (p.setPrice ?? p.price), 0);
 const setPriceHtml = ps => setTotal(ps) < setFull(ps) ? `<s>${money(setFull(ps))}</s>${money(setTotal(ps))}` : money(setTotal(ps));
+const setVisual = ps => ps[0].setCover
+  ? `<div class="plinth"><img class="photo" src="${esc(ps[0].setCover)}" alt="${esc(setTitle(ps[0].set))}" loading="lazy">`
+  : `<div class="plinth duo">${ps.map(p => `<div class="half">${setPhoto(p)}</div>`).join("")}`;
 const setPhoto = p => `<img class="photo" src="${esc(p.setImage || p.image)}" alt="${esc(p.name)}" loading="lazy">`;
 function setCard(k, ps, i = 0) {
   const gone = ps.every(isGone);
-  return `<a class="work setcard${gone ? " gone" : ""}" href="#/set/${k}" data-set="${k}" style="--i:${i}"><div class="plinth duo">${ps.map(p => `<div class="half">${setPhoto(p)}</div>`).join("")}<span class="tag-badge">Matching set</span></div>
+  return `<a class="work setcard${gone ? " gone" : ""}" href="#/set/${k}" data-set="${k}" style="--i:${i}">${setVisual(ps)}<span class="tag-badge">Matching set</span></div>
     <div class="label"><div class="t">${esc(setTitle(ps[0].set))}</div><div class="m">${esc(ps[0].colorName)}, ${ps.map(p => esc(shortName(p))).join(" + ")}</div><div class="p">${gone ? '<span class="dot" aria-hidden="true"></span>Gone' : setPriceHtml(ps)}</div></div></a>`;
 }
 function wallTiles(list) {
@@ -861,7 +864,7 @@ function setPage(k) {
   if (!ps) return notFound();
   const all = ps.every(isGone);
   return `<div class="piece">
-      <div class="views">${ps.map(p => `<div class="plinth" role="button" tabindex="0" aria-label="Zoom in on the ${esc(p.name)}">${photo(p)}</div>`).join("")}</div>
+      <div class="views">${ps[0].setCover ? `<div class="plinth" role="button" tabindex="0" aria-label="Zoom in on the set"><img class="photo" src="${esc(ps[0].setCover)}" alt="${esc(setTitle(ps[0].set))}"></div>` : ps.map(p => `<div class="plinth" role="button" tabindex="0" aria-label="Zoom in on the ${esc(p.name)}">${photo(p)}</div>`).join("")}</div>
       <div class="placard"><a class="back" href="#" data-back>&larr; All pieces</a>
         <p class="pchip">Matching set</p>
         <h1>${esc(setTitle(ps[0].set))}</h1>
