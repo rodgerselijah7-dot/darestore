@@ -87,7 +87,7 @@ img,svg{max-width:100%;display:block}
 .hero-feat .p{margin-top:2px;font-size:12px;font-weight:600;color:var(--grey)}
 .hero-feat.hero-set{flex:0 0 clamp(300px,34vw,440px)}
 .hero-feat.hero-set .plinth{aspect-ratio:5/4;padding:0 3%;gap:2%}
-.hero-feat.hero-set .plinth img.photo{max-height:90%}
+.hero-feat.hero-set .plinth img.photo{max-height:none}
 .hero-feat.hero-set .t{font-size:15px}.hero-feat.hero-set .p{font-size:14px}
 @media (max-width:760px){.hero{flex-direction:column;align-items:stretch}.hero-copy{flex:none}.hero-feat{flex:none;max-width:180px}.hero-feat.hero-set{max-width:none;width:100%}}
 
@@ -141,9 +141,9 @@ img,svg{max-width:100%;display:block}
 .label .p{margin-top:6px;color:var(--ink);font-weight:700}
 .ref{font-size:11px;color:#B5B5B2;letter-spacing:.04em;margin-top:2px}
 .low{position:absolute;top:10px;left:10px;background:var(--wall);border:1px solid var(--dot);color:var(--dot);font-size:11px;padding:3px 8px;border-radius:999px}
-.plinth.duo{background:#fff;display:flex;align-items:center;justify-content:center;gap:4%;padding:0 5%}
+.plinth.duo{background:#fff;display:flex;align-items:center;justify-content:center;gap:2%;padding:0 3%}
 .plinth.duo .half{flex:1 1 0;min-width:0;height:100%;display:flex;align-items:center;justify-content:center}
-.plinth.duo img.photo{width:100%;height:auto;max-height:72%;object-fit:contain}
+.plinth.duo img.photo{width:100%;height:auto;aspect-ratio:1/1;max-height:none;object-fit:contain}
 .price s,.label .p s,.setpart s,.hero-feat .p s{color:var(--grey);font-weight:400;margin-right:6px}
 .item .lp s{display:block;color:var(--grey);font-size:12px}
 .item .lp .sub{display:block;margin:2px 0 0;font-size:11px}
