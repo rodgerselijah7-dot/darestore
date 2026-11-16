@@ -40,15 +40,6 @@ img,svg{max-width:100%;display:block}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--dot);vertical-align:1px;margin-right:7px}
 
-/* falling background silhouette: fixed behind everything, position driven by scroll (see boot script) */
-.bg-fall{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;display:flex;justify-content:center}
-.bg-fall img{position:absolute;left:50%;top:0;height:54vh;width:auto;transform:translate(-50%,-100%);opacity:.07}
-@media (max-width:640px){.bg-fall img{height:40vh}}
-@media (prefers-reduced-motion:reduce){.bg-fall img{top:50%;transform:translate(-50%,-50%) !important}}
-body[data-page="home"] .bg-fall img,body[data-page="about"] .bg-fall img{opacity:.13}
-body[data-page="shop"] .bg-fall img{opacity:.04}
-body[data-page="product"] .bg-fall{display:none}
-
 /* header */
 .hdr{position:sticky;top:0;z-index:30;background:rgba(0,0,0,.97);color:var(--wall);display:flex;justify-content:space-between;align-items:center;gap:24px;padding:18px var(--pad)}
 .name{text-decoration:none;color:var(--wall);font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.01em;text-transform:uppercase}
@@ -395,7 +386,6 @@ footer .check a{color:rgba(255,255,255,.75)}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="bg-fall" aria-hidden="true"><img id="fallImg" src="/images/silhouette.png" alt=""></div>
 
 <header class="hdr">
   <a class="name" href="#/" aria-label="DARE home">DARE</a>
@@ -1357,27 +1347,9 @@ if (matchMedia("(hover:hover) and (pointer:fine)").matches && !matchMedia("(pref
 }
 
 /* ---------- boot ---------- */
-/* ---------- falling background: position driven by scroll, loops continuously, reversible ---------- */
-function initFall() {
-  const img = $("#fallImg");
-  if (!img || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  let raf = 0;
-  const update = () => {
-    raf = 0;
-    const vh = innerHeight, ih = img.offsetHeight || vh * 0.54;
-    const span = vh + ih;
-    const y = ((scrollY * 0.5) % span + span) % span - ih; // -ih (just above) to vh (just below), loops with scroll
-    rot += (target - rot) * 0.18; if (Math.abs(target - rot) < 0.5) rot = target; img.style.transform = `translate(-50%, ${y}px) rotate(${rot}deg)`; if (rot !== target) raf = requestAnimationFrame(update);
-  };
-  let lastY = scrollY, rot = 0, target = 0, down = true, acc = 0; addEventListener("scroll", () => { const d = scrollY - lastY; lastY = scrollY; if (Math.abs(d) < 400) { acc = (d > 0) === (acc > 0) ? acc + d : d; if (down && acc < -12) { down = false; target += 180; } else if (!down && acc > 12) { down = true; target += 180; } } if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
-  addEventListener("resize", () => { if (!raf) raf = requestAnimationFrame(update); });
-  update();
-}
-
 (async function boot() {
   $("#copy").textContent = `© ${new Date().getFullYear()} ${CONFIG.brand}. Desired Ambitions Requires Execution.`;
   $("#igLink").href = CONFIG.instagram; $("#ytLink").href = CONFIG.youtube;
-  initFall();
   if (!HASH && location.hash.startsWith("#/")) history.replaceState(null, "", location.hash.slice(1)); // old #/ links
   fixLinks(document);
   loadAnalytics();
