@@ -380,7 +380,10 @@
       "Relaxed fit",
       "Printed chest logo"
     ],
-    "badge": "New"
+    "badge": "New",
+    "gallery": [
+      "/images/products/dare-mini-collection.jpg"
+    ]
   },
   {
     "id": "tee-d-grey",
@@ -409,7 +412,10 @@
       "Relaxed fit",
       "Printed chest logo"
     ],
-    "badge": "New"
+    "badge": "New",
+    "gallery": [
+      "/images/products/dare-mini-collection.jpg"
+    ]
   },
   {
     "id": "tee-d-brown",
@@ -438,7 +444,10 @@
       "Relaxed fit",
       "Printed chest logo"
     ],
-    "badge": "New"
+    "badge": "New",
+    "gallery": [
+      "/images/products/dare-mini-collection.jpg"
+    ]
   },
   {
     "id": "tee-d-navy",
@@ -467,7 +476,10 @@
       "Relaxed fit",
       "Printed chest logo"
     ],
-    "badge": "New"
+    "badge": "New",
+    "gallery": [
+      "/images/products/dare-mini-collection.jpg"
+    ]
   },
   {
     "id": "tee-777",
@@ -755,6 +767,146 @@
     ]
   },
   {
+    "id": "honeycomb-tee-red",
+    "name": "Honeycomb Crop Tee",
+    "category": "tops",
+    "price": 30,
+    "colorName": "Red",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/honeycomb-tee-red.jpg",
+    "description": "Cropped short-sleeve tee in red honeycomb-textured stretch knit, with a side tie at the hem. Pairs with the matching Honeycomb Shorts.",
+    "details": [
+      "Honeycomb-textured stretch knit",
+      "Cropped, fitted cut",
+      "Side tie at the hem"
+    ],
+    "badge": "Matching set",
+    "set": "honeycomb",
+    "setPrice": 25,
+    "setImage": "/images/products/set-honeycomb-tee-red.jpg",
+    "gallery": [
+      "/images/products/honeycomb-set-red.jpg"
+    ]
+  },
+  {
+    "id": "honeycomb-shorts-red",
+    "name": "Honeycomb Shorts",
+    "category": "bottoms",
+    "price": 30,
+    "colorName": "Red",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/honeycomb-shorts-red.jpg",
+    "description": "High-rise shorts in the same red honeycomb-textured knit as the Honeycomb Crop Tee, cut to wear as a set.",
+    "details": [
+      "Honeycomb-textured stretch knit",
+      "High-rise waistband",
+      "Fitted cut"
+    ],
+    "badge": "Matching set",
+    "set": "honeycomb",
+    "setPrice": 25,
+    "setImage": "/images/products/set-honeycomb-shorts-red.jpg",
+    "gallery": [
+      "/images/products/honeycomb-set-red.jpg"
+    ]
+  },
+  {
+    "id": "honeycomb-tee-black",
+    "name": "Honeycomb Crop Tee",
+    "category": "tops",
+    "price": 30,
+    "colorName": "Black",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/honeycomb-tee-black.jpg",
+    "description": "Cropped short-sleeve tee in black honeycomb-textured stretch knit, with a side tie at the hem. Pairs with the matching Honeycomb Shorts.",
+    "details": [
+      "Honeycomb-textured stretch knit",
+      "Cropped, fitted cut",
+      "Side tie at the hem"
+    ],
+    "badge": "Matching set",
+    "set": "honeycomb",
+    "setPrice": 25,
+    "setImage": "/images/products/set-honeycomb-tee-black.jpg",
+    "gallery": [
+      "/images/products/honeycomb-set-black.jpg"
+    ]
+  },
+  {
+    "id": "honeycomb-shorts-black",
+    "name": "Honeycomb Shorts",
+    "category": "bottoms",
+    "price": 30,
+    "colorName": "Black",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/honeycomb-shorts-black.jpg",
+    "description": "High-rise shorts in the same black honeycomb-textured knit as the Honeycomb Crop Tee, cut to wear as a set.",
+    "details": [
+      "Honeycomb-textured stretch knit",
+      "High-rise waistband",
+      "Fitted cut"
+    ],
+    "badge": "Matching set",
+    "set": "honeycomb",
+    "setPrice": 25,
+    "setImage": "/images/products/set-honeycomb-shorts-black.jpg",
+    "gallery": [
+      "/images/products/honeycomb-set-black.jpg"
+    ]
+  },
+  {
     "id": "studio-bra-white",
     "name": "Studio Sports Bra",
     "category": "tops",
@@ -882,6 +1034,35 @@
     ]
   },
   {
+    "id": "skirt-plaid-red",
+    "name": "Plaid Pleated Skirt",
+    "category": "bottoms",
+    "price": 38,
+    "colorName": "Red Plaid",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/skirt-plaid-red.jpg",
+    "description": "Red and white plaid skirt, knife-pleated all the way around from a smooth high waistband.",
+    "details": [
+      "Stretch woven",
+      "Knife pleats",
+      "High-rise waistband"
+    ],
+    "badge": "New"
+  },
+  {
     "id": "shorts-denim-black",
     "name": "Signature Denim Shorts",
     "category": "bottoms",
@@ -908,6 +1089,35 @@
       "Five-pocket construction",
       "Button and zip fly"
     ]
+  },
+  {
+    "id": "shorts-ripped-denim-black",
+    "name": "Ripped Denim Shorts",
+    "category": "bottoms",
+    "price": 58,
+    "colorName": "Black",
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "stock": {
+      "30": 15,
+      "32": 25,
+      "34": 25,
+      "36": 20,
+      "38": 15
+    },
+    "image": "/images/products/shorts-ripped-denim-black.jpg",
+    "description": "Black denim shorts with heavy ripped-and-repaired panels down both legs, cut long at the knee.",
+    "details": [
+      "Cotton stretch denim",
+      "Distressed front panels",
+      "Five-pocket construction"
+    ],
+    "badge": "New"
   },
   {
     "id": "shorts-reconstructed-denim",
