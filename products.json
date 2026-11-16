@@ -1127,34 +1127,6 @@
     "badge": "New"
   },
   {
-    "id": "shorts-reconstructed-denim",
-    "name": "Reconstructed Denim Shorts",
-    "category": "bottoms",
-    "price": 65,
-    "colorName": "Washed Grey",
-    "sizes": [
-      "30",
-      "32",
-      "34",
-      "36",
-      "38"
-    ],
-    "stock": {
-      "30": 10,
-      "32": 18,
-      "34": 18,
-      "36": 15,
-      "38": 10
-    },
-    "image": "/images/products/shorts-reconstructed-denim.jpg",
-    "description": "Washed denim shorts torn and patched with color at the seams — no two repairs the same. The DARE crest stamped at the hem.",
-    "details": [
-      "Cotton denim",
-      "Hand-distressed, one-of-one repairs",
-      "Five-pocket construction"
-    ]
-  },
-  {
     "id": "signature-shorts-blue",
     "name": "Signature Shorts",
     "category": "bottoms",
@@ -1173,6 +1145,33 @@
       "XL": 20
     },
     "image": "/images/products/signature-shorts-blue.jpg",
+    "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
+    "details": [
+      "Lightweight nylon shell",
+      "Elastic drawstring waist",
+      "Mesh lining",
+      "Printed DARE crest"
+    ]
+  },
+  {
+    "id": "signature-shorts-pink",
+    "name": "Signature Shorts",
+    "category": "bottoms",
+    "price": 40,
+    "colorName": "Pink",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 30,
+      "L": 30,
+      "XL": 20
+    },
+    "image": "/images/products/signature-shorts-pink.jpg",
     "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
     "details": [
       "Lightweight nylon shell",
@@ -1238,30 +1237,31 @@
     ]
   },
   {
-    "id": "signature-shorts-pink",
-    "name": "Signature Shorts",
+    "id": "shorts-reconstructed-denim",
+    "name": "Reconstructed Denim Shorts",
     "category": "bottoms",
-    "price": 40,
-    "colorName": "Pink",
+    "price": 65,
+    "colorName": "Washed Grey",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
     ],
     "stock": {
-      "S": 20,
-      "M": 30,
-      "L": 30,
-      "XL": 20
+      "30": 10,
+      "32": 18,
+      "34": 18,
+      "36": 15,
+      "38": 10
     },
-    "image": "/images/products/signature-shorts-pink.jpg",
-    "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
+    "image": "/images/products/shorts-reconstructed-denim.jpg",
+    "description": "Washed denim shorts torn and patched with color at the seams — no two repairs the same. The DARE crest stamped at the hem.",
     "details": [
-      "Lightweight nylon shell",
-      "Elastic drawstring waist",
-      "Mesh lining",
-      "Printed DARE crest"
+      "Cotton denim",
+      "Hand-distressed, one-of-one repairs",
+      "Five-pocket construction"
     ]
   },
   {
