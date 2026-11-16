@@ -66,6 +66,7 @@ nav button{white-space:nowrap}
 .icon{min-width:36px;min-height:36px;border:1px solid var(--hair);background:#fff;cursor:pointer;padding:0 10px}
 .icon:hover{border-color:var(--ink)}
 .icon[disabled]{opacity:.3;cursor:default}
+.tag.gone{color:#d7261e;border-color:#d7261e}
 .tag{display:inline-block;font-size:11px;padding:1px 7px;border:1px solid var(--hair);margin-left:6px;vertical-align:1px;color:var(--grey)}
 @media (max-width:640px){.prow{grid-template-columns:56px 1fr}.pacts{grid-column:1/-1;justify-content:flex-start}}
 .ed{max-width:760px}
@@ -210,12 +211,13 @@ function products() {
       <button class="btn quiet" id="backupP">Download backup</button></div>
     ${list.length ? `<div class="plist">${list.map((p, i) => `<div class="prow ${p.hidden ? "off" : ""}">
       <img class="thumb" src="${esc(p.image)}" alt="" loading="lazy">
-      <div class="pmeta"><b>${esc(p.name)}${p.hidden ? '<span class="tag">Hidden</span>' : ""}${p.badge ? `<span class="tag">${esc(p.badge)}</span>` : ""}</b>
+      <div class="pmeta"><b>${esc(p.name)}${p.soldOut ? '<span class="tag gone">● Gone</span>' : ""}${p.hidden ? '<span class="tag">Hidden</span>' : ""}${p.badge ? `<span class="tag">${esc(p.badge)}</span>` : ""}</b>
         <span>${esc(p.colorName)} · ${esc(CAT_LABEL[p.category] || p.category)} · ${money(p.price).replace(".00", "")} · ${availOf(p)} available</span></div>
       <div class="pacts">
         <button class="icon" data-mv="${esc(p.id)}|top" ${i ? "" : "disabled"} aria-label="Move ${esc(p.name)} to the top">Top</button>
         <button class="icon" data-mv="${esc(p.id)}|up" ${i ? "" : "disabled"} aria-label="Move ${esc(p.name)} up">↑</button>
         <button class="icon" data-mv="${esc(p.id)}|down" ${i < list.length - 1 ? "" : "disabled"} aria-label="Move ${esc(p.name)} down">↓</button>
+        <button class="icon" data-gone="${esc(p.id)}">${p.soldOut ? "In stock" : "Gone"}</button>
         <button class="icon" data-hide="${esc(p.id)}">${p.hidden ? "Show" : "Hide"}</button>
         <button class="btn quiet" data-edit="${esc(p.id)}">Edit</button></div></div>`).join("")}</div>`
       : `<p class="sub">No products yet. Add your first one.</p>`}`;
@@ -227,6 +229,10 @@ function bindProducts() {
   $("#addP").onclick = () => openEditor(null);
   document.querySelectorAll("[data-edit]").forEach(b => b.onclick = () => openEditor(b.dataset.edit));
   document.querySelectorAll("[data-mv]").forEach(b => b.onclick = () => { const [id, dir] = b.dataset.mv.split("|"); b.disabled = true; productAction(dir === "top" ? { action: "moveProduct", id, to: "top" } : { action: "moveProduct", id, dir }, dir === "top" ? "Moved to the top. It's now the first piece in the shop." : "Order saved."); });
+  document.querySelectorAll("[data-gone]").forEach(b => b.onclick = () => {
+    const p = DATA.products.find(x => x.id === b.dataset.gone);
+    productAction({ action: "soldOutProduct", id: p.id, soldOut: !p.soldOut }, p.soldOut ? `${p.name} (${p.colorName}) is back in stock.` : `${p.name} (${p.colorName}) is marked Gone.`);
+  });
   document.querySelectorAll("[data-hide]").forEach(b => b.onclick = () => {
     const p = DATA.products.find(x => x.id === b.dataset.hide); b.disabled = true;
     productAction({ action: "hideProduct", id: p.id, hidden: !p.hidden }, p.hidden ? `${p.name} is back in the shop.` : `${p.name} is hidden from the shop.`);
@@ -244,8 +250,8 @@ function bindProducts() {
 function openEditor(id) {
   const p = id ? DATA.products.find(x => x.id === id) : null;
   ED = { id, dirty: false, startStock: {}, f: p
-    ? { name: p.name, colorName: p.colorName, category: p.category, price: String(p.price), badge: p.badge || "", sizes: [...p.sizes], image: p.image, imageBack: p.imageBack || "", description: p.description, details: (p.details || []).join("\n"), hidden: !!p.hidden }
-    : { name: "", colorName: "", category: "tops", price: "", badge: "", sizes: ["S", "M", "L", "XL"], image: "", imageBack: "", description: "", details: "", hidden: false } };
+    ? { name: p.name, colorName: p.colorName, category: p.category, price: String(p.price), badge: p.badge || "", sizes: [...p.sizes], image: p.image, imageBack: p.imageBack || "", description: p.description, details: (p.details || []).join("\n"), hidden: !!p.hidden, soldOut: !!p.soldOut }
+    : { name: "", colorName: "", category: "tops", price: "", badge: "", sizes: ["S", "M", "L", "XL"], image: "", imageBack: "", description: "", details: "", hidden: false, soldOut: false } };
   draw(); scrollTo(0, 0);
 }
 function editor() {
@@ -275,6 +281,7 @@ function editor() {
     <div class="sec"><h2>DESCRIPTION</h2>
       <label class="f"><span>Description</span><textarea class="field" data-pf="description" maxlength="600" placeholder="What it is and what makes it yours.">${esc(f.description)}</textarea></label>
       <label class="f"><span>Details <small>one per line, up to 8. The first line shows as Material.</small></span><textarea class="field" data-pf="details" placeholder="Heavyweight cotton&#10;Oversized fit&#10;Screen-printed graphic">${esc(f.details)}</textarea></label></div>
+    <div class="sec"><label class="check"><input type="checkbox" data-pf="soldOut" ${f.soldOut ? "checked" : ""}><span>Mark as gone (sold out)<br><small style="color:var(--grey)">The shop shows the red Gone marker and nobody can buy it, whatever the stock numbers say. Uncheck when it's back.</small></span></label></div>
     <div class="sec"><label class="check"><input type="checkbox" data-pf="hidden" ${f.hidden ? "checked" : ""}><span>Hide from the shop<br><small style="color:var(--grey)">Hidden pieces can't be seen or bought. Use this for drafts and retired pieces.</small></span></label></div>
     <div class="save"><button class="btn" id="saveP">${old ? "Save changes" : "Add product"}</button><button class="btn quiet" id="cancelP">Cancel</button>
       ${old ? `<button class="danger" id="delP">Delete product</button>` : ""}<div class="err" id="perr"></div></div></div>`;

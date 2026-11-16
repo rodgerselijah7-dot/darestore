@@ -91,11 +91,12 @@ module.exports = async (req, res) => {
     await saveCatalog(catalog);
     return res.status(200).json({ product: p });
   }
-  if (b.action === "hideProduct" || b.action === "deleteProduct" || b.action === "moveProduct") {
+  if (b.action === "hideProduct" || b.action === "soldOutProduct" || b.action === "deleteProduct" || b.action === "moveProduct") {
     const catalog = (await getCatalog({ all: true })).map(p => ({ ...p }));
     const i = catalog.findIndex(p => p.id === b.id);
     if (i < 0) return res.status(404).json({ error: "That product no longer exists. Refresh and try again." });
     if (b.action === "hideProduct") { if (b.hidden) catalog[i].hidden = true; else delete catalog[i].hidden; }
+    if (b.action === "soldOutProduct") { if (b.soldOut) catalog[i].soldOut = true; else delete catalog[i].soldOut; }
     if (b.action === "deleteProduct") catalog.splice(i, 1);
     if (b.action === "moveProduct") {
       const j = b.to === "top" ? 0 : i + (b.dir === "up" ? -1 : 1);
@@ -141,5 +142,6 @@ function clean(x) {
   p.details = details;
   if (badge) p.badge = badge;
   if (x.hidden) p.hidden = true;
+  if (x.soldOut) p.soldOut = true;
   return { product: p };
 }
