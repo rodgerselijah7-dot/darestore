@@ -776,7 +776,7 @@ function setCard(k, ps, i = 0) {
   return `<a class="work setcard${gone ? " gone" : ""}" href="#/set/${k}" data-set="${k}" style="--i:${i}">${setVisual(ps)}<span class="tag-badge">Matching set</span></div>
     <div class="label"><div class="t">${esc(setTitle(ps[0].set))}</div><div class="m">${esc(ps[0].colorName)}, ${ps.map(p => esc(shortName(p))).join(" + ")}</div><div class="p">${gone ? '<span class="dot" aria-hidden="true"></span>Gone' : setPriceHtml(ps)}</div></div></a>`;
 }
-function wallTiles(list) {
+function wallTiles(list, cat = "all") {
   const groups = setGroups(), done = new Set(), sets = [], rest = [];
   for (const p of list) {
     const k = setKeyFor(p);
@@ -794,7 +794,26 @@ function wallTiles(list) {
     if (pairs.length && (s === 0 || s === 4 || !singles.length)) order.push(...pairs.shift());
     else order.push(singles.shift());
   }
-  return [...order.map((k, i) => setCard(k, groups[k], i)), ...rest.map((p, i) => work(p, order.length + i))];
+  return [...order.map((k, i) => setCard(k, groups[k], i)), ...(cat === "all" ? rest : pairUp(rest, order.length)).map((p, i) => work(p, order.length + i))];
+}
+/* Category pages: the same piece in two colours (or two pieces marked with the same "pair")
+   lands on one row, both two-across and three-across, by pulling a single piece forward when needed. */
+function pairUp(list, start) {
+  const key = p => p.pair || p.name, units = [];
+  for (let i = 0; i < list.length; i++) {
+    if (i + 1 < list.length && key(list[i]) === key(list[i + 1]) && !(i + 2 < list.length && key(list[i + 2]) === key(list[i]))) { units.push([list[i], list[i + 1]]); i++; }
+    else units.push([list[i]]);
+  }
+  const out = [];
+  while (units.length) {
+    const s = (start + out.length) % 6;
+    if (units[0].length === 2 && s !== 0 && s !== 4) {
+      const j = units.findIndex(u => u.length === 1);
+      if (j > 0) { out.push(...units.splice(j, 1)[0]); continue; }
+    }
+    out.push(...units.shift());
+  }
+  return out;
 }
 let SHOP_LIST = [], FIRST = true;
 function shop(cat = "all") {
@@ -802,7 +821,7 @@ function shop(cat = "all") {
   SHOP_LIST = list;
   const gridIcon = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="1" y="1" width="6" height="6" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="1" width="6" height="6" stroke="currentColor" stroke-width="1.4"/><rect x="1" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.4"/></svg>`;
   const oneIcon = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="1" width="10" height="14" stroke="currentColor" stroke-width="1.4"/></svg>`;
-  const tiles = wallTiles(list);
+  const tiles = wallTiles(list, cat);
   if (cat === "all" && tiles.length >= 6) tiles.splice(6, 0, `<div class="interrupt" aria-hidden="true"><p>Most people stop at <span>desired</span>.</p></div>`);
   if (cat === "all" && tiles.length >= 12) {
     const feat = featuredPiece();

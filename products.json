@@ -441,7 +441,8 @@
       "Hand-bleached, one-of-one wash",
       "Glitter print"
     ],
-    "imageBack": "/images/products/hoodie-1454-bleached-back.jpg"
+    "imageBack": "/images/products/hoodie-1454-bleached-back.jpg",
+    "pair": "1454-crewneck"
   },
   {
     "id": "crewneck-desired-ambitions",
@@ -469,7 +470,8 @@
       "Cotton fleece",
       "Ribbed cuffs and hem",
       "Screen-printed chest graphic"
-    ]
+    ],
+    "pair": "1454-crewneck"
   },
   {
     "id": "hoodie-777",
@@ -1234,7 +1236,8 @@
       "Cotton twill",
       "Five-pocket construction",
       "Printed graphics, both legs"
-    ]
+    ],
+    "pair": "camo-shorts"
   },
   {
     "id": "shorts-camo-d",
@@ -1262,7 +1265,8 @@
       "Cotton twill",
       "Five-pocket construction",
       "Printed graphic"
-    ]
+    ],
+    "pair": "camo-shorts"
   },
   {
     "id": "shorts-redemption-red",
