@@ -1,199 +1,5 @@
 [
   {
-    "id": "moto-hoodie-black",
-    "name": "Moto Zip Hoodie",
-    "category": "hoodies",
-    "price": 70,
-    "colorName": "Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 15,
-      "M": 25,
-      "L": 25,
-      "XL": 20,
-      "2XL": 10
-    },
-    "image": "/images/products/moto-hoodie-black.jpg",
-    "description": "Full-zip black hoodie with stitched moto ribbing across the shoulders and elbows. Pairs with the matching Moto Joggers.",
-    "details": [
-      "Cotton fleece",
-      "Full zip, drawstring hood",
-      "Stitched rib panels at shoulders and elbows",
-      "Kangaroo pocket",
-      "Ribbed cuffs"
-    ],
-    "badge": "Matching set",
-    "set": "moto",
-    "setPrice": 56,
-    "setImage": "/images/products/set-moto-hoodie-black.jpg"
-  },
-  {
-    "id": "moto-joggers-black",
-    "name": "Moto Joggers",
-    "category": "bottoms",
-    "price": 55,
-    "colorName": "Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 15,
-      "M": 25,
-      "L": 25,
-      "XL": 20,
-      "2XL": 10
-    },
-    "image": "/images/products/moto-joggers-black.jpg",
-    "description": "Black joggers with the same stitched moto ribbing at the knees and hips as the Moto Zip Hoodie, cut to wear as a set.",
-    "details": [
-      "Cotton fleece",
-      "Elastic drawstring waist",
-      "Stitched rib panels at knees and hips",
-      "Ribbed ankle cuffs"
-    ],
-    "badge": "Matching set",
-    "set": "moto",
-    "setPrice": 44,
-    "setImage": "/images/products/set-moto-joggers-black.jpg"
-  },
-  {
-    "id": "hoodie-777",
-    "name": "777 Hoodie",
-    "category": "hoodies",
-    "price": 85,
-    "colorName": "Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 15,
-      "M": 25,
-      "L": 25,
-      "XL": 20,
-      "2XL": 10
-    },
-    "image": "/images/products/hoodie-777-front.jpg",
-    "imageBack": "/images/products/hoodie-777-back.jpg",
-    "description": "Hoodie version of the 777 — white on the chest, a column of 777s running color to color down the back beneath a dagger on the hood.",
-    "details": [
-      "Cotton fleece",
-      "Oversized fit",
-      "Screen-printed graphic, front and back"
-    ]
-  },
-  {
-    "id": "beanie-sparkle-mauve",
-    "name": "Sparkle Beanie",
-    "category": "accessories",
-    "price": 30,
-    "colorName": "Mauve",
-    "sizes": [
-      "OS"
-    ],
-    "stock": {
-      "OS": 40
-    },
-    "image": "/images/products/beanie-sparkle-mauve.jpg",
-    "description": "Knit beanie fading into rhinestones at the crown, Dare signed on the cuff.",
-    "details": [
-      "Acrylic knit",
-      "Rhinestone embellishment",
-      "Embroidered cuff"
-    ],
-    "soldOut": true
-  },
-  {
-    "id": "ski-mask-dare-black",
-    "name": "D.A.R.E Ski Mask",
-    "category": "accessories",
-    "price": 25,
-    "colorName": "Black",
-    "sizes": [
-      "OS"
-    ],
-    "stock": {
-      "OS": 40
-    },
-    "image": "/images/products/ski-mask-dare-black.jpg",
-    "description": "Ski mask with D.A.R.E lettered in neon at the back.",
-    "details": [
-      "Stretch knit",
-      "Full-face coverage",
-      "Printed graphic"
-    ]
-  },
-  {
-    "id": "hoodie-1454-bleached",
-    "name": "1454 Hoodie",
-    "category": "hoodies",
-    "price": 90,
-    "colorName": "Bleached Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 10,
-      "M": 20,
-      "L": 20,
-      "XL": 15,
-      "2XL": 8
-    },
-    "image": "/images/products/hoodie-1454-bleached.jpg",
-    "description": "Hand-bleached hoodie — no two come out the same. A small glitter 1454 mark sits at the chest, Dontae Amare Rare Edition lettered small on the back.",
-    "details": [
-      "Cotton fleece",
-      "Hand-bleached, one-of-one wash",
-      "Glitter print"
-    ],
-    "imageBack": "/images/products/hoodie-1454-bleached-back.jpg"
-  },
-  {
-    "id": "crewneck-desired-ambitions",
-    "name": "Desired Ambitions Crewneck",
-    "category": "hoodies",
-    "price": 65,
-    "colorName": "Black",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "stock": {
-      "S": 15,
-      "M": 25,
-      "L": 25,
-      "XL": 20,
-      "2XL": 10
-    },
-    "image": "/images/products/crewneck-desired-ambitions.jpg",
-    "description": "Heavyweight crewneck with the whole mission spelled out on the chest: Desired Ambitions Requires Execution.",
-    "details": [
-      "Cotton fleece",
-      "Ribbed cuffs and hem",
-      "Screen-printed chest graphic"
-    ]
-  },
-  {
     "id": "track-jacket-black",
     "name": "Track Jacket",
     "category": "hoodies",
@@ -324,6 +130,416 @@
     "set": "track",
     "setPrice": 26,
     "setImage": "/images/products/set-track-shorts-rust.jpg"
+  },
+  {
+    "id": "moto-hoodie-black",
+    "name": "Moto Zip Hoodie",
+    "category": "hoodies",
+    "price": 70,
+    "colorName": "Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 15,
+      "M": 25,
+      "L": 25,
+      "XL": 20,
+      "2XL": 10
+    },
+    "image": "/images/products/moto-hoodie-black.jpg",
+    "description": "Full-zip black hoodie with stitched moto ribbing across the shoulders and elbows. Pairs with the matching Moto Joggers.",
+    "details": [
+      "Cotton fleece",
+      "Full zip, drawstring hood",
+      "Stitched rib panels at shoulders and elbows",
+      "Kangaroo pocket",
+      "Ribbed cuffs"
+    ],
+    "badge": "Matching set",
+    "set": "moto",
+    "setPrice": 56,
+    "setImage": "/images/products/set-moto-hoodie-black.jpg"
+  },
+  {
+    "id": "moto-joggers-black",
+    "name": "Moto Joggers",
+    "category": "bottoms",
+    "price": 55,
+    "colorName": "Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 15,
+      "M": 25,
+      "L": 25,
+      "XL": 20,
+      "2XL": 10
+    },
+    "image": "/images/products/moto-joggers-black.jpg",
+    "description": "Black joggers with the same stitched moto ribbing at the knees and hips as the Moto Zip Hoodie, cut to wear as a set.",
+    "details": [
+      "Cotton fleece",
+      "Elastic drawstring waist",
+      "Stitched rib panels at knees and hips",
+      "Ribbed ankle cuffs"
+    ],
+    "badge": "Matching set",
+    "set": "moto",
+    "setPrice": 44,
+    "setImage": "/images/products/set-moto-joggers-black.jpg"
+  },
+  {
+    "id": "studio-bra-white",
+    "name": "Studio Sports Bra",
+    "category": "tops",
+    "price": 35,
+    "colorName": "White",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/studio-bra-white.jpg",
+    "description": "White racerback sports bra with a keyhole cutout at the back and a wide band at the hem. Pairs with the matching Studio Shorts.",
+    "details": [
+      "Smooth stretch knit",
+      "Racerback with keyhole cutout",
+      "Wide elastic underband"
+    ],
+    "badge": "Matching set",
+    "set": "studio",
+    "setPrice": 30,
+    "setImage": "/images/products/set-studio-bra-white.jpg",
+    "gallery": [
+      "/images/products/studio-set-white.jpg"
+    ],
+    "setCover": "/images/products/studio-set-white.jpg"
+  },
+  {
+    "id": "studio-shorts-white",
+    "name": "Studio Shorts",
+    "category": "bottoms",
+    "price": 35,
+    "colorName": "White",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/studio-shorts-white.jpg",
+    "description": "High-rise white shorts with a V-seam waistband and side pockets, cut to wear with the Studio Sports Bra.",
+    "details": [
+      "Smooth stretch knit",
+      "High-rise V-seam waistband",
+      "Side pockets"
+    ],
+    "badge": "Matching set",
+    "set": "studio",
+    "setPrice": 30,
+    "setImage": "/images/products/set-studio-shorts-white.jpg",
+    "gallery": [
+      "/images/products/studio-set-white.jpg"
+    ],
+    "setCover": "/images/products/studio-set-white.jpg"
+  },
+  {
+    "id": "honeycomb-tee-red",
+    "name": "Honeycomb Crop Tee",
+    "category": "tops",
+    "price": 30,
+    "colorName": "Red",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/honeycomb-tee-red.jpg",
+    "description": "Cropped short-sleeve tee in red honeycomb-textured stretch knit, with a side tie at the hem. Pairs with the matching Honeycomb Shorts.",
+    "details": [
+      "Honeycomb-textured stretch knit",
+      "Cropped, fitted cut",
+      "Side tie at the hem"
+    ],
+    "badge": "Matching set",
+    "set": "honeycomb",
+    "setPrice": 25,
+    "setImage": "/images/products/set-honeycomb-tee-red.jpg",
+    "gallery": [
+      "/images/products/honeycomb-set-red.jpg"
+    ],
+    "setCover": "/images/products/honeycomb-set-red.jpg"
+  },
+  {
+    "id": "honeycomb-shorts-red",
+    "name": "Honeycomb Shorts",
+    "category": "bottoms",
+    "price": 30,
+    "colorName": "Red",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/honeycomb-shorts-red.jpg",
+    "description": "High-rise shorts in the same red honeycomb-textured knit as the Honeycomb Crop Tee, cut to wear as a set.",
+    "details": [
+      "Honeycomb-textured stretch knit",
+      "High-rise waistband",
+      "Fitted cut"
+    ],
+    "badge": "Matching set",
+    "set": "honeycomb",
+    "setPrice": 25,
+    "setImage": "/images/products/set-honeycomb-shorts-red.jpg",
+    "gallery": [
+      "/images/products/honeycomb-set-red.jpg"
+    ],
+    "setCover": "/images/products/honeycomb-set-red.jpg"
+  },
+  {
+    "id": "honeycomb-tee-black",
+    "name": "Honeycomb Crop Tee",
+    "category": "tops",
+    "price": 30,
+    "colorName": "Black",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/honeycomb-tee-black.jpg",
+    "description": "Cropped short-sleeve tee in black honeycomb-textured stretch knit, with a side tie at the hem. Pairs with the matching Honeycomb Shorts.",
+    "details": [
+      "Honeycomb-textured stretch knit",
+      "Cropped, fitted cut",
+      "Side tie at the hem"
+    ],
+    "badge": "Matching set",
+    "set": "honeycomb",
+    "setPrice": 25,
+    "setImage": "/images/products/set-honeycomb-tee-black.jpg",
+    "gallery": [
+      "/images/products/honeycomb-set-black.jpg"
+    ],
+    "setCover": "/images/products/honeycomb-set-black.jpg"
+  },
+  {
+    "id": "honeycomb-shorts-black",
+    "name": "Honeycomb Shorts",
+    "category": "bottoms",
+    "price": 30,
+    "colorName": "Black",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "XS": 10,
+      "S": 20,
+      "M": 25,
+      "L": 20,
+      "XL": 10
+    },
+    "image": "/images/products/honeycomb-shorts-black.jpg",
+    "description": "High-rise shorts in the same black honeycomb-textured knit as the Honeycomb Crop Tee, cut to wear as a set.",
+    "details": [
+      "Honeycomb-textured stretch knit",
+      "High-rise waistband",
+      "Fitted cut"
+    ],
+    "badge": "Matching set",
+    "set": "honeycomb",
+    "setPrice": 25,
+    "setImage": "/images/products/set-honeycomb-shorts-black.jpg",
+    "gallery": [
+      "/images/products/honeycomb-set-black.jpg"
+    ],
+    "setCover": "/images/products/honeycomb-set-black.jpg"
+  },
+  {
+    "id": "hoodie-1454-bleached",
+    "name": "1454 Hoodie",
+    "category": "hoodies",
+    "price": 90,
+    "colorName": "Bleached Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 10,
+      "M": 20,
+      "L": 20,
+      "XL": 15,
+      "2XL": 8
+    },
+    "image": "/images/products/hoodie-1454-bleached.jpg",
+    "description": "Hand-bleached hoodie — no two come out the same. A small glitter 1454 mark sits at the chest, Dontae Amare Rare Edition lettered small on the back.",
+    "details": [
+      "Cotton fleece",
+      "Hand-bleached, one-of-one wash",
+      "Glitter print"
+    ],
+    "imageBack": "/images/products/hoodie-1454-bleached-back.jpg"
+  },
+  {
+    "id": "crewneck-desired-ambitions",
+    "name": "Desired Ambitions Crewneck",
+    "category": "hoodies",
+    "price": 65,
+    "colorName": "Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 15,
+      "M": 25,
+      "L": 25,
+      "XL": 20,
+      "2XL": 10
+    },
+    "image": "/images/products/crewneck-desired-ambitions.jpg",
+    "description": "Heavyweight crewneck with the whole mission spelled out on the chest: Desired Ambitions Requires Execution.",
+    "details": [
+      "Cotton fleece",
+      "Ribbed cuffs and hem",
+      "Screen-printed chest graphic"
+    ]
+  },
+  {
+    "id": "hoodie-777",
+    "name": "777 Hoodie",
+    "category": "hoodies",
+    "price": 85,
+    "colorName": "Black",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "stock": {
+      "S": 15,
+      "M": 25,
+      "L": 25,
+      "XL": 20,
+      "2XL": 10
+    },
+    "image": "/images/products/hoodie-777-front.jpg",
+    "imageBack": "/images/products/hoodie-777-back.jpg",
+    "description": "Hoodie version of the 777 — white on the chest, a column of 777s running color to color down the back beneath a dagger on the hood.",
+    "details": [
+      "Cotton fleece",
+      "Oversized fit",
+      "Screen-printed graphic, front and back"
+    ]
+  },
+  {
+    "id": "beanie-sparkle-mauve",
+    "name": "Sparkle Beanie",
+    "category": "accessories",
+    "price": 30,
+    "colorName": "Mauve",
+    "sizes": [
+      "OS"
+    ],
+    "stock": {
+      "OS": 40
+    },
+    "image": "/images/products/beanie-sparkle-mauve.jpg",
+    "description": "Knit beanie fading into rhinestones at the crown, Dare signed on the cuff.",
+    "details": [
+      "Acrylic knit",
+      "Rhinestone embellishment",
+      "Embroidered cuff"
+    ],
+    "soldOut": true
+  },
+  {
+    "id": "ski-mask-dare-black",
+    "name": "D.A.R.E Ski Mask",
+    "category": "accessories",
+    "price": 25,
+    "colorName": "Black",
+    "sizes": [
+      "OS"
+    ],
+    "stock": {
+      "OS": 40
+    },
+    "image": "/images/products/ski-mask-dare-black.jpg",
+    "description": "Ski mask with D.A.R.E lettered in neon at the back.",
+    "details": [
+      "Stretch knit",
+      "Full-face coverage",
+      "Printed graphic"
+    ]
   },
   {
     "id": "tee-take-that-risk",
@@ -766,222 +982,6 @@
       "Relaxed fit",
       "Screen-printed graphic"
     ]
-  },
-  {
-    "id": "honeycomb-tee-red",
-    "name": "Honeycomb Crop Tee",
-    "category": "tops",
-    "price": 30,
-    "colorName": "Red",
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "XS": 10,
-      "S": 20,
-      "M": 25,
-      "L": 20,
-      "XL": 10
-    },
-    "image": "/images/products/honeycomb-tee-red.jpg",
-    "description": "Cropped short-sleeve tee in red honeycomb-textured stretch knit, with a side tie at the hem. Pairs with the matching Honeycomb Shorts.",
-    "details": [
-      "Honeycomb-textured stretch knit",
-      "Cropped, fitted cut",
-      "Side tie at the hem"
-    ],
-    "badge": "Matching set",
-    "set": "honeycomb",
-    "setPrice": 25,
-    "setImage": "/images/products/set-honeycomb-tee-red.jpg",
-    "gallery": [
-      "/images/products/honeycomb-set-red.jpg"
-    ],
-    "setCover": "/images/products/honeycomb-set-red.jpg"
-  },
-  {
-    "id": "honeycomb-shorts-red",
-    "name": "Honeycomb Shorts",
-    "category": "bottoms",
-    "price": 30,
-    "colorName": "Red",
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "XS": 10,
-      "S": 20,
-      "M": 25,
-      "L": 20,
-      "XL": 10
-    },
-    "image": "/images/products/honeycomb-shorts-red.jpg",
-    "description": "High-rise shorts in the same red honeycomb-textured knit as the Honeycomb Crop Tee, cut to wear as a set.",
-    "details": [
-      "Honeycomb-textured stretch knit",
-      "High-rise waistband",
-      "Fitted cut"
-    ],
-    "badge": "Matching set",
-    "set": "honeycomb",
-    "setPrice": 25,
-    "setImage": "/images/products/set-honeycomb-shorts-red.jpg",
-    "gallery": [
-      "/images/products/honeycomb-set-red.jpg"
-    ],
-    "setCover": "/images/products/honeycomb-set-red.jpg"
-  },
-  {
-    "id": "honeycomb-tee-black",
-    "name": "Honeycomb Crop Tee",
-    "category": "tops",
-    "price": 30,
-    "colorName": "Black",
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "XS": 10,
-      "S": 20,
-      "M": 25,
-      "L": 20,
-      "XL": 10
-    },
-    "image": "/images/products/honeycomb-tee-black.jpg",
-    "description": "Cropped short-sleeve tee in black honeycomb-textured stretch knit, with a side tie at the hem. Pairs with the matching Honeycomb Shorts.",
-    "details": [
-      "Honeycomb-textured stretch knit",
-      "Cropped, fitted cut",
-      "Side tie at the hem"
-    ],
-    "badge": "Matching set",
-    "set": "honeycomb",
-    "setPrice": 25,
-    "setImage": "/images/products/set-honeycomb-tee-black.jpg",
-    "gallery": [
-      "/images/products/honeycomb-set-black.jpg"
-    ],
-    "setCover": "/images/products/honeycomb-set-black.jpg"
-  },
-  {
-    "id": "honeycomb-shorts-black",
-    "name": "Honeycomb Shorts",
-    "category": "bottoms",
-    "price": 30,
-    "colorName": "Black",
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "XS": 10,
-      "S": 20,
-      "M": 25,
-      "L": 20,
-      "XL": 10
-    },
-    "image": "/images/products/honeycomb-shorts-black.jpg",
-    "description": "High-rise shorts in the same black honeycomb-textured knit as the Honeycomb Crop Tee, cut to wear as a set.",
-    "details": [
-      "Honeycomb-textured stretch knit",
-      "High-rise waistband",
-      "Fitted cut"
-    ],
-    "badge": "Matching set",
-    "set": "honeycomb",
-    "setPrice": 25,
-    "setImage": "/images/products/set-honeycomb-shorts-black.jpg",
-    "gallery": [
-      "/images/products/honeycomb-set-black.jpg"
-    ],
-    "setCover": "/images/products/honeycomb-set-black.jpg"
-  },
-  {
-    "id": "studio-bra-white",
-    "name": "Studio Sports Bra",
-    "category": "tops",
-    "price": 35,
-    "colorName": "White",
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "XS": 10,
-      "S": 20,
-      "M": 25,
-      "L": 20,
-      "XL": 10
-    },
-    "image": "/images/products/studio-bra-white.jpg",
-    "description": "White racerback sports bra with a keyhole cutout at the back and a wide band at the hem. Pairs with the matching Studio Shorts.",
-    "details": [
-      "Smooth stretch knit",
-      "Racerback with keyhole cutout",
-      "Wide elastic underband"
-    ],
-    "badge": "Matching set",
-    "set": "studio",
-    "setPrice": 30,
-    "setImage": "/images/products/set-studio-bra-white.jpg",
-    "gallery": [
-      "/images/products/studio-set-white.jpg"
-    ],
-    "setCover": "/images/products/studio-set-white.jpg"
-  },
-  {
-    "id": "studio-shorts-white",
-    "name": "Studio Shorts",
-    "category": "bottoms",
-    "price": 35,
-    "colorName": "White",
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "XS": 10,
-      "S": 20,
-      "M": 25,
-      "L": 20,
-      "XL": 10
-    },
-    "image": "/images/products/studio-shorts-white.jpg",
-    "description": "High-rise white shorts with a V-seam waistband and side pockets, cut to wear with the Studio Sports Bra.",
-    "details": [
-      "Smooth stretch knit",
-      "High-rise V-seam waistband",
-      "Side pockets"
-    ],
-    "badge": "Matching set",
-    "set": "studio",
-    "setPrice": 30,
-    "setImage": "/images/products/set-studio-shorts-white.jpg",
-    "gallery": [
-      "/images/products/studio-set-white.jpg"
-    ],
-    "setCover": "/images/products/studio-set-white.jpg"
   },
   {
     "id": "romper-tie-dye",
