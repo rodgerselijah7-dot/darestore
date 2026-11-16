@@ -1154,6 +1154,33 @@
     ]
   },
   {
+    "id": "signature-shorts-blue",
+    "name": "Signature Shorts",
+    "category": "bottoms",
+    "price": 45,
+    "colorName": "Blue",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": {
+      "S": 20,
+      "M": 30,
+      "L": 30,
+      "XL": 20
+    },
+    "image": "/images/products/signature-shorts-blue.jpg",
+    "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
+    "details": [
+      "Lightweight nylon shell",
+      "Elastic drawstring waist",
+      "Mesh lining",
+      "Printed DARE crest"
+    ]
+  },
+  {
     "id": "crown-cargo-shorts-camo",
     "name": "Camo Shorts",
     "category": "bottoms",
@@ -1207,33 +1234,6 @@
       "Cotton twill",
       "Five-pocket construction",
       "Printed graphic"
-    ]
-  },
-  {
-    "id": "signature-shorts-blue",
-    "name": "Signature Shorts",
-    "category": "bottoms",
-    "price": 45,
-    "colorName": "Blue",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "stock": {
-      "S": 20,
-      "M": 30,
-      "L": 30,
-      "XL": 20
-    },
-    "image": "/images/products/signature-shorts-blue.jpg",
-    "description": "Quick-dry shorts with an elastic drawstring waist and the DARE crest printed at the thigh.",
-    "details": [
-      "Lightweight nylon shell",
-      "Elastic drawstring waist",
-      "Mesh lining",
-      "Printed DARE crest"
     ]
   },
   {
